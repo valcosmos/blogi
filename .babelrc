@@ -1,0 +1,15 @@
+{
+  //Next.js的总配置文件，相当于继承了它本身的所有配置
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      //增加新的插件，antd按需引入
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "lib",
+        "style": true
+      }
+    ]
+  ]
+}
