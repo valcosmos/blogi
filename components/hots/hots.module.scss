@@ -1,0 +1,30 @@
+.hots {
+  :global {
+    .hot-list {
+      background-color: #fff;
+    }
+    .title {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      border-radius: 20px;
+
+      .title-content {
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      &:hover {
+        background: #e5e5e5;
+      }
+    }
+  }
+}
+
+.ant-badge {
+  sup {
+    border-radius: 5px;
+    border: none;
+  }
+}
