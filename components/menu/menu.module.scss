@@ -1,0 +1,17 @@
+.menu {
+  :global {
+    .icon {
+      border: none;
+
+      img {
+        height: 40px;
+      }
+
+      &.ant-menu-item-selected::after,
+      &.ant-menu-item:hover::after,
+      &.ant-menu-item-selected::after {
+        border: none !important;
+      }
+    }
+  }
+}
