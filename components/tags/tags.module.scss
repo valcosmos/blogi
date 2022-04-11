@@ -1,0 +1,16 @@
+.tags {
+  :global {
+    .ant-tag {
+      margin-bottom: 10px;
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .all-posts {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+  }
+}
