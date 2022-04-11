@@ -1,0 +1,30 @@
+.links {
+  :global {
+  }
+  .ant-card-cover {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px 0;
+    height: 120px;
+    img {
+      width: 100px;
+    }
+  }
+
+  .ant-card-meta-detail {
+    .ant-card-meta-title,
+    .ant-card-meta-description {
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  .ant-card-cover {
+    img {
+      border-radius: 50px;
+    }
+  }
+}
