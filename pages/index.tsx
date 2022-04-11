@@ -1,22 +1,28 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
-import styles from '../styles/Home.module.css'
 
-import { Button } from 'antd'
-import { lazy } from 'react'
+import Posts from '@/components/posts'
 
-import Post from './posts'
+import Hots from '@/components/hots'
+
+import Tags from '@/components/tags'
+
+import { Col, Row } from 'antd'
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
-      <Post></Post>
-      <Button type="primary">Button</Button>
-      <Link href={'/links'}>links</Link>
-      <Link href={'/timeline'}>timeline</Link>
-      <Link href={'/messages'}>messages</Link>
-      <Link href={'/about'}>about</Link>
-    </div>
+    <>
+      <div className="home container">
+        <Row gutter={20}>
+          <Col xs={24} sm={24} md={18} lg={18}>
+            <Posts />
+          </Col>
+          <Col xs={24} sm={24} md={6} lg={6}>
+            <Hots />
+            <Tags />
+          </Col>
+        </Row>
+      </div>
+    </>
   )
 }
 

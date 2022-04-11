@@ -9,13 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "add": "^2.0.6",
     "antd": "^4.19.5",
+    "axios": "^0.26.1",
     "next": "12.1.4",
+    "qs": "^6.10.3",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-tsparticles": "^1.43.1"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
+    "@types/qs": "^6.9.7",
     "@types/react": "18.0.1",
     "@types/react-dom": "18.0.0",
     "babel-plugin-import": "^1.13.3",
