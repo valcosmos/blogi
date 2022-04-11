@@ -9,11 +9,14 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['images.weserv.nl']
+  },
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname)
     return config
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   compiler: {
     //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
     //styledComponents: true,

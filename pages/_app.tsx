@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import Layout from '../components/layout'
-
+import 'md-editor-rt/lib/style.css'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
