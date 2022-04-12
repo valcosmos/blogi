@@ -5,5 +5,10 @@
         width: 40px;
       }
     }
+
+    .ant-comment-actions{
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
