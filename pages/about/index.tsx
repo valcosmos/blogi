@@ -1,6 +1,5 @@
 import { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
-
 import { Avatar } from 'antd'
 import Editor from 'md-editor-rt'
 import { getAbout } from '@/api/common'

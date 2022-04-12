@@ -19,7 +19,7 @@ const Links: NextPage = () => {
 
   useEffect(() => {
     getLinkLists()
-  })
+  },[])
   return (
     <div className={style.links + ' container mt-2'}>
       <Card className="mb-2" title={'友链信息'}>

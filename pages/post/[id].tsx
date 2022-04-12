@@ -80,7 +80,7 @@ const Post: NextPage = () => {
 
         <div className="content">
           <div className="side">
-            <Badge
+            {/* <Badge
               count={post.like}
               className="mb-2"
               style={{
@@ -97,6 +97,7 @@ const Post: NextPage = () => {
                 icon={<StarOutlined />}
               />
             </Badge>
+
             <Badge count={commentTotal}>
               <Button
                 shape="circle"
@@ -104,7 +105,7 @@ const Post: NextPage = () => {
                 onClick={toComment}
                 icon={<CommentOutlined />}
               />
-            </Badge>
+            </Badge> */}
           </div>
           <Editor
             modelValue={post.content}

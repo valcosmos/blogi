@@ -26,7 +26,7 @@ const TL: NextPage = () => {
   }, [])
   return (
     <div className={style.timeline + ' container'}>
-      <Timeline mode="alternate" className="pt-3">
+      {/* <Timeline mode="alternate" className="pt-3">
         {logs.map((item, index) => {
           return (
             <Timeline.Item
@@ -41,7 +41,7 @@ const TL: NextPage = () => {
             </Timeline.Item>
           )
         })}
-      </Timeline>
+      </Timeline> */}
     </div>
   )
 }

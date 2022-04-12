@@ -6,7 +6,7 @@ import Hots from '@/components/hots'
 
 import Tags from '@/components/tags'
 
-import { Col, Row } from 'antd'
+import { Col, Row, Badge } from 'antd'
 
 const Home: NextPage = () => {
   return (
