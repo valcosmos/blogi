@@ -1,4 +1,7 @@
 import { NextPage } from 'next'
+
+import Head from 'next/head'
+
 import React, { useEffect, useState } from 'react'
 import CommentList from '@/components/comment-list'
 import style from './msg.module.scss'
@@ -41,13 +44,18 @@ const Msgs: NextPage = () => {
 
   useEffect(() => {
     getMsgList()
-  
   }, [])
 
   return (
-    <div className={style.msgs + ' container'}>
-      <CommentList setFormData={setFormData} list={msgs} total={total} />
-    </div>
+    <>
+      <Head>
+        <title>Valcosmos | 留言</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className={style.msgs + ' container'}>
+        <CommentList setFormData={setFormData} list={msgs} total={total} />
+      </div>
+    </>
   )
 }
 
