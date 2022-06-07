@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import Link from 'next/link'
 import { getComments, getPostDetial, setLike } from '@/api/post'
 import { HttpResponse, MsgInfo, PostInfo } from '@/common/interface'
@@ -67,20 +68,26 @@ const Post: NextPage = () => {
     if (!id) return
     getDetail()
     getPostComments()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return (
-    <div className="container w900">
-      <div className={style.detail + ' padding-2'}>
-        <h1>{post.title}</h1>
-        <div className="count-data">
-          <span className="me-3">{formatDate(post.created || '')}</span>
-          <span>阅读{post?.read}</span>
-        </div>
+    <>
+      <Head>
+        <title>Valcosmos | {post.title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="container w900">
+        <div className={style.detail + ' padding-2'}>
+          <h1>{post.title}</h1>
+          <div className="count-data">
+            <span className="me-3">{formatDate(post.created || '')}</span>
+            <span>阅读{post?.read}</span>
+          </div>
 
-        <div className="content">
-          <div className="side">
-            {/* <Badge
+          <div className="content">
+            <div className="side">
+              {/* <Badge
               count={post.like}
               className="mb-2"
               style={{
@@ -106,34 +113,35 @@ const Post: NextPage = () => {
                 icon={<CommentOutlined />}
               />
             </Badge> */}
-          </div>
-          <Editor
-            modelValue={post.content}
-            previewOnly
-            showCodeRowNumber
-          ></Editor>
+            </div>
+            <Editor
+              modelValue={post.content}
+              previewOnly
+              showCodeRowNumber
+            ></Editor>
 
-          <div className="footer">
-            <Button
-              onClick={() => handleLike(post._id || '')}
-              type={liked ? 'primary' : 'default'}
-              icon={<StarOutlined />}
-            >
-              <span>点赞 {post.like}</span>
-            </Button>
+            <div className="footer">
+              <Button
+                onClick={() => handleLike(post._id || '')}
+                type={liked ? 'primary' : 'default'}
+                icon={<StarOutlined />}
+              >
+                <span>点赞 {post.like}</span>
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="comment mt-2  w900 pt-2">
-        111
-        {/* <msg-list
+        <div className="comment mt-2  w900 pt-2">
+          111
+          {/* <msg-list
       :list="comments"
       :total="commentsTotal"
       @onSubmit="handleSetComment"
     ></msg-list> */}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
