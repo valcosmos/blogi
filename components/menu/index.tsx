@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Menu } from 'antd'
+import { Menu, MenuProps } from 'antd'
 
 import {
   FieldTimeOutlined,
@@ -22,16 +22,21 @@ const CustomMenu = () => {
   const [current, setCurrent] = useState('mail')
 
   const handleClick = (e: any) => {
-    setCurrent(e.key)
-    router.push(e.key)
+    const r = e.key === 'logo' ? '/' : e.key
+    setCurrent(r)
+    router.push(r)
   }
 
-  const menuList = [
-    { icon: HomeOutlined, title: '首页', key: '/' },
-    { icon: LinkOutlined, title: '友链', key: '/links' },
-    { icon: FieldTimeOutlined, title: '时间轴', key: '/timeline' },
-    { icon: MessageOutlined, title: '留言', key: '/messages' },
-    { icon: InfoCircleOutlined, title: '关于', key: '/about' }
+  const menuList: MenuProps['items'] = [
+    {
+      label: <Image src={logo} alt="logo" width="40" height="40" />,
+      key: 'logo'
+    },
+    { icon: <HomeOutlined />, label: '首页', key: '/' },
+    { icon: <LinkOutlined />, label: '友链', key: '/links' },
+    { icon: <FieldTimeOutlined />, label: '时间轴', key: '/timeline' },
+    { icon: <MessageOutlined />, label: '留言', key: '/messages' },
+    { icon: <InfoCircleOutlined />, label: '关于', key: '/about' }
   ]
 
   return (
@@ -40,15 +45,16 @@ const CustomMenu = () => {
       onClick={handleClick}
       selectedKeys={[current]}
       mode="horizontal"
+      items={menuList}
     >
-      <Menu.Item className="icon" key="icon" disabled>
+      {/* <Menu.Item className="icon" key="icon" disabled>
         <Image src={logo} alt="logo" width="40" height="40" />
       </Menu.Item>
       {menuList.map((item) => (
         <Menu.Item key={item.key} icon={<item.icon />}>
           {item.title}
         </Menu.Item>
-      ))}
+      ))} */}
     </Menu>
   )
 }
