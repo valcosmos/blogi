@@ -1,5 +1,7 @@
 import { NextPage } from 'next'
 
+import Head from 'next/head'
+
 import React, { useEffect, useState } from 'react'
 
 import { RocketOutlined } from '@ant-design/icons'
@@ -25,24 +27,30 @@ const TL: NextPage = () => {
     getLogLists()
   }, [])
   return (
-    <div className={style.timeline + ' container'}>
-      <Timeline mode="alternate" className="pt-3">
-        {logs.map((item, index) => {
-          return (
-            <Timeline.Item
-              dot={
-                index === 0 && <RocketOutlined style={{ fontSize: '28px' }} />
-              }
-              key={item._id}
-              color={index % 2 === 0 ? 'green' : 'blue'}
-            >
-              <h3>{item.log}</h3>
-              <p>{formatDate(item.created || '')}</p>
-            </Timeline.Item>
-          )
-        })}
-      </Timeline>
-    </div>
+    <>
+      <Head>
+        <title>Valcosmos | 时间轴</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className={style.timeline + ' container'}>
+        <Timeline mode="alternate" className="pt-3">
+          {logs.map((item, index) => {
+            return (
+              <Timeline.Item
+                dot={
+                  index === 0 && <RocketOutlined style={{ fontSize: '28px' }} />
+                }
+                key={item._id}
+                color={index % 2 === 0 ? 'green' : 'blue'}
+              >
+                <h3>{item.log}</h3>
+                <p>{formatDate(item.created || '')}</p>
+              </Timeline.Item>
+            )
+          })}
+        </Timeline>
+      </div>
+    </>
   )
 }
 
