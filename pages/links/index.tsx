@@ -1,4 +1,6 @@
 import { NextPage } from 'next'
+import Head from 'next/head'
+
 import React, { useEffect, useState } from 'react'
 import { Card, Row, Col, Button } from 'antd'
 import { LinkOutlined } from '@ant-design/icons'
@@ -19,40 +21,46 @@ const Links: NextPage = () => {
 
   useEffect(() => {
     getLinkLists()
-  },[])
+  }, [])
   return (
-    <div className={style.links + ' container mt-2'}>
-      <Card className="mb-2" title={'友链信息'}>
-        <p>站名：Valcosmos</p>
-        <p>地址：valzt.cn</p>
-        <p>头像：https://api.valzt.cn/media/avatar_me.png</p>
-        <p>个签：人生如逆旅，我亦是行人</p>
-      </Card>
+    <>
+      <Head>
+        <title>Valcosmos | 友情链接</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className={style.links + ' container mt-2'}>
+        <Card className="mb-2" title={'友链信息'}>
+          <p>站名：Valcosmos</p>
+          <p>地址：valzt.cn</p>
+          <p>头像：https://api.valzt.cn/media/avatar_me.png</p>
+          <p>个签：人生如逆旅，我亦是行人</p>
+        </Card>
 
-      <Row gutter={20}>
-        {links.map((link) => (
-          <Col key={link._id} xs={24} sm={12} md={8} lg={6} className="mb-2">
-            <Card
-              cover={
-                <Image
-                  alt="avatar"
-                  src={link.avatar}
-                  width={100}
-                  height={100}
-                />
-              }
-              actions={[
-                <Button type="primary" icon={<LinkOutlined />} key={'link'}>
-                  访问
-                </Button>
-              ]}
-            >
-              <Card.Meta title={link.nickname} description={link.desc} />
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </div>
+        <Row gutter={20}>
+          {links.map((link) => (
+            <Col key={link._id} xs={24} sm={12} md={8} lg={6} className="mb-2">
+              <Card
+                cover={
+                  <Image
+                    alt="avatar"
+                    src={link.avatar}
+                    width={100}
+                    height={100}
+                  />
+                }
+                actions={[
+                  <Button type="primary" icon={<LinkOutlined />} key={'link'}>
+                    访问
+                  </Button>
+                ]}
+              >
+                <Card.Meta title={link.nickname} description={link.desc} />
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
+    </>
   )
 }
 
