@@ -40,6 +40,7 @@ export default function PostList() {
   }
   useEffect(() => {
     getPostList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageInfo.current])
 
   const icons: Record<string, any | string>[] = [

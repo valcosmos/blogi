@@ -46,16 +46,7 @@ const CustomMenu = () => {
       selectedKeys={[current]}
       mode="horizontal"
       items={menuList}
-    >
-      {/* <Menu.Item className="icon" key="icon" disabled>
-        <Image src={logo} alt="logo" width="40" height="40" />
-      </Menu.Item>
-      {menuList.map((item) => (
-        <Menu.Item key={item.key} icon={<item.icon />}>
-          {item.title}
-        </Menu.Item>
-      ))} */}
-    </Menu>
+    />
   )
 }
 
