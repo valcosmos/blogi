@@ -1,11 +1,17 @@
 import { NextPage } from 'next'
+
 import Head from 'next/head'
 
 import React, { useEffect, useState } from 'react'
+
 import { Card, Row, Col, Button } from 'antd'
+
 import { LinkOutlined } from '@ant-design/icons'
+
 import { getLinks } from '@/api/common'
+
 import { HttpResponse, LinkInfo } from '@/common/interface'
+
 import Image from 'next/image'
 
 import style from './links.module.scss'
