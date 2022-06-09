@@ -10,10 +10,12 @@ import { Timeline } from 'antd'
 
 import { formatDate } from '@/utils/utils'
 
+import { HttpResponse, LogInfo } from '@/common/interface'
+
+import { getLogs } from '@/api/common'
+
 import style from './timeline.module.scss'
 
-import { HttpResponse, LogInfo } from '@/common/interface'
-import { getLogs } from '@/api/common'
 
 const TL: NextPage = () => {
   const [logs, setLogs] = useState<LogInfo[]>([])
