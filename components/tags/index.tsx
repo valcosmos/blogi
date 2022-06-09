@@ -5,7 +5,9 @@ import { Card, message, Tag } from 'antd'
 import { TagOutlined } from '@ant-design/icons'
 
 import style from './tags.module.scss'
+
 import { getTags } from '@/api/post'
+
 import { HttpResponse, TagInfo } from '@/common/interface'
 
 export default function Tags() {
