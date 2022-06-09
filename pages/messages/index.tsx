@@ -1,15 +1,25 @@
 import { NextPage } from 'next'
 
+import dynamic from 'next/dynamic'
+
 import Head from 'next/head'
 
 import React, { useEffect, useState } from 'react'
-import CommentList from '@/components/comment-list'
-import style from './msg.module.scss'
-import { HttpResponse, MsgInfo } from '@/common/interface'
-import { getMsgs, setMsgs } from '@/api/common'
-import { toTree } from '@/utils/utils'
+
 import { message } from 'antd'
+
+// import CommentList from '@/components/comment-list'
+const CommentList = dynamic(() => import('@/components/comment-list'))
+
+import { HttpResponse, MsgInfo } from '@/common/interface'
+
+import { getMsgs, setMsgs } from '@/api/common'
+
+import { toTree } from '@/utils/utils'
+
 import { FormType } from '@/components/comment-form'
+
+import style from './msg.module.scss'
 
 const Msgs: NextPage = () => {
   const [msgs, setMsg] = useState<MsgInfo[]>([])
