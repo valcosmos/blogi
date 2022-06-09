@@ -15,6 +15,7 @@ import Image from 'next/image'
 import logo from '@/assets/img/logoh64.png'
 
 import style from '@/components/menu/menu.module.scss'
+
 import { useRouter } from 'next/router'
 
 const CustomMenu = () => {
