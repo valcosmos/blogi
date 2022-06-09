@@ -1,10 +1,15 @@
 import { NextPage } from 'next'
+
 import Head from 'next/head'
 
 import React, { useEffect, useState } from 'react'
+
 import { Avatar } from 'antd'
+
 import Editor from 'md-editor-rt'
+
 import { getAbout } from '@/api/common'
+
 import { HttpResponse } from '@/common/interface'
 
 import style from './about.module.scss'
