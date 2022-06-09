@@ -1,17 +1,23 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import Link from 'next/link'
-import { getComments, getPostDetial, setLike } from '@/api/post'
-import { HttpResponse, MsgInfo, PostInfo } from '@/common/interface'
-import { message, Badge, Button } from 'antd'
-import { CommentOutlined, StarOutlined } from '@ant-design/icons'
-import { useEffect, useState } from 'react'
-import { formatDate, scrollToElement, toTree } from '@/utils/utils'
 import { NextPage } from 'next'
 
-import style from './post.module.scss'
+// import Link from 'next/link'
+import { getComments, getPostDetail, setLike } from '@/api/post'
+
+import { HttpResponse, MsgInfo, PostInfo } from '@/common/interface'
+
+import { message, Button } from 'antd'
+
+import { StarOutlined } from '@ant-design/icons'
+
+import { useEffect, useState } from 'react'
+
+import { formatDate, scrollToElement, toTree } from '@/utils/utils'
 
 import Editor from 'md-editor-rt'
+
+import style from './post.module.scss'
 
 const Post: NextPage = () => {
   const router = useRouter()
@@ -27,7 +33,7 @@ const Post: NextPage = () => {
   const [liked, setLiked] = useState<boolean>(false)
 
   const getDetail = async () => {
-    const { msg, data, code, isLiked } = (await getPostDetial({
+    const { msg, data, code, isLiked } = (await getPostDetail({
       id: id as string
     })) as HttpResponse
     if (code !== 200) return message.error('unknown error')
