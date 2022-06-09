@@ -9,7 +9,7 @@ export const getPosts = (pageInfo: PageInfo) =>
 
 export const getHotPosts = () => request.get('/public/get-hot-posts')
 
-export const getPostDetial = (id: { id: string }) =>
+export const getPostDetail = (id: { id: string }) =>
   request.get('/public/get-post-detail?' + stringify(id))
 
 export const getComments = (postId: { postId: string }) =>
