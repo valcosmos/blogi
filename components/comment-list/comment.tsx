@@ -1,24 +1,32 @@
-import { MsgInfo } from '@/common/interface'
-import React, { FC, useState } from 'react'
-import { Comment } from 'antd'
-import { formatDate } from '@/utils/utils'
-import CommentForm from '@/components/comment-form'
+import {MsgInfo} from '@/common/interface'
+import React, {FC, useState} from 'react'
+import {Comment} from 'antd'
+import {formatDate} from '@/utils/utils'
+import CommentForm, {FormType} from '@/components/comment-form'
 
 interface CustomCommentProps {
   item: MsgInfo
   id: string
+  active: string
+  setActive: (str: string) => void
+  setFormData: (form: FormType) => void
 }
 
-const CustomComment: FC<CustomCommentProps> = ({ item, id }, key) => {
-  const [itemID, setItemID] = useState<string>('')
+const CustomComment: FC<CustomCommentProps> = ({item, id, active, setActive, setFormData}, key) => {
+  // const [itemID, setItemID] = useState<string>('')
 
   const createMarkup = (avatar: string) => {
-    return { __html: avatar }
+    return {__html: avatar}
   }
 
-  
   const handleReply = (id: string) => {
-    setItemID((prev) => (prev === id ? '' : id))
+    // setItemID((prev) => (prev === id ? '' : id))
+    setActive(active === id ? '' : id)
+  }
+
+  const _setCommentForm = (data: FormType) => {
+    setActive('')
+    setFormData(data)
   }
 
   return (
@@ -31,9 +39,9 @@ const CustomComment: FC<CustomCommentProps> = ({ item, id }, key) => {
             handleReply(id as string)
           }}
         >
-          {itemID === id && '取消'}回复
+          {active === id && '取消'}回复
         </span>,
-        itemID === id && <CommentForm getFormData={()=>{}} key={'form=>' + key} />
+        active === id && <CommentForm getFormData={_setCommentForm} key={'form=>' + key} pid={id}/>
       ]}
       author={item.nickname}
       avatar={[
@@ -48,7 +56,7 @@ const CustomComment: FC<CustomCommentProps> = ({ item, id }, key) => {
     >
       {item.children?.length > 0 &&
         item.children.map((item: MsgInfo) =>
-          CustomComment({ item, id: item._id }, item._id)
+          CustomComment({item, id: item._id, active, setActive, setFormData}, item._id)
         )}
     </Comment>
   )
