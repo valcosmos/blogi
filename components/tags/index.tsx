@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { Card, message, Tag } from 'antd'
+import {Card, message, Tag} from 'antd'
 
-import { TagOutlined } from '@ant-design/icons'
+import {TagOutlined} from '@ant-design/icons'
 
 import style from './tags.module.scss'
 
-import { getTags } from '@/api/post'
+import {getTags} from '@/api/post'
 
-import { HttpResponse, TagInfo } from '@/common/interface'
+import {HttpResponse, TagInfo} from '@/common/interface'
+import {useRouter} from "next/router";
 
-export default function Tags() {
+export default function Tags({getTag}: { getTag: (tag:string) => void }) {
+  const router = useRouter()
   const [tags, setTags] = useState<TagInfo[]>([])
 
   const tagColor = [
@@ -31,14 +33,15 @@ export default function Tags() {
   ]
 
   const _getTags = async () => {
-    const { code, data, msg } = (await getTags()) as HttpResponse
+    const {code, data, msg} = (await getTags()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
     console.log(data)
     setTags(data)
   }
 
   const handleTagClick = (tag?: string) => {
-    console.log(tag)
+    // console.log(tag)
+    getTag(tag as string)
   }
 
   useEffect(() => {
@@ -46,18 +49,18 @@ export default function Tags() {
   }, [])
 
   return (
-    <div className={style.tags}>
+    <div className={style.tags + " mt-2"}>
       <Card
         title={
           <>
-            <TagOutlined />
+            <TagOutlined/>
             <span className="ms-1">文章标签</span>
           </>
         }
       >
         <div className="all-posts">
           <Tag color="purple">
-            <span onClick={() => handleTagClick}>所有文章</span>
+            <span onClick={() => handleTagClick('')}>所有文章</span>
           </Tag>
         </div>
 
