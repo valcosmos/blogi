@@ -1,23 +1,23 @@
-import { NextPage } from 'next'
+import {NextPage} from 'next'
 
 import dynamic from 'next/dynamic'
 
 import Head from 'next/head'
 
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { message } from 'antd'
+import {message} from 'antd'
 
 // import CommentList from '@/components/comment-list'
 const CommentList = dynamic(() => import('@/components/comment-list'))
 
-import { HttpResponse, MsgInfo } from '@/common/interface'
+import {HttpResponse, MsgInfo} from '@/common/interface'
 
-import { getMsgs, setMsgs } from '@/api/common'
+import {getMsgs, setMsgs} from '@/api/common'
 
-import { toTree } from '@/utils/utils'
+import {toTree} from '@/utils/utils'
 
-import { FormType } from '@/components/comment-form'
+import {FormType} from '@/components/comment-form'
 
 import style from './msg.module.scss'
 
@@ -27,17 +27,18 @@ const Msgs: NextPage = () => {
   const [total, setTotal] = useState<number>(0)
 
   const getMsgList = async () => {
-    const { code, data, total } = (await getMsgs()) as HttpResponse
-    if (code === 200) {
-      // const res = toTree(data)
-
-      setMsg([...toTree(data)])
-      setTotal(total as number)
-    }
+    const {code, data, total, msg} = (await getMsgs()) as HttpResponse
+    if (code !== 200) return message.error(msg || 'unknown error')
+    // setMsg(toTree(data))
+    // const res = toTree(data)
+    // console.log(data)
+    // console.log(res)
+    setMsg(toTree(data))
+    setTotal(total as number)
   }
 
   const onSubmit = async (value: FormType) => {
-    const { code, msg } = (await setMsgs(value)) as HttpResponse
+    const {code, msg} = (await setMsgs(value)) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
     await getMsgList()
   }
@@ -46,9 +47,6 @@ const Msgs: NextPage = () => {
     if (props.email === '') {
       delete props.email
     }
-    // const { code, msg } = (await setMsgs(props)) as HttpResponse
-    // if (code !== 200) return message.error(msg || 'unknown error')
-    // await getMsgList()
     onSubmit(props)
   }
 
@@ -70,11 +68,11 @@ const Msgs: NextPage = () => {
           content="HTML5, CSS3, JavaScript, TypeScript, Vue, React, Koa, nodejs, Jenkins, Docker, Golang, Gin, Python"
         />
 
-        <meta name="author" content="Cupid Valentine | 李青丘" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="author" content="Cupid Valentine | 李青丘"/>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
       <div className={style.msgs + ' container'}>
-        <CommentList setFormData={setFormData} list={msgs} total={total} />
+        <CommentList setFormData={setFormData} list={msgs} total={total}/>
       </div>
     </>
   )
