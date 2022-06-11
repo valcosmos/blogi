@@ -10,3 +10,6 @@ export const setMsgs = (data: { nickname: string; content: string }) =>
   request.post('/public/set-msg', data)
 
 export const getAbout = () => request.get('/public/get-user-msg')
+
+export const getProjects = () => request.get('/public/get-projects')
+

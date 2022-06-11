@@ -2,6 +2,7 @@ export interface PageInfo {
   current: number
   sort: number
   pageSize: number
+  tag?: string
 }
 
 
@@ -20,13 +21,13 @@ interface BaseInfo {
 }
 
 export interface PostInfo extends BaseInfo {
+  tags: string[]
   catalog?: string
   comment?: number
   content: string
   isTop?: string
   like?: number
   read?: number
-  tag?: string[]
   title?: string
 }
 
@@ -51,4 +52,12 @@ export interface MsgInfo extends BaseInfo {
 
 export interface TagInfo extends BaseInfo {
   tagName: string
+}
+
+
+export interface ProjectInfo extends BaseInfo {
+  name: string
+  desc: string
+  repo: string
+  link: string
 }
