@@ -1,30 +1,34 @@
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 import Head from 'next/head'
-import { NextPage } from 'next'
+import {NextPage} from 'next'
 
 // import Link from 'next/link'
-import { getComments, getPostDetail, setLike } from '@/api/post'
+import {getComments, getPostDetail, setComment, setLike} from '@/api/post'
 
-import { HttpResponse, MsgInfo, PostInfo } from '@/common/interface'
+import {HttpResponse, MsgInfo, PostInfo} from '@/common/interface'
 
-import { message, Button } from 'antd'
+import {message, Button, Badge} from 'antd'
 
-import { StarOutlined } from '@ant-design/icons'
+import {StarOutlined, CommentOutlined} from '@ant-design/icons'
 
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 
-import { formatDate, scrollToElement, toTree } from '@/utils/utils'
+import {formatDate, scrollToElement, toTree} from '@/utils/utils'
 
 import Editor from 'md-editor-rt'
 
+const CommentList = dynamic(() => import('@/components/comment-list'))
+
 import style from './post.module.scss'
+import dynamic from "next/dynamic";
+import {FormType} from "@/components/comment-form";
 
 const Post: NextPage = () => {
   const router = useRouter()
 
-  const { id } = router.query
+  const {id} = router.query
 
-  const [post, setPost] = useState<PostInfo>({ _id: '', content: '' })
+  const [post, setPost] = useState<PostInfo>({_id: '', content: '', tags: []})
 
   const [comments, setComments] = useState<MsgInfo[]>([])
 
@@ -33,7 +37,7 @@ const Post: NextPage = () => {
   const [liked, setLiked] = useState<boolean>(false)
 
   const getDetail = async () => {
-    const { msg, data, code, isLiked } = (await getPostDetail({
+    const {msg, data, code, isLiked} = (await getPostDetail({
       id: id as string
     })) as HttpResponse
     if (code !== 200) return message.error('unknown error')
@@ -43,8 +47,10 @@ const Post: NextPage = () => {
     setLiked(isLiked as boolean)
   }
 
+
+
   const getPostComments = async () => {
-    const { code, data, total, msg } = (await getComments({
+    const {code, data, total, msg} = (await getComments({
       postId: id as string
     })) as HttpResponse
 
@@ -53,8 +59,30 @@ const Post: NextPage = () => {
     setCommentTotal(total as number)
   }
 
+  const setPostComment = async (props:FormType) => {
+    const { code, msg, data } = (await setComment({
+      postId: post._id,
+      ...props
+    })) as HttpResponse
+
+    if (code !== 200) return message.error(msg || 'unknown error')
+    await getPostComments()
+  }
+
+  const setFormData = async (props: FormType) => {
+    console.log(props)
+    if (props.email === '') {
+      delete props.email
+    }
+    // const { code, msg } = (await setMsgs(props)) as HttpResponse
+    // if (code !== 200) return message.error(msg || 'unknown error')
+    // await getMsgList()
+    // Post(props)
+    setPostComment(props)
+  }
+
   const handleLike = async (id: string) => {
-    const { msg, code, data, isLiked } = (await setLike({ id })) as HttpResponse
+    const {msg, code, data, isLiked} = (await setLike({id})) as HttpResponse
     if (code !== 200) return message.error(msg || '')
     if (data > (post.like as number)) {
       message.success(msg || '')
@@ -62,7 +90,7 @@ const Post: NextPage = () => {
       message.warn(msg || '')
     }
     setLiked(isLiked as boolean)
-    setPost((prev) => ({ ...prev, like: data }))
+    setPost((prev) => ({...prev, like: data}))
   }
 
   const toComment = () => {
@@ -91,11 +119,11 @@ const Post: NextPage = () => {
           content="HTML5, CSS3, JavaScript, TypeScript, Vue, React, Koa, nodejs, Jenkins, Docker, Golang, Gin, Python"
         />
 
-        <meta name="author" content="Cupid Valentine | 李青丘" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="author" content="Cupid Valentine | 李青丘"/>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
-      <div className="container w900">
-        <div className={style.detail + ' padding-2'}>
+      <div className={style.detail + " container w900"}>
+        <div>
           <h1>{post.title}</h1>
           <div className="count-data">
             <span className="me-3">{formatDate(post.created || '')}</span>
@@ -104,32 +132,32 @@ const Post: NextPage = () => {
 
           <div className="content">
             <div className="side">
-              {/* <Badge
-              count={post.like}
-              className="mb-2"
-              style={{
-                backgroundColor: liked ? '#6768aa' : 'transparent',
-                color: liked ? '#fff' : '#6768aa',
-                boxShadow: '0 0 0 1px #6768aa inset'
-              }}
-            >
-              <Button
-                type={liked ? 'primary' : 'default'}
-                shape="circle"
-                size="large"
-                onClick={() => handleLike(post._id)}
-                icon={<StarOutlined />}
-              />
-            </Badge>
+              <Badge
+                count={post.like}
+                className="mb-2"
+                style={{
+                  backgroundColor: liked ? '#6768aa' : 'transparent',
+                  color: liked ? '#fff' : '#6768aa',
+                  boxShadow: '0 0 0 1px #6768aa inset'
+                }}
+              >
+                <Button
+                  type={liked ? 'primary' : 'default'}
+                  shape="circle"
+                  size="large"
+                  onClick={() => handleLike(post._id)}
+                  icon={<StarOutlined/>}
+                />
+              </Badge>
 
-            <Badge count={commentTotal}>
-              <Button
-                shape="circle"
-                size="large"
-                onClick={toComment}
-                icon={<CommentOutlined />}
-              />
-            </Badge> */}
+              <Badge count={commentTotal}>
+                <Button
+                  shape="circle"
+                  size="large"
+                  onClick={toComment}
+                  icon={<CommentOutlined/>}
+                />
+              </Badge>
             </div>
             <Editor
               modelValue={post.content}
@@ -141,7 +169,7 @@ const Post: NextPage = () => {
               <Button
                 onClick={() => handleLike(post._id || '')}
                 type={liked ? 'primary' : 'default'}
-                icon={<StarOutlined />}
+                icon={<StarOutlined/>}
               >
                 <span>点赞 {post.like}</span>
               </Button>
@@ -149,13 +177,12 @@ const Post: NextPage = () => {
           </div>
         </div>
 
-        <div className="comment mt-2  w900 pt-2">
-          111
-          {/* <msg-list
-      :list="comments"
-      :total="commentsTotal"
-      @onSubmit="handleSetComment"
-    ></msg-list> */}
+        <div className="comment mt-2 w900 pt-2">
+
+          <CommentList
+            setFormData={setFormData} list={comments} total={commentTotal}
+          />
+
         </div>
       </div>
     </>
