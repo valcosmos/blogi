@@ -1,9 +1,23 @@
 import React from 'react'
 
 import Particles from 'react-tsparticles'
+
+import { loadFull } from 'tsparticles'
+
 import style from '@/components/banner/banner.module.scss'
 
 const Banner = () => {
+  const particlesInit = async (main: any) => {
+    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(main)
+  }
+  const particlesLoaded = (container: any): Promise<void> => {
+    console.log(container)  
+    return new Promise(resolve=>resolve())
+  }
+
   const options: any = {
     // background: {
     //   color: {
@@ -85,7 +99,14 @@ const Banner = () => {
     detectRetina: true
   }
 
-  return <Particles id="tsparticles" options={options} />
+  return (
+    <Particles
+      id="tsparticles"
+      options={options}
+      init={particlesInit}
+      loaded={particlesLoaded}
+    />
+  )
 }
 
 export default Banner
