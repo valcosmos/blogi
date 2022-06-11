@@ -3,11 +3,20 @@
     .hot-list {
       background-color: #fff;
     }
+    .ant-list-item {
+      border: none;
+      padding: 0;
+    }
     .title {
       display: flex;
       align-items: center;
       padding: 5px;
+      padding-right: 10px;
       border-radius: 20px;
+      transition: all ease .3s;
+      width: 100%;
+      overflow: hidden;
+      cursor: pointer;
 
       .title-content {
         width: 100%;

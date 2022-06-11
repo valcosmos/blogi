@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+
 import style from './hots.module.scss'
 import { Card, List, message, Badge } from 'antd'
 import { FireOutlined } from '@ant-design/icons'
@@ -6,6 +8,7 @@ import { getHotPosts } from '@/api/post'
 import { HttpResponse, PostInfo } from '@/common/interface'
 
 export default function Hots() {
+  const router = useRouter()
   const [hots, setHots] = useState<Array<PostInfo>>([])
 
   const getList = async () => {
@@ -19,7 +22,7 @@ export default function Hots() {
   }, [])
 
   const toPostDetial = (id: string) => {
-    console.log(id)
+    router.push(`/post/${id}`)
   }
 
   return (
@@ -33,7 +36,6 @@ export default function Hots() {
         }
       >
         <List
-          bordered
           dataSource={hots}
           className={'hot-list'}
           renderItem={(item, index) => (
