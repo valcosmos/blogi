@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
+import React, {createRef, FC, useRef} from 'react'
 import style from './input.module.scss'
 import { Button, Col, Form, Input, Row } from 'antd'
 import { MailOutlined, UserOutlined } from '@ant-design/icons'
+import type { FormInstance } from 'antd/es/form';
 
 interface CommentFormProps {
   info?: string
@@ -16,6 +17,7 @@ export interface FormType {
 }
 
 const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
+  const formRef = createRef<FormInstance>()
   const onFinish = (value: FormType) => {
     const v = {
       ...value,
@@ -23,11 +25,13 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
       pid: pid || '0'
     }
     getFormData(v)
+    formRef.current?.resetFields()
   }
   const onFinishFailed = () => {}
   return (
     <div className={style.commentForm}>
       <Form
+        ref={formRef}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -42,7 +46,7 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
               validateTrigger: 'onBlur'
             },
             {
-              max: 10,
+              max: 1000,
               message: '字数不能超过1000字哟～',
               validateTrigger: 'onChange'
             }
