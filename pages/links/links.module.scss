@@ -1,14 +1,13 @@
 .links {
   :global {
-  }
-  .ant-card-cover {
+      .ant-card-cover {
     display: flex;
     justify-content: center;
     align-content: center;
     padding: 10px 0;
     height: 120px;
     img {
-      width: 100px;
+      // width: 80px!important;
     }
   }
 
@@ -22,9 +21,12 @@
     }
   }
 
-  .ant-card-cover {
-    img {
-      border-radius: 50px;
-    }
+  .ant-card-meta{
+    display: flex;
+    justify-content: center;
   }
+
+
+  }
+
 }
