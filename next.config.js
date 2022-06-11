@@ -14,7 +14,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['images.weserv.nl']
+    domains: [
+      'valzt.cn',
+      'raw.githubusercontent.com',
+      'webpack.js.org',
+      'github.com',
+      'simpleicons.org',
+      'avatars.githubusercontent.com',
+      'beego.vip',
+      'www.vectorlogo.zone',
+      'images.weserv.nl',
+
+
+    ]
   },
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname)
@@ -22,10 +34,10 @@ const nextConfig = {
     return config
   },
   reactStrictMode: false,
-  compiler: {
-    //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
-    styledComponents: true
-  },
+  // compiler: {
+  //   //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
+  //   styledComponents: true
+  // },
 
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
