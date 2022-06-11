@@ -20,7 +20,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-tsparticles": "^2.0.6",
-    "sharp": "^0.30.6"
+    "sharp": "^0.30.6",
+    "tsparticles": "^2.0.6"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.6",
