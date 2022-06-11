@@ -1,17 +1,28 @@
 .menu {
   :global {
-    .icon {
-      border: none;
+    // .icon {
+    //   border: none;
 
-      img {
-        height: 40px;
-      }
-
-      &.ant-menu-item-selected::after,
-      &.ant-menu-item:hover::after,
-      &.ant-menu-item-selected::after {
-        border: none !important;
-      }
+    .img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
     }
+
+    .logo-item,
+    .logo-item:hover,
+    .logo-item:hover::after{
+      border-color: transparent!important;
+    }
+
+
+    //   &.ant-menu-item-selected::after,
+    //   &.ant-menu-item:hover::after,
+    //   &.ant-menu-item-selected::after {
+    //     border: none !important;
+    //   }
+    // }
   }
 }

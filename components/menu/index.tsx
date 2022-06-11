@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
-import { Menu, MenuProps } from 'antd'
+import {Menu, MenuProps} from 'antd'
 
 import {
   FieldTimeOutlined,
   HomeOutlined,
   InfoCircleOutlined,
   LinkOutlined,
-  MessageOutlined
+  MessageOutlined, ProjectOutlined
 } from '@ant-design/icons'
 
 import Image from 'next/image'
 
 import logo from '@/assets/img/logoh64.png'
 
-import style from '@/components/menu/menu.module.scss'
+import {useRouter} from 'next/router'
 
-import { useRouter } from 'next/router'
+import style from './menu.module.scss'
 
 const CustomMenu = () => {
   const router = useRouter()
@@ -30,14 +30,16 @@ const CustomMenu = () => {
 
   const menuList: MenuProps['items'] = [
     {
-      label: <Image src={logo} alt="logo" width="40" height="40" />,
-      key: 'logo'
+      label: <div className="img"><Image src={logo} alt="logo" width="40" height="40"/></div>,
+      key: 'logo',
+      className: 'logo-item'
     },
-    { icon: <HomeOutlined />, label: '首页', key: '/' },
-    { icon: <LinkOutlined />, label: '友链', key: '/links' },
-    { icon: <FieldTimeOutlined />, label: '时间轴', key: '/timeline' },
-    { icon: <MessageOutlined />, label: '留言', key: '/messages' },
-    { icon: <InfoCircleOutlined />, label: '关于', key: '/about' }
+    {icon: <HomeOutlined/>, label: '首页', key: '/'},
+    {icon: <LinkOutlined/>, label: '友链', key: '/links'},
+    {icon: <ProjectOutlined/>, label: '开源', key: '/open-source'},
+    {icon: <FieldTimeOutlined/>, label: '时间轴', key: '/timeline'},
+    {icon: <MessageOutlined/>, label: '留言', key: '/messages'},
+    {icon: <InfoCircleOutlined/>, label: '关于', key: '/about'}
   ]
 
   return (
