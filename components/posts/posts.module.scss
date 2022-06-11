@@ -4,7 +4,9 @@
       background-color: #fff;
     }
     .img {
-      max-width: 160px;
+      position: relative;
+      width: 60px;
+      height: 100%;
     }
 
     .pagination {
@@ -12,6 +14,10 @@
       justify-content: flex-end;
       padding: 0 20px;
     }
+          .ant-list-pagination{
+            margin: 0;
+        padding: 20px;
+      }
 
     ::v-deep(.ant-list-item-action) {
       li {
