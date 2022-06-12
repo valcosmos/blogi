@@ -66,7 +66,9 @@ const Links: NextPage = () => {
                   />
                 }
                 actions={[
-                  <Button type="primary" icon={<LinkOutlined />} key={'link'}>
+                  <Button type="primary" icon={<LinkOutlined />} key={'link'} onClick={()=>{
+                    window.open(link.url,'_blank')
+                  }}>
                     访问
                   </Button>
                 ]}
