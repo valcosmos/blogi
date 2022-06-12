@@ -19,7 +19,7 @@ import Link from 'next/link'
 import {HttpResponse, PostInfo} from '@/common/interface'
 
 import {postIcon, postIconProps} from '@/utils/post-icon'
-import {scrollToElement} from '@/utils/utils'
+import {formatDate, scrollToElement} from '@/utils/utils'
 import {useRouter} from 'next/router'
 
 export default function PostList({tag}: { tag: string }) {
@@ -104,7 +104,7 @@ export default function PostList({tag}: { tag: string }) {
               <IconText icon={MessageOutlined} text={item.comment as number} key="3"/>,
               <IconText
                 icon={ClockCircleOutlined}
-                text={item.created as string}
+                text={formatDate(item.created as string)}
                 key="4"
               />
             ]}
