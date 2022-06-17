@@ -1,4 +1,6 @@
-import {FC, ReactNode} from 'react'
+import {CSSProperties, FC, ReactNode} from 'react'
+
+import { BackTop } from 'antd';
 // import style from './layout.module.scss'
 import {Layout} from 'antd'
 
@@ -14,6 +16,17 @@ import {useRouter} from "next/router";
 interface LayoutProps {
   children?: ReactNode
 }
+
+const topStyle: CSSProperties = {
+  height: 40,
+  width: 40,
+  lineHeight: '40px',
+  borderRadius: 4,
+  backgroundColor: '#6868a9',
+  color: '#fff',
+  textAlign: 'center',
+  fontSize: 14,
+};
 
 const LayoutCom: FC<LayoutProps> = ({children}) => {
 
@@ -40,6 +53,11 @@ const LayoutCom: FC<LayoutProps> = ({children}) => {
           <Footer></Footer>
         </Layout.Footer>
       </Layout>
+
+
+      <BackTop>
+        <div style={topStyle}>UP</div>
+      </BackTop>
     </div>
   )
 }
