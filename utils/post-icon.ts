@@ -28,7 +28,7 @@ export const postIcon: postIconProps[] = [
     tag: 'express',
     icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg'
   },
-  { tag: 'Django', icon: 'https://simpleicons.org/icons/django.svg' },
+  {tag: 'Django', icon: 'https://simpleicons.org/icons/django.svg'},
   {
     tag: 'Python',
     icon: 'https://avatars.githubusercontent.com/u/1525981?s=200&v=4'
@@ -41,7 +41,7 @@ export const postIcon: postIconProps[] = [
     tag: 'Gin',
     icon: 'https://raw.githubusercontent.com/gin-gonic/logo/master/color.png'
   },
-  { tag: 'Beego', icon: 'https://beego.vip/static/img/beego_purple.png' },
+  {tag: 'Beego', icon: 'https://beego.vip/static/img/beego_purple.png'},
   {
     tag: 'TypeScript',
     icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg'
