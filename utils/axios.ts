@@ -1,11 +1,6 @@
-import { HttpResponse } from '@/common/interface'
+import {HttpResponse} from '@/common/interface'
 
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios'
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 
 class HttpRequest {
   private baseURL: string
@@ -14,14 +9,13 @@ class HttpRequest {
   }
 
   getConfig() {
-    const config = {
+    return {
       baseURL: this.baseURL,
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
       timeout: 10000
     }
-    return config
   }
 
   interceptors(instance: AxiosInstance) {
