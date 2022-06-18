@@ -16,8 +16,9 @@
 
 - 个人博客系统，前端页面。
 
-- 使用`Next.js` `TypeScript`构建。
+- 使用`Next.js` `TypeScript`构建，目前使用`Vercel`进行部署（非常方便，推荐大家试试）。
 
+- 目前该项目在我自己的mac上，使用Chrome Lighthouse进行generate report，`Performance`、`Accessibility`、`Best Practices`、`SEO`分数均在**90+**。
 
 
 ## 使用
