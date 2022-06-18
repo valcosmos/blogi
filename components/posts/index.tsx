@@ -25,6 +25,8 @@ import {useRouter} from 'next/router'
 export default function PostList({tag}: { tag: string }) {
   const router = useRouter()
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const [list, setList] = useState<Array<PostInfo>>([])
 
   const [total, setTotal] = useState(0)
@@ -51,10 +53,12 @@ export default function PostList({tag}: { tag: string }) {
   }
 
   const getPostList = async () => {
+    setLoading(true)
     const {code, msg, total, data} = (await getPosts(
       {...pageInfo, tag}
     )) as HttpResponse
     if (code === 200) {
+      setLoading(false)
       setList(data)
       setTotal(total || 0)
     }
@@ -84,6 +88,7 @@ export default function PostList({tag}: { tag: string }) {
       <List
         className="post-list"
         itemLayout="vertical"
+        loading={loading}
         size="large"
         pagination={{
           onChange: (page) => {
