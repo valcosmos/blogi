@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import React, {useEffect, useState} from 'react'
+
+import {useRouter} from 'next/router'
+
+import {Card, List, message, Badge} from 'antd'
+
+import {FireOutlined} from '@ant-design/icons'
+
+import {getHotPosts} from '@/api/post'
+
+import {HttpResponse, PostInfo} from '@/common/interface'
 
 import style from './hots.module.scss'
-import { Card, List, message, Badge } from 'antd'
-import { FireOutlined } from '@ant-design/icons'
-import { getHotPosts } from '@/api/post'
-import { HttpResponse, PostInfo } from '@/common/interface'
+
 
 export default function Hots() {
   const router = useRouter()
@@ -16,7 +22,7 @@ export default function Hots() {
 
   const getList = async () => {
     setLoading(true)
-    const { code, msg, data } = (await getHotPosts()) as HttpResponse
+    const {code, msg, data} = (await getHotPosts()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
     setHots(data)
     setLoading(false)
@@ -35,7 +41,7 @@ export default function Hots() {
       <Card
         title={
           <>
-            <FireOutlined />
+            <FireOutlined/>
             <span className="ms-1">点击排行</span>
           </>
         }
@@ -49,7 +55,7 @@ export default function Hots() {
               <div onClick={() => toPostDetial(item._id)} className="title">
                 <Badge
                   count={index + 1}
-                  style={{ backgroundColor: index < 3 ? '#52c41a' : '#d3d3d3' }}
+                  style={{backgroundColor: index < 3 ? '#52c41a' : '#d3d3d3'}}
                 />
                 <span className="ms-1 title-content">{item.title}</span>
               </div>

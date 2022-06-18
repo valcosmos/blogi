@@ -1,8 +1,13 @@
 import React, {createRef, FC, useRef} from 'react'
-import style from './input.module.scss'
+
 import { Button, Col, Form, Input, Row } from 'antd'
+
 import { MailOutlined, UserOutlined } from '@ant-design/icons'
+
 import type { FormInstance } from 'antd/es/form';
+
+import style from './input.module.scss'
+
 
 interface CommentFormProps {
   info?: string

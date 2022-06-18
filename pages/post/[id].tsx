@@ -1,5 +1,9 @@
 import {useRouter} from 'next/router'
+
+import dynamic from "next/dynamic";
+
 import Head from 'next/head'
+
 import {NextPage} from 'next'
 
 // import Link from 'next/link'
@@ -15,13 +19,14 @@ import {useEffect, useState} from 'react'
 
 import {formatDate, scrollToElement, toTree} from '@/utils/utils'
 
+import {FormType} from "@/components/comment-form"
+
 import Editor from 'md-editor-rt'
 
 const CommentList = dynamic(() => import('@/components/comment-list'))
 
 import style from './post.module.scss'
-import dynamic from "next/dynamic";
-import {FormType} from "@/components/comment-form";
+
 
 const Post: NextPage = () => {
   const router = useRouter()
@@ -48,7 +53,6 @@ const Post: NextPage = () => {
   }
 
 
-
   const getPostComments = async () => {
     const {code, data, total, msg} = (await getComments({
       postId: id as string
@@ -59,8 +63,8 @@ const Post: NextPage = () => {
     setCommentTotal(total as number)
   }
 
-  const setPostComment = async (props:FormType) => {
-    const { code, msg, data } = (await setComment({
+  const setPostComment = async (props: FormType) => {
+    const {code, msg, data} = (await setComment({
       postId: post._id,
       ...props
     })) as HttpResponse

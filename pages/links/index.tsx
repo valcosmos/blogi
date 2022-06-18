@@ -1,16 +1,16 @@
-import { NextPage } from 'next'
+import {NextPage} from 'next'
 
 import Head from 'next/head'
 
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { Card, Row, Col, Button } from 'antd'
+import {Card, Row, Col, Button, message} from 'antd'
 
-import { LinkOutlined } from '@ant-design/icons'
+import {LinkOutlined} from '@ant-design/icons'
 
-import { getLinks } from '@/api/common'
+import {getLinks} from '@/api/common'
 
-import { HttpResponse, LinkInfo } from '@/common/interface'
+import {HttpResponse, LinkInfo} from '@/common/interface'
 
 import Image from 'next/image'
 
@@ -19,10 +19,10 @@ import style from './links.module.scss'
 const Links: NextPage = () => {
   const [links, setLinks] = useState<LinkInfo[]>([])
   const getLinkLists = async () => {
-    const { code, msg, data } = (await getLinks()) as HttpResponse
-    if (code === 200) {
-      setLinks(data)
-    }
+    const {code, msg, data} = (await getLinks()) as HttpResponse
+    if (code !== 200) return message.error(msg || 'unknown error')
+    setLinks(data)
+
   }
 
   useEffect(() => {
@@ -42,8 +42,8 @@ const Links: NextPage = () => {
           content="HTML5, CSS3, JavaScript, TypeScript, Vue, React, Koa, nodejs, Jenkins, Docker, Golang, Gin, Python"
         />
 
-        <meta name="author" content="Cupid Valentine | 李青丘" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="author" content="Cupid Valentine | 李青丘"/>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
       <div className={style.links + ' container mt-2'}>
         <Card className="mb-2" title={'友链信息'}>
@@ -66,14 +66,14 @@ const Links: NextPage = () => {
                   />
                 }
                 actions={[
-                  <Button type="primary" icon={<LinkOutlined />} key={'link'} onClick={()=>{
-                    window.open(link.url,'_blank')
+                  <Button type="primary" icon={<LinkOutlined/>} key={'link'} onClick={() => {
+                    window.open(link.url, '_blank')
                   }}>
                     访问
                   </Button>
                 ]}
               >
-                <Card.Meta title={link.nickname} description={link.desc} />
+                <Card.Meta title={link.nickname} description={link.desc}/>
               </Card>
             </Col>
           ))}

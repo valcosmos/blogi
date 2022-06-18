@@ -4,15 +4,14 @@ import {Card, message, Tag} from 'antd'
 
 import {TagOutlined} from '@ant-design/icons'
 
-import style from './tags.module.scss'
-
 import {getTags} from '@/api/post'
 
 import {HttpResponse, TagInfo} from '@/common/interface'
-import {useRouter} from "next/router";
+
+import style from './tags.module.scss'
+
 
 export default function Tags({getTag}: { getTag: (tag:string) => void }) {
-  const router = useRouter()
   const [tags, setTags] = useState<TagInfo[]>([])
 
   const tagColor = [

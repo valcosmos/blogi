@@ -5,12 +5,12 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
 import {Col, Row, Badge} from 'antd'
+
 import {useState} from "react";
 
 // const DynamicComponent = dynamic(() =>
 //   import('../components/hello').then((mod) => mod.Hello)
 // )
-
 
 // import Posts from '@/components/posts'
 
@@ -26,6 +26,7 @@ const Tags = dynamic(() => import('@/components/tags'))
 
 
 const Home: NextPage = () => {
+
   const [tag, setTag] = useState<string>('')
 
   const getTag = (tag: string) => {
@@ -50,10 +51,11 @@ const Home: NextPage = () => {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
+
       <div className="home container">
         <Row gutter={20}>
           <Col xs={24} sm={24} md={18} lg={18}>
-            <Posts tag={tag} />
+            <Posts tag={tag}/>
           </Col>
           <Col xs={24} sm={24} md={6} lg={6}>
             <Hots/>

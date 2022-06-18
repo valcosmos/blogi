@@ -1,8 +1,6 @@
-import { HttpResponse } from './../common/interface'
 import { PageInfo } from '@/common/interface'
 import request from '@/utils/axios'
 import { stringify } from 'qs'
-import { AxiosResponse } from 'axios'
 
 export const getPosts = (pageInfo: PageInfo) =>
   request.get('/public/get-posts?' + stringify(pageInfo))

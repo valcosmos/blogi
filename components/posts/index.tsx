@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import style from './posts.module.scss'
+
 import {List, Space} from 'antd'
+
 import {getPosts} from '@/api/post'
 
 import Image from 'next/image'
-
-import PostImg from '@/assets/img/post.jpg'
 
 import {
   MessageOutlined,
@@ -15,12 +14,19 @@ import {
   ClockCircleOutlined,
   LinkOutlined
 } from '@ant-design/icons'
+
 import Link from 'next/link'
+
 import {HttpResponse, PostInfo} from '@/common/interface'
 
 import {postIcon, postIconProps} from '@/utils/post-icon'
+
 import {formatDate, scrollToElement} from '@/utils/utils'
+
 import {useRouter} from 'next/router'
+
+import style from './posts.module.scss'
+
 
 export default function PostList({tag}: { tag: string }) {
   const router = useRouter()

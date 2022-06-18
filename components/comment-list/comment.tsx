@@ -1,7 +1,11 @@
 import {MsgInfo} from '@/common/interface'
-import React, {FC, useState} from 'react'
+
+import React, {FC} from 'react'
+
 import {Comment} from 'antd'
+
 import {formatDate} from '@/utils/utils'
+
 import CommentForm, {FormType} from '@/components/comment-form'
 
 interface CustomCommentProps {

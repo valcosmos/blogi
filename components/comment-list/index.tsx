@@ -1,11 +1,17 @@
 import {MsgInfo} from '@/common/interface'
-import {List, Comment, Tooltip} from 'antd'
+
+import {List} from 'antd'
+
 import React, {FC, useState} from 'react'
-import style from './comment.module.scss'
+
 import CustomComment from './comment'
+
 import CommentForm from '@/components/comment-form'
 
 import {FormType} from '@/components/comment-form'
+
+import style from './comment.module.scss'
+
 
 interface CommentProps {
   list: MsgInfo[]
@@ -34,7 +40,8 @@ const CommentList: FC<CommentProps> = ({list, total, setFormData}) => {
         dataSource={list}
         renderItem={(item) => (
           <li>
-            <CustomComment id={item._id} item={item} active={active} setActive={handleActive} setFormData={getFormData}/>
+            <CustomComment id={item._id} item={item} active={active} setActive={handleActive}
+                           setFormData={getFormData}/>
           </li>
         )}
       />

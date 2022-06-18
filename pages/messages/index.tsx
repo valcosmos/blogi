@@ -8,7 +8,6 @@ import React, {useEffect, useState} from 'react'
 
 import {message} from 'antd'
 
-// import CommentList from '@/components/comment-list'
 const CommentList = dynamic(() => import('@/components/comment-list'))
 
 import {HttpResponse, MsgInfo} from '@/common/interface'
@@ -21,19 +20,16 @@ import {FormType} from '@/components/comment-form'
 
 import style from './msg.module.scss'
 
-const Msgs: NextPage = () => {
-  const [msgs, setMsg] = useState<MsgInfo[]>([])
+const Messages: NextPage = () => {
+
+  const [messageList, setMessageList] = useState<MsgInfo[]>([])
 
   const [total, setTotal] = useState<number>(0)
 
   const getMsgList = async () => {
     const {code, data, total, msg} = (await getMsgs()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
-    // setMsg(toTree(data))
-    // const res = toTree(data)
-    // console.log(data)
-    // console.log(res)
-    setMsg(toTree(data))
+    setMessageList(toTree(data))
     setTotal(total as number)
   }
 
@@ -71,11 +67,11 @@ const Msgs: NextPage = () => {
         <meta name="author" content="Cupid Valentine | 李青丘"/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
-      <div className={style.msgs + ' container'}>
-        <CommentList setFormData={setFormData} list={msgs} total={total}/>
+      <div className={style.message + ' container'}>
+        <CommentList setFormData={setFormData} list={messageList} total={total}/>
       </div>
     </>
   )
 }
 
-export default Msgs
+export default Messages

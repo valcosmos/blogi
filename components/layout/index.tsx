@@ -44,8 +44,6 @@ const LayoutCom: FC<LayoutProps> = ({children}) => {
           {!router.pathname.includes('post') && <div className="banner">
             <Banner/>
           </div>}
-
-
           {children}
         </Layout.Content>
 

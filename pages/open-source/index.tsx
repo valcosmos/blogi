@@ -4,17 +4,13 @@ import Head from 'next/head'
 
 import React, {useEffect, useState} from 'react'
 
-import {RocketOutlined} from '@ant-design/icons'
-
 import {Row, Col, Card, message, Button} from 'antd'
 
 import Image from "next/image";
 
-import {formatDate} from '@/utils/utils'
+import {HttpResponse, ProjectInfo} from '@/common/interface'
 
-import {HttpResponse, LogInfo, ProjectInfo} from '@/common/interface'
-
-import {getLogs, getProjects} from '@/api/common'
+import {getProjects} from '@/api/common'
 
 import style from './open.module.scss'
 
@@ -28,10 +24,10 @@ const OpenSource: NextPage = () => {
     setProject(data)
   }
 
-
   useEffect(() => {
     _getProject()
   }, [])
+
   return (
     <>
       <Head>
@@ -51,6 +47,7 @@ const OpenSource: NextPage = () => {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
+
       <div className={style.openSource + ' container'}>
         <Row gutter={20}>
 
@@ -77,8 +74,6 @@ const OpenSource: NextPage = () => {
               </Card>
             </Col>
           ))}
-
-
         </Row>
       </div>
     </>

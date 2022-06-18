@@ -14,8 +14,6 @@ const Layout = dynamic(() => import('@/components/layout'))
 
 import 'nprogress/nprogress.css'
 
-// import Layout from '../components/layout'
-
 import 'md-editor-rt/lib/style.css'
 
 import '../styles/globals.scss'
@@ -26,15 +24,19 @@ function MyApp({Component, pageProps}: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
+
     router.events.on("routeChangeStart", () => {
       NProgress.start();
     });
+
     router.events.on("routeChangeComplete", () => {
       NProgress.done();
     });
+
     router.events.on("routeChangeError", () => {
       NProgress.done();
     });
+
   }, [router.events]);
 
   return (
@@ -46,7 +48,8 @@ function MyApp({Component, pageProps}: AppProps) {
 
       <Layout>
         <Component {...pageProps} />
-      </Layout></>
+      </Layout>
+    </>
   )
 }
 
