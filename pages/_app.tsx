@@ -1,5 +1,7 @@
 import type {AppProps} from 'next/app'
 
+import Head from "next/head";
+
 import {useRouter} from "next/router";
 
 import {useEffect} from "react";
@@ -36,9 +38,15 @@ function MyApp({Component, pageProps}: AppProps) {
   }, [router.events]);
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Head>
+        <title>valcosmos</title>
+        <link rel="shortcut icon" href="webicon.ico"/>
+      </Head>
+
+      <Layout>
+        <Component {...pageProps} />
+      </Layout></>
   )
 }
 

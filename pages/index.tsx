@@ -36,7 +36,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Valcosmos | 李青丘的个人博客</title>
-        <link rel="shortcut icon" href="webicon.ico" />
         <meta
           name="description"
           content="valcosmos-李青丘的个人博客-Web前端开发-分享前端技术"
