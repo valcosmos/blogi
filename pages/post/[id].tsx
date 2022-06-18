@@ -17,7 +17,9 @@ import {StarOutlined, CommentOutlined} from '@ant-design/icons'
 
 import {useEffect, useState} from 'react'
 
-import {formatDate, scrollToElement, toTree} from '@/utils/utils'
+import {formatDate, scrollToElement} from '@/utils/utils'
+
+import {toTree} from '@valcosmos/to-tree'
 
 import {FormType} from "@/components/comment-form"
 

@@ -14,7 +14,9 @@ import {HttpResponse, MsgInfo} from '@/common/interface'
 
 import {getMsgs, setMsgs} from '@/api/common'
 
-import {toTree} from '@/utils/utils'
+// import {toTree} from '@/utils/utils'
+
+import {toTree} from '@valcosmos/to-tree'
 
 import {FormType} from '@/components/comment-form'
 
@@ -29,7 +31,7 @@ const Messages: NextPage = () => {
   const getMsgList = async () => {
     const {code, data, total, msg} = (await getMsgs()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
-    setMessageList(toTree(data))
+    setMessageList(toTree(data, '_id', 'pid'))
     setTotal(total as number)
   }
 

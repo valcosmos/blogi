@@ -26,12 +26,16 @@ a {
 
 
 code {
-  overflow-y: hidden!important;
+  overflow-y: hidden !important;
 }
 
-p{
-  display: flex;
+
+#md-editor-rt {
+  p {
+    display: flex;
+  }
 }
+
 
 // ====
 
