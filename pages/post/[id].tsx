@@ -112,7 +112,8 @@ const Post: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Valcosmos | {post.title}</title>
+        <title>{'Valcosmos | ' + post.title}</title>
+
         <meta
           name="description"
           content={`valcosmos-李青丘的个人博客-Web前端开发-分享前端技术-${post.title}`}
@@ -124,69 +125,73 @@ const Post: NextPage = () => {
         />
 
         <meta name="author" content="Cupid Valentine | 李青丘"/>
+
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
-      <div className={style.detail + " container w900"}>
-        <div>
-          <h1>{post.title}</h1>
-          <div className="count-data">
-            <span className="me-3">{formatDate(post.created || '')}</span>
-            <span>阅读{post?.read}</span>
-          </div>
 
-          <div className="content">
-            <div className="side">
-              <Badge
-                count={post.like}
-                className="mb-2"
-                style={{
-                  backgroundColor: liked ? '#6768aa' : 'transparent',
-                  color: liked ? '#fff' : '#6768aa',
-                  boxShadow: '0 0 0 1px #6768aa inset'
-                }}
-              >
+      <div style={{padding: '0 20px'}}>
+        <div className={style.detail + " container w900"}>
+          <div>
+            <h1>{post.title}</h1>
+            <div className="count-data">
+              <span className="me-3">{formatDate(post.created || '')}</span>
+              <span>阅读{post?.read}</span>
+            </div>
+
+            <div className="content">
+              <div className="side">
+                <Badge
+                  count={post.like}
+                  className="mb-2"
+                  style={{
+                    backgroundColor: liked ? '#6768aa' : 'transparent',
+                    color: liked ? '#fff' : '#6768aa',
+                    boxShadow: '0 0 0 1px #6768aa inset'
+                  }}
+                >
+                  <Button
+                    type={liked ? 'primary' : 'default'}
+                    shape="circle"
+                    size="large"
+                    onClick={() => handleLike(post._id)}
+                    icon={<StarOutlined/>}
+                  />
+                </Badge>
+
+                <Badge count={commentTotal}>
+                  <Button
+                    shape="circle"
+                    size="large"
+                    onClick={toComment}
+                    icon={<CommentOutlined/>}
+                  />
+                </Badge>
+              </div>
+              <Editor
+                modelValue={post.content}
+                previewOnly
+                showCodeRowNumber
+              ></Editor>
+
+              <div className="footer">
                 <Button
+                  onClick={() => handleLike(post._id || '')}
                   type={liked ? 'primary' : 'default'}
-                  shape="circle"
-                  size="large"
-                  onClick={() => handleLike(post._id)}
                   icon={<StarOutlined/>}
-                />
-              </Badge>
-
-              <Badge count={commentTotal}>
-                <Button
-                  shape="circle"
-                  size="large"
-                  onClick={toComment}
-                  icon={<CommentOutlined/>}
-                />
-              </Badge>
-            </div>
-            <Editor
-              modelValue={post.content}
-              previewOnly
-              showCodeRowNumber
-            ></Editor>
-
-            <div className="footer">
-              <Button
-                onClick={() => handleLike(post._id || '')}
-                type={liked ? 'primary' : 'default'}
-                icon={<StarOutlined/>}
-              >
-                <span>点赞 {post.like}</span>
-              </Button>
+                >
+                  <span>点赞 {post.like}</span>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="comment mt-2 w900 pt-2">
+          <div className="comment mt-2 w900 pt-2">
 
-          <CommentList
-            setFormData={setFormData} list={comments} total={commentTotal}
-          />
+            <CommentList
+              setFormData={setFormData} list={comments} total={commentTotal}
+            />
 
+          </div>
         </div>
       </div>
     </>

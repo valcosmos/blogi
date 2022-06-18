@@ -29,6 +29,10 @@ code {
   overflow-y: hidden!important;
 }
 
+p{
+  display: flex;
+}
+
 // ====
 
 @for $i from 1 through 5 {

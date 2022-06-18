@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import {List, Space} from 'antd'
+import {List, message, Space} from 'antd'
 
 import {getPosts} from '@/api/post'
 
@@ -9,7 +9,6 @@ import Image from 'next/image'
 import {
   MessageOutlined,
   LikeOutlined,
-  StarOutlined,
   EyeOutlined,
   ClockCircleOutlined,
   LinkOutlined
@@ -60,14 +59,11 @@ export default function PostList({tag}: { tag: string }) {
 
   const getPostList = async () => {
     setLoading(true)
-    const {code, msg, total, data} = (await getPosts(
-      {...pageInfo, tag}
-    )) as HttpResponse
-    if (code === 200) {
-      setLoading(false)
-      setList(data)
-      setTotal(total || 0)
-    }
+    const {code, msg, total, data} = (await getPosts({...pageInfo, tag})) as HttpResponse
+    if (code !== 200) return message.error(msg || 'unknown error')
+    setLoading(false)
+    setList(data)
+    setTotal(total || 0)
   }
 
   useEffect(() => {
