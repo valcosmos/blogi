@@ -20,6 +20,7 @@
 
 - 目前该项目在我自己的mac上，使用Chrome Lighthouse进行generate report，`Performance`、`Accessibility`、`Best Practices`、`SEO`分数均在**90+**。
 
+<img src="/public/score.png" width="500px" />
 
 ## 使用
 
@@ -40,5 +41,9 @@ pnpm i
 pnpm dev
 
 ```
+
+## 讨论
+
+大家如果在使用过程中有什么问题，可以前往`Discussions`中进行讨论，或者在`issues`中进行提问。
 
 
