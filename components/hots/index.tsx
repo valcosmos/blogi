@@ -9,12 +9,17 @@ import { HttpResponse, PostInfo } from '@/common/interface'
 
 export default function Hots() {
   const router = useRouter()
+
+  const [loading, setLoading] = useState<boolean>(false)
+
   const [hots, setHots] = useState<Array<PostInfo>>([])
 
   const getList = async () => {
+    setLoading(true)
     const { code, msg, data } = (await getHotPosts()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
     setHots(data)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -37,6 +42,7 @@ export default function Hots() {
       >
         <List
           dataSource={hots}
+          loading={loading}
           className={'hot-list'}
           renderItem={(item, index) => (
             <List.Item>
