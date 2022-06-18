@@ -22,21 +22,22 @@
 
 ## 使用
 
-```shell
+使用 Gitpod （点击下面按钮即可，但是跳转之后需要注册，有兴趣可以试试这个gitpod，感觉挺有趣的。）
 
-# use pnpm
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://valcosmos-valnext-ybzdox95h1z.ws-us47.gitpod.io//)
+
+使用git克隆到本地:
+
+```bash
+
+git clone https://github.com/valcosmos/valnext.git
+
+cd valnext
 
 pnpm i
 
 pnpm dev
 
-# use yarn
-
-yarn
-
-yarn dev
-
 ```
-
 
 
