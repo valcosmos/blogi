@@ -17,15 +17,15 @@
     "antd": "^4.21.3",
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
-    "md-editor-rt": "^2.1.2",
+    "md-editor-rt": "^2.2.0",
     "next": "12.1.6",
     "nprogress": "^0.2.0",
     "qs": "^6.10.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-tsparticles": "^2.0.6",
-    "sharp": "^0.30.6",
-    "tsparticles": "^2.0.6"
+    "react-tsparticles": "^2.1.0",
+    "sharp": "^0.30.7",
+    "tsparticles": "^2.1.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.6",
@@ -44,7 +44,7 @@
     "next-transpile-modules": "^9.0.0",
     "next-with-less": "^2.0.5",
     "null-loader": "^4.0.1",
-    "sass": "^1.52.3",
+    "sass": "^1.53.0",
     "typescript": "4.7.4"
   }
 }
