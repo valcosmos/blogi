@@ -32,7 +32,6 @@ const LayoutCom: FC<LayoutProps> = ({children}) => {
 
   const router = useRouter()
 
-  console.log(typeof router.pathname)
   return (
     <div>
       <Layout className={style.layout}>

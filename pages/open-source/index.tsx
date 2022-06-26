@@ -85,7 +85,6 @@ export default OpenSource
 export async function getServerSideProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  console.log(context)
 
   const {code, data, msg} = await getProjects() as HttpResponse
   if (!data) {

@@ -14,7 +14,6 @@ const Banner = () => {
     await loadFull(main)
   }
   const particlesLoaded = (container: any): Promise<void> => {
-    console.log(container)
     return new Promise(resolve=>resolve())
   }
 

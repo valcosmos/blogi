@@ -75,14 +75,12 @@ export default Home
 export async function getServerSideProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  console.log(context)
   const {total: postListTotal, data: postList} = (await getPosts({
     sort: -1,
     current: 1,
     pageSize: 10, tag: ''
   })) as HttpResponse
 
-  console.log(postListTotal)
 
   const {data: hostList} = (await getHotPosts()) as HttpResponse
   const {data: tagList} = (await getTags()) as HttpResponse

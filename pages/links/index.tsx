@@ -89,7 +89,6 @@ export default Links
 export async function getServerSideProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  console.log(context)
   const {code, msg, data} = (await getLinks()) as HttpResponse
   if (!data) {
     return {

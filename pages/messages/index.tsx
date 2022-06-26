@@ -81,7 +81,6 @@ export default Messages
 export async function getServerSideProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  console.log(context)
 
   const {code, data, total, msg} = (await getMsgs()) as HttpResponse
 

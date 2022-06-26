@@ -74,7 +74,6 @@ export default TL
 export async function getServerSideProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  console.log(context)
 
   const {msg, data, code} = (await getLogs()) as HttpResponse
 

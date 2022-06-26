@@ -76,7 +76,6 @@ const Post: NextPage = () => {
   }
 
   const setFormData = async (props: FormType) => {
-    console.log(props)
     if (props.email === '') {
       delete props.email
     }
@@ -100,7 +99,6 @@ const Post: NextPage = () => {
   }
 
   const toComment = () => {
-    console.log(111)
     scrollToElement('.comment', 800, 0)
   }
 

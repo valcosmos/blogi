@@ -34,12 +34,10 @@ export default function Tags({getTag, list}: { getTag: (tag: string) => void, li
   const _getTags = async () => {
     const {code, data, msg} = (await getTags()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
-    console.log(data)
     setTags(data)
   }
 
   const handleTagClick = (tag?: string) => {
-    // console.log(tag)
     getTag(tag as string)
   }
 
