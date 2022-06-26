@@ -71,7 +71,7 @@ const TL: NextPage<{ data: any }> = ({data}) => {
 
 export default TL
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
