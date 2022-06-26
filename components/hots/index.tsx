@@ -13,12 +13,12 @@ import {HttpResponse, PostInfo} from '@/common/interface'
 import style from './hots.module.scss'
 
 
-export default function Hots() {
+export default function Hots({list}: {list: any}) {
   const router = useRouter()
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const [hots, setHots] = useState<Array<PostInfo>>([])
+  const [hots, setHots] = useState<Array<PostInfo>>(list)
 
   const getList = async () => {
     setLoading(true)
@@ -28,9 +28,9 @@ export default function Hots() {
     setLoading(false)
   }
 
-  useEffect(() => {
-    getList()
-  }, [])
+  // useEffect(() => {
+  //   getList()
+  // }, [])
 
   const toPostDetial = (id: string) => {
     router.push(`/post/${id}`)
