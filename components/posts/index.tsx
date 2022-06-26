@@ -70,13 +70,13 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
   }
 
   // useEffect(() => {
-    // getPostList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // getPostList()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [pageInfo.current, tag])
 
-  // useUpdateEffect(() => {
-  //   getPostList()
-  // }, [pageInfo.current, tag])
+  useUpdateEffect(() => {
+    getPostList()
+  }, [pageInfo.current, tag])
 
   const icons: Record<string, any | string>[] = [
     {type: EyeOutlined, text: 'read'},

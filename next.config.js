@@ -33,7 +33,7 @@ const nextConfig = {
 
     return config
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   // compiler: {
   //   //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
   //   styledComponents: true
