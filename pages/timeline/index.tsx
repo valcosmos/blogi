@@ -1,33 +1,33 @@
-import { NextPage } from 'next'
+import {NextPage} from 'next'
 
 import Head from 'next/head'
 
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { RocketOutlined } from '@ant-design/icons'
+import {RocketOutlined} from '@ant-design/icons'
 
-import { Timeline } from 'antd'
+import {Timeline} from 'antd'
 
-import { formatDate } from '@/utils/utils'
+import {formatDate} from '@/utils/utils'
 
-import { HttpResponse, LogInfo } from '@/common/interface'
+import {HttpResponse, LogInfo} from '@/common/interface'
 
-import { getLogs } from '@/api/common'
+import {getLogs, getMsgs} from '@/api/common'
 
 import style from './timeline.module.scss'
 
 
-const TL: NextPage = () => {
-  const [logs, setLogs] = useState<LogInfo[]>([])
-  const getLogLists = async () => {
-    const { msg, data, code } = (await getLogs()) as HttpResponse
-    if (code === 200) {
-      setLogs(data)
-    }
-  }
-  useEffect(() => {
-    getLogLists()
-  }, [])
+const TL: NextPage<{ data: any }> = ({data}) => {
+  const [logs, setLogs] = useState<LogInfo[]>(data)
+  // const getLogLists = async () => {
+  //   const {msg, data, code} = (await getLogs()) as HttpResponse
+  //   if (code === 200) {
+  //     setLogs(data)
+  //   }
+  // }
+  // useEffect(() => {
+  //   getLogLists()
+  // }, [])
   return (
     <>
       <Head>
@@ -43,9 +43,9 @@ const TL: NextPage = () => {
           content="HTML5, CSS3, JavaScript, TypeScript, Vue, React, Koa, nodejs, Jenkins, Docker, Golang, Gin, Python"
         />
 
-        <meta name="author" content="Cupid Valentine | 李青丘" />
+        <meta name="author" content="Cupid Valentine | 李青丘"/>
 
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
       <div className={style.timeline + ' container'}>
         <Timeline mode="alternate" className="pt-3">
@@ -53,7 +53,7 @@ const TL: NextPage = () => {
             return (
               <Timeline.Item
                 dot={
-                  index === 0 && <RocketOutlined style={{ fontSize: '28px' }} />
+                  index === 0 && <RocketOutlined style={{fontSize: '28px'}}/>
                 }
                 key={item._id}
                 color={index % 2 === 0 ? 'green' : 'blue'}
@@ -70,3 +70,21 @@ const TL: NextPage = () => {
 }
 
 export default TL
+
+export async function getServerSideProps(context: any) {
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+  console.log(context)
+
+  const {msg, data, code} = (await getLogs()) as HttpResponse
+
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {data} // will be passed to the page component as props
+  }
+}
