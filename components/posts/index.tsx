@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 
 import {List, message, Space} from 'antd'
 
+import type {PaginationProps} from 'antd';
+
 import {getPosts} from '@/api/post'
 
 import Image from 'next/image'
@@ -49,6 +51,23 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
 
   // const {tag: routerTag, page} = router.query
 
+
+  const itemRender: PaginationProps['itemRender'] = (num, type, originalElement) => {
+    // if (type === 'prev') {
+    //   return <a>Previous</a>;
+    // }
+    // if (type === 'next') {
+    //   return <a>Next</a>;
+    // }
+    if (type === 'page') {
+      return <button className={'custom-pagination'}>{num}</button>;
+    }
+    // if (originalElement.type === 'a') {
+    //   originalElement!.href = 'javascript:;'
+    // }
+
+    return originalElement;
+  };
 
   const icon = (tag?: string): string => {
     let icon = ''
@@ -106,7 +125,8 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
             router.push(`/`)
           },
           pageSize: 10,
-          total: total
+          total: total,
+          itemRender: itemRender
         }}
         dataSource={list}
         renderItem={(item) => (

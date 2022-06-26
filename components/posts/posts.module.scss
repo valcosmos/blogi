@@ -9,6 +9,13 @@
       height: 100%;
     }
 
+    .custom-pagination{
+      border: none;
+      background-color: transparent;
+      width: 100%;
+      cursor: pointer;
+    }
+
     .pagination {
       display: flex;
       justify-content: flex-end;
