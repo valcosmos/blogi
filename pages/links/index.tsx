@@ -8,7 +8,7 @@ import {Card, Row, Col, Button, message} from 'antd'
 
 import {LinkOutlined} from '@ant-design/icons'
 
-import {getLinks} from '@/api/common'
+import {getLinks, getProjects} from '@/api/common'
 
 import {HttpResponse, LinkInfo} from '@/common/interface'
 
@@ -16,18 +16,18 @@ import Image from 'next/image'
 
 import style from './links.module.scss'
 
-const Links: NextPage = () => {
-  const [links, setLinks] = useState<LinkInfo[]>([])
-  const getLinkLists = async () => {
-    const {code, msg, data} = (await getLinks()) as HttpResponse
-    if (code !== 200) return message.error(msg || 'unknown error')
-    setLinks(data)
+const Links: NextPage<{ data: any }> = ({data}) => {
+  const [links, setLinks] = useState<LinkInfo[]>(data)
+  // const getLinkLists = async () => {
+  //   const {code, msg, data} = (await getLinks()) as HttpResponse
+  //   if (code !== 200) return message.error(msg || 'unknown error')
+  //   setLinks(data)
+  //
+  // }
 
-  }
-
-  useEffect(() => {
-    getLinkLists()
-  }, [])
+  // useEffect(() => {
+  //   getLinkLists()
+  // }, [])
   return (
     <>
       <Head>
@@ -84,3 +84,20 @@ const Links: NextPage = () => {
 }
 
 export default Links
+
+
+export async function getServerSideProps(context: any) {
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+  console.log(context)
+  const {code, msg, data} = (await getLinks()) as HttpResponse
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {data} // will be passed to the page component as props
+  }
+}
