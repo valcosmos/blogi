@@ -14,12 +14,12 @@ import {HttpResponse} from '@/common/interface'
 
 import style from './about.module.scss'
 
-const About: NextPage = () => {
+const About: NextPage<{ data: any }> = ({data}) => {
+  const [text, setText] = useState<string>(data.info)
 
-  const [text, setText] = useState<string>('')
+  const [avatar, setAvatar] = useState<string>(data.avatar)
 
-  const [avatar, setAvatar] = useState<string>('')
-
+  /*
   const getInfo = async () => {
     const {code, msg, data} = (await getAbout()) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
@@ -30,7 +30,7 @@ const About: NextPage = () => {
   useEffect(() => {
     getInfo()
   }, [])
-
+*/
   return (
     <>
       <Head>
@@ -63,3 +63,21 @@ const About: NextPage = () => {
 }
 
 export default About
+
+export async function getServerSideProps(context: any) {
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+  console.log(context)
+
+  const {code, msg, data} = (await getAbout()) as HttpResponse
+
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {data} // will be passed to the page component as props
+  }
+}
