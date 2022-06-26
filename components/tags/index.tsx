@@ -11,7 +11,7 @@ import {HttpResponse, TagInfo} from '@/common/interface'
 import style from './tags.module.scss'
 
 
-export default function Tags({getTag, list}: { getTag: (tag: string) => void, list: any }) {
+export default function Tags({getTag, list}: { getTag: (tag: string) => void, list?: any }) {
   const [tags, setTags] = useState<TagInfo[]>(list)
 
   const tagColor = [

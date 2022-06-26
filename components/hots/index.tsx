@@ -13,7 +13,7 @@ import {HttpResponse, PostInfo} from '@/common/interface'
 import style from './hots.module.scss'
 
 
-export default function Hots({list}: {list: any}) {
+export default function Hots({list}: {list?: any}) {
   const router = useRouter()
 
   const [loading, setLoading] = useState<boolean>(false)

@@ -29,7 +29,7 @@ import {getLinks} from "@/api/common";
 import {useUpdateEffect} from "react-use";
 
 
-export default function PostList({tag, postList, postTotal}: { tag: string, postList: any, postTotal: number }) {
+export default function PostList({tag, postList, postTotal}: { tag: string, postList?: any, postTotal?: number }) {
 
   const router = useRouter()
 
@@ -69,10 +69,10 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
     setTotal(total || 0)
   }
 
-  useEffect(() => {
+  // useEffect(() => {
     // getPostList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageInfo.current, tag])
+  // }, [pageInfo.current, tag])
 
   useUpdateEffect(() => {
     getPostList()

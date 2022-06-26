@@ -83,6 +83,7 @@ export async function getServerSideProps(context: any) {
 
 
   const {data: hostList} = (await getHotPosts()) as HttpResponse
+
   const {data: tagList} = (await getTags()) as HttpResponse
 
   if (!postList) {
