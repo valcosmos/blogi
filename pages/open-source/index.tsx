@@ -10,23 +10,23 @@ import Image from "next/image";
 
 import {HttpResponse, ProjectInfo} from '@/common/interface'
 
-import {getProjects} from '@/api/common'
+import {getMsgs, getProjects} from '@/api/common'
 
 import style from './open.module.scss'
 
 
-const OpenSource: NextPage = () => {
-  const [project, setProject] = useState<ProjectInfo[]>([])
+const OpenSource: NextPage<{ data: any }> = ({data}) => {
+  const [project, setProject] = useState<ProjectInfo[]>(data)
 
-  const _getProject = async () => {
-    const {code, data, msg} = await getProjects() as HttpResponse
-    if (code !== 200) return message.error(msg || 'unknown error')
-    setProject(data)
-  }
+  // const _getProject = async () => {
+  //   const {code, data, msg} = await getProjects() as HttpResponse
+  //   if (code !== 200) return message.error(msg || 'unknown error')
+  //   setProject(data)
+  // }
 
-  useEffect(() => {
-    _getProject()
-  }, [])
+  // useEffect(() => {
+  //   _getProject()
+  // }, [])
 
   return (
     <>
@@ -81,3 +81,21 @@ const OpenSource: NextPage = () => {
 }
 
 export default OpenSource
+
+export async function getServerSideProps(context: any) {
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+  console.log(context)
+
+  const {code, data, msg} = await getProjects() as HttpResponse
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {data} // will be passed to the page component as props
+  }
+}
+
