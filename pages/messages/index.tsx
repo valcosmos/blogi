@@ -12,7 +12,7 @@ const CommentList = dynamic(() => import('@/components/comment-list'))
 
 import {HttpResponse, MsgInfo} from '@/common/interface'
 
-import {getMsgs, setMsgs} from '@/api/common'
+import {getAbout, getMsgs, setMsgs} from '@/api/common'
 
 // import {toTree} from '@/utils/utils'
 
@@ -22,11 +22,11 @@ import {FormType} from '@/components/comment-form'
 
 import style from './msg.module.scss'
 
-const Messages: NextPage = () => {
+const Messages: NextPage<{data:any}> = ({data}) => {
 
-  const [messageList, setMessageList] = useState<MsgInfo[]>([])
+  const [messageList, setMessageList] = useState<MsgInfo[]>(toTree(data.data, '_id', 'pid'))
 
-  const [total, setTotal] = useState<number>(0)
+  const [total, setTotal] = useState<number>(data.total)
 
   const getMsgList = async () => {
     const {code, data, total, msg} = (await getMsgs()) as HttpResponse
@@ -48,9 +48,9 @@ const Messages: NextPage = () => {
     onSubmit(props)
   }
 
-  useEffect(() => {
-    getMsgList()
-  }, [])
+  // useEffect(() => {
+  //   getMsgList()
+  // }, [])
 
   return (
     <>
@@ -77,3 +77,21 @@ const Messages: NextPage = () => {
 }
 
 export default Messages
+
+export async function getServerSideProps(context: any) {
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+  console.log(context)
+
+  const {code, data, total, msg} = (await getMsgs()) as HttpResponse
+
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {data:{total, data}} // will be passed to the page component as props
+  }
+}
