@@ -4,9 +4,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development next dev",
-    "build": "NODE_ENV=development next build",
-    "start": "NODE_ENV=development next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
     "prepare": "husky install"
   },
