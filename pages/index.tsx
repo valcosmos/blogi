@@ -72,7 +72,7 @@ const Home: NextPage<{ data: any }> = ({data}) => {
 export default Home
 
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
   const {total: postListTotal, data: postList} = (await getPosts({
