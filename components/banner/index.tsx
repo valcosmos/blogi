@@ -14,7 +14,7 @@ const Banner = () => {
     await loadFull(main)
   }
   const particlesLoaded = (container: any): Promise<void> => {
-    console.log(container)  
+    console.log(container)
     return new Promise(resolve=>resolve())
   }
 
@@ -35,7 +35,7 @@ const Banner = () => {
           mode: 'push'
         },
         onHover: {
-          enable: true,
+          enable: false,
           mode: 'repulse'
         },
         resize: true
