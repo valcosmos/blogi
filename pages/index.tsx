@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 
 import {Col, Row, Badge} from 'antd'
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getHotPosts, getPosts, getTags} from "@/api/post";
 import {HttpResponse} from "@/common/interface";
 
@@ -14,26 +14,42 @@ import {HttpResponse} from "@/common/interface";
 //   import('../components/hello').then((mod) => mod.Hello)
 // )
 
-import Posts from '@/components/posts'
-
-import Hots from '@/components/hots'
-
-import Tags from '@/components/tags'
-
-// const Posts = dynamic(() => import('@/components/posts'))
+// import Posts from '@/components/posts'
 //
-// const Hots = dynamic(() => import('@/components/hots'))
+// import Hots from '@/components/hots'
 //
-// const Tags = dynamic(() => import('@/components/tags'))
+// import Tags from '@/components/tags'
+
+const Posts = dynamic(() => import('@/components/posts'))
+
+const Hots = dynamic(() => import('@/components/hots'))
+
+const Tags = dynamic(() => import('@/components/tags'))
 
 
 const Home: NextPage<{ data: any }> = ({data}) => {
+
 
   const [tag, setTag] = useState<string>('')
 
   const getTag = (tag: string) => {
     setTag(tag)
   }
+
+  const {
+    postList,
+    postListTotal,
+    hotList,
+    tagList
+  } = data
+
+  const [posts, setPosts] = useState(postList)
+  const [total, setTotal] = useState(postListTotal)
+  const [hots, setHots] = useState(hotList)
+  const [tags, setTags] = useState(tagList)
+
+
+
 
   return (
     <>
@@ -57,11 +73,11 @@ const Home: NextPage<{ data: any }> = ({data}) => {
       <div className="home container">
         <Row gutter={20}>
           <Col xs={24} sm={24} md={18} lg={18}>
-            <Posts postList={data.postList} postTotal={data.postListTotal} tag={tag}/>
+            <Posts postList={posts} postTotal={total} tag={tag}/>
           </Col>
           <Col xs={24} sm={24} md={6} lg={6}>
-            <Hots list={data.hostList}/>
-            <Tags list={data.tagList} getTag={getTag}/>
+            <Hots list={hots}/>
+            <Tags list={tags} getTag={getTag}/>
           </Col>
         </Row>
       </div>
@@ -82,7 +98,7 @@ export async function getStaticProps(context: any) {
   })) as HttpResponse
 
 
-  const {data: hostList} = (await getHotPosts()) as HttpResponse
+  const {data: hotList} = (await getHotPosts()) as HttpResponse
 
   const {data: tagList} = (await getTags()) as HttpResponse
 
@@ -95,7 +111,7 @@ export async function getStaticProps(context: any) {
   return {
     props: {
       data: {
-        postListTotal, postList, hostList,
+        postListTotal, postList, hotList,
         tagList
       }
     } // will be passed to the page component as props

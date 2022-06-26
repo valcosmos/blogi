@@ -4,7 +4,7 @@ import Head from "next/head";
 
 import {useRouter} from "next/router";
 
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 import NProgress from 'nprogress'
 
@@ -23,8 +23,8 @@ function MyApp({Component, pageProps}: AppProps) {
 
   const router = useRouter()
 
-  useEffect(() => {
 
+  useEffect(() => {
     router.events.on("routeChangeStart", () => {
       NProgress.start();
     });
