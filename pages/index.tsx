@@ -14,17 +14,17 @@ import {HttpResponse} from "@/common/interface";
 //   import('../components/hello').then((mod) => mod.Hello)
 // )
 
-// import Posts from '@/components/posts'
+import Posts from '@/components/posts'
 
-// import Hots from '@/components/hots'
+import Hots from '@/components/hots'
 
-// import Tags from '@/components/tags'
+import Tags from '@/components/tags'
 
-const Posts = dynamic(() => import('@/components/posts'))
-
-const Hots = dynamic(() => import('@/components/hots'))
-
-const Tags = dynamic(() => import('@/components/tags'))
+// const Posts = dynamic(() => import('@/components/posts'))
+//
+// const Hots = dynamic(() => import('@/components/hots'))
+//
+// const Tags = dynamic(() => import('@/components/tags'))
 
 
 const Home: NextPage<{ data: any }> = ({data}) => {
