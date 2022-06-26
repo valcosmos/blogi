@@ -25,16 +25,19 @@ import {formatDate, scrollToElement} from '@/utils/utils'
 import {useRouter} from 'next/router'
 
 import style from './posts.module.scss'
+import {getLinks} from "@/api/common";
+import {useUpdateEffect} from "react-use";
 
 
-export default function PostList({tag}: { tag: string }) {
+export default function PostList({tag, postList, postTotal}: { tag: string, postList: any, postTotal: number }) {
+
   const router = useRouter()
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const [list, setList] = useState<Array<PostInfo>>([])
+  const [list, setList] = useState<Array<PostInfo>>(postList)
 
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(postTotal)
 
   const [pageInfo, setPageInfo] = useState({
     sort: -1,
@@ -67,8 +70,12 @@ export default function PostList({tag}: { tag: string }) {
   }
 
   useEffect(() => {
-    getPostList()
+    // getPostList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageInfo.current, tag])
+
+  useUpdateEffect(() => {
+    getPostList()
   }, [pageInfo.current, tag])
 
   const icons: Record<string, any | string>[] = [
@@ -137,3 +144,6 @@ export default function PostList({tag}: { tag: string }) {
     </div>
   )
 }
+
+
+
