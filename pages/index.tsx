@@ -7,6 +7,8 @@ import dynamic from 'next/dynamic'
 import {Col, Row, Badge} from 'antd'
 
 import {useState} from "react";
+import {getHotPosts, getPosts, getTags} from "@/api/post";
+import {HttpResponse} from "@/common/interface";
 
 // const DynamicComponent = dynamic(() =>
 //   import('../components/hello').then((mod) => mod.Hello)
@@ -25,7 +27,7 @@ const Hots = dynamic(() => import('@/components/hots'))
 const Tags = dynamic(() => import('@/components/tags'))
 
 
-const Home: NextPage = () => {
+const Home: NextPage<{ data: any }> = ({data}) => {
 
   const [tag, setTag] = useState<string>('')
 
@@ -55,11 +57,11 @@ const Home: NextPage = () => {
       <div className="home container">
         <Row gutter={20}>
           <Col xs={24} sm={24} md={18} lg={18}>
-            <Posts tag={tag}/>
+            <Posts postList={data.postList} postTotal={data.postListTotal} tag={tag}/>
           </Col>
           <Col xs={24} sm={24} md={6} lg={6}>
-            <Hots/>
-            <Tags getTag={getTag}/>
+            <Hots list={data.hostList}/>
+            <Tags list={data.tagList} getTag={getTag}/>
           </Col>
         </Row>
       </div>
@@ -68,3 +70,35 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+
+export async function getServerSideProps(context: any) {
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+  console.log(context)
+  const {total: postListTotal, data: postList} = (await getPosts({
+    sort: -1,
+    current: 1,
+    pageSize: 10, tag: ''
+  })) as HttpResponse
+
+  console.log(postListTotal)
+
+  const {data: hostList} = (await getHotPosts()) as HttpResponse
+  const {data: tagList} = (await getTags()) as HttpResponse
+
+  if (!postList) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {
+      data: {
+        postListTotal, postList, hostList,
+        tagList
+      }
+    } // will be passed to the page component as props
+  }
+}
