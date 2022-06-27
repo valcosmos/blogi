@@ -30,7 +30,7 @@ const CustomMenu = () => {
 
   const menuList: MenuProps['items'] = [
     {
-      label: <div className="img"><Image src={logo} alt="logo" width={40} height={40}/></div>,
+      label: <div className="img"><Image src={logo} alt="logo" width={40} height={40} priority={true}/></div>,
       key: 'logo',
       className: 'logo-item'
     },
