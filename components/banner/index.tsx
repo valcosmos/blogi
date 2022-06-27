@@ -1,10 +1,15 @@
 import React from 'react'
 
-import Particles from 'react-tsparticles'
+// import Particles from 'react-tsparticles'
 
-import { loadFull } from 'tsparticles'
+import dynamic from "next/dynamic";
+
+import {loadFull} from 'tsparticles'
 
 import style from '@/components/banner/banner.module.scss'
+
+const Particles = dynamic(() => import('react-tsparticles'))
+
 
 const Banner = () => {
   const particlesInit = async (main: any) => {
@@ -14,7 +19,7 @@ const Banner = () => {
     await loadFull(main)
   }
   const particlesLoaded = (container: any): Promise<void> => {
-    return new Promise(resolve=>resolve())
+    return new Promise(resolve => resolve())
   }
 
   const options: any = {

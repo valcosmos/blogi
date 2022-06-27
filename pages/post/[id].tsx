@@ -29,11 +29,7 @@ const CommentList = dynamic(() => import('@/components/comment-list'))
 
 import style from './post.module.scss'
 
-
 const Post: NextPage = () => {
-  const router = useRouter()
-
-  const {id} = router.query
 
   const [post, setPost] = useState<PostInfo>({_id: '', content: '', tags: []})
 
@@ -42,6 +38,10 @@ const Post: NextPage = () => {
   const [commentTotal, setCommentTotal] = useState<number>(0)
 
   const [liked, setLiked] = useState<boolean>(false)
+
+  const router = useRouter()
+
+  const {id} = router.query
 
   const getDetail = async () => {
     const {msg, data, code, isLiked} = (await getPostDetail({

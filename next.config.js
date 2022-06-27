@@ -13,6 +13,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   images: {
     domains: [
       'valzt.cn',
@@ -28,11 +29,15 @@ const nextConfig = {
 
     ]
   },
-  webpack: (config) => {
+  webpack: (config, {webpack, isServer, dev}) => {
     config.resolve.alias['@'] = path.resolve(__dirname)
+    if (!isServer && !dev) {
+      //为了避免同一文件被多次打包
+      config.optimization.splitChunks.cacheGroups.lib.minChunks = 2
+    }
     return config
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   // compiler: {
   //   //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
   //   styledComponents: true

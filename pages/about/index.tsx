@@ -1,5 +1,7 @@
 import {NextPage} from 'next'
 
+import dynamic from "next/dynamic";
+
 import Head from 'next/head'
 
 import React, {useEffect, useState} from 'react'
@@ -15,6 +17,7 @@ import {HttpResponse} from '@/common/interface'
 import style from './about.module.scss'
 
 const About: NextPage<{ data: any }> = ({data}) => {
+
   const [text, setText] = useState<string>(data.info)
 
   const [avatar, setAvatar] = useState<string>(data.avatar)
