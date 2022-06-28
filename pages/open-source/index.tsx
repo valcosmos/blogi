@@ -55,7 +55,7 @@ const OpenSource: NextPage<{ data: any }> = ({data}) => {
             <Col xs={24} sm={12} md={8} lg={6} key={item._id}>
               <Card
                 cover={<div className={'repo-cover'}><Image layout={'fill'} objectFit={'contain'}
-                                                            src={'https://valzt.cn/media/avatar_me.png'}
+                                                            src={'https://api.valzt.cn/media/avatar_me.png'}
                                                             alt={'opensource-cover'}/></div>}
                 actions={[
                   <Button type={'primary'} key={'repo'} onClick={() => {
