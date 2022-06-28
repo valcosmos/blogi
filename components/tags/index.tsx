@@ -15,20 +15,19 @@ export default function Tags({getTag, list}: { getTag: (tag: string) => void, li
   const [tags, setTags] = useState<TagInfo[]>(list)
 
   const tagColor = [
-    'pink',
-    'red',
-    'orange',
-    'green',
-    'cyan',
-    'blue',
-    'purple',
-    'pink',
-    'red',
-    'orange',
-    'green',
-    'cyan',
-    'blue',
-    'purple'
+    '#d54700',
+    '#0098dd',
+    '#87d068',
+    '#108ee9',
+    '#33333D',
+    '#000000',
+    '#092E20',
+    '#3776AB',
+    '#00ADD8',
+    '#009639',
+    '#5FCF80',
+    '#3178C6',
+    '#D24939',
   ]
 
   const _getTags = async () => {
@@ -62,7 +61,8 @@ export default function Tags({getTag, list}: { getTag: (tag: string) => void, li
         </div>
 
         {tags.map((tag, index) => (
-          <Tag key={tag._id} color={tagColor[index]}>
+          // <Tag key={tag._id} color={tagColor[index]}>
+          <Tag key={tag._id}>
             <span onClick={() => handleTagClick(tag.tagName)}>
               {tag.tagName}
             </span>

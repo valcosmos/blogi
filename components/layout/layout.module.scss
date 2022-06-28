@@ -1,7 +1,28 @@
-.layout{
-  :global{
-    .l-header{
+.layout {
+  background-color: #f5f5f5 !important;
+
+  :global {
+    .l-header {
+      display: flex;
       height: auto;
+
+      .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        //width: 100%;
+        width: 40px;
+        height: 64px;
+        //height: 100%;
+        margin-right: 20px;
+        .img-view {
+          width: 40px;
+          height: 40px;
+          background: url("../../assets/img/logoh64.png") no-repeat no-repeat center center;
+          background-size: contain;
+          color: transparent;
+        }
+      }
     }
   }
 }

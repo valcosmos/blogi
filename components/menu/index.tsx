@@ -43,13 +43,9 @@ const CustomMenu = () => {
 //     {icon: <MessageOutlined/>, label: '留言', key: '/messages'},
 //     {icon: <InfoCircleOutlined/>, label: '关于', key: '/about'}
 //   ]
-  
+
+  // <Image src={logo} alt="logo" width={40} height={40} priority={true}/>
   const menuList: MenuProps['items'] = [
-    {
-      label: <div className="img"><Image src={logo} alt="logo" width={40} height={40} priority={true}/></div>,
-      key: 'logo',
-      className: 'logo-item'
-    },  
     {icon: <HomeOutlined/>, label: <Link href={'/'}>首页</Link>, key: '/'},
     {icon: <LinkOutlined/>, label: <Link href={'/links'}>友链</Link>, key: '/links'},
     {icon: <ProjectOutlined/>, label: <Link href={'/open-source'}>开源</Link>, key: '/open-source'},

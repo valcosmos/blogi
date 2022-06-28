@@ -1,4 +1,4 @@
-import {CSSProperties, FC, ReactNode} from 'react'
+import React, {CSSProperties, FC, ReactNode} from 'react'
 
 import dynamic from "next/dynamic";
 
@@ -46,6 +46,9 @@ const LayoutCom: FC<LayoutProps> = ({children}) => {
     <div>
       <Layout className={style.layout}>
         <Layout.Header className="l-header">
+          <div className="img">
+            <div className={'img-view'}></div>
+          </div>
           <Menu/>
         </Layout.Header>
 
