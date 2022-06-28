@@ -17,6 +17,7 @@ const nextConfig = {
   images: {
     domains: [
       'valzt.cn',
+      'api.valzt.cn',
       'raw.githubusercontent.com',
       'webpack.js.org',
       'github.com',
