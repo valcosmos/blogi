@@ -7,7 +7,9 @@ import dynamic from 'next/dynamic'
 import {Col, Row, Badge} from 'antd'
 
 import {useEffect, useState} from "react";
+
 import {getHotPosts, getPosts, getTags} from "@/api/post";
+
 import {HttpResponse} from "@/common/interface";
 
 // const DynamicComponent = dynamic(() =>
@@ -47,9 +49,6 @@ const Home: NextPage<{ data: any }> = ({data}) => {
   const [total, setTotal] = useState(postListTotal)
   const [hots, setHots] = useState(hotList)
   const [tags, setTags] = useState(tagList)
-
-
-
 
   return (
     <>
