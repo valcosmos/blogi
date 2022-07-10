@@ -138,7 +138,8 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
               <IconText icon={MessageOutlined} text={item.comment as number} key="3"/>,
               <IconText
                 icon={ClockCircleOutlined}
-                text={formatDate(item.created as string)}
+                // text={formatDate(item.created as string)}
+                text={item.created}
                 key="4"
               />
             ]}
