@@ -13,7 +13,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  productionBrowserSourceMaps: true,
+  // productionBrowserSourceMaps: true,
   images: {
     domains: [
       'valzt.cn',
@@ -25,12 +25,10 @@ const nextConfig = {
       'avatars.githubusercontent.com',
       'beego.vip',
       'www.vectorlogo.zone',
-      'images.weserv.nl',
-
-
+      'images.weserv.nl'
     ]
   },
-  webpack: (config, {webpack, isServer, dev}) => {
+  webpack: (config, { webpack, isServer, dev }) => {
     config.resolve.alias['@'] = path.resolve(__dirname)
     if (!isServer && !dev) {
       //为了避免同一文件被多次打包
@@ -43,7 +41,7 @@ const nextConfig = {
   //   //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
   //   styledComponents: true
   // },
-
+  swcMinify: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
   }
