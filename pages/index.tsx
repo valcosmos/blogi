@@ -110,9 +110,12 @@ export async function getStaticProps(context: any) {
   return {
     props: {
       data: {
-        postListTotal, postList, hotList,
+        postListTotal,
+        postList,
+        hotList,
         tagList
       }
-    } // will be passed to the page component as props
+    }, // will be passed to the page component as props
+    revalidate: 10 // In seconds
   }
 }
