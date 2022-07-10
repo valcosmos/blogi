@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {List, message, Space} from 'antd'
 
@@ -96,6 +96,10 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
   useUpdateEffect(() => {
     getPostList()
   }, [pageInfo.current, tag])
+
+  useEffect(() => {
+    setList(postList.map((item:any) => ({...item, created: formatDate(item.created)})))
+  }, [postList])
 
   const icons: Record<string, any | string>[] = [
     {type: EyeOutlined, text: 'read'},
