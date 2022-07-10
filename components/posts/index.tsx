@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import {List, message, Space} from 'antd'
 
@@ -22,7 +22,7 @@ import {HttpResponse, PostInfo} from '@/common/interface'
 
 import {postIcon, postIconProps} from '@/utils/post-icon'
 
-import {formatDate, scrollToElement} from '@/utils/utils'
+import {scrollToElement} from '@/utils/utils'
 
 import {useRouter} from 'next/router'
 
@@ -96,10 +96,6 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
   useUpdateEffect(() => {
     getPostList()
   }, [pageInfo.current, tag])
-
-  useEffect(() => {
-    setList(postList.map((item:any) => ({...item, created: formatDate(item.created)})))
-  }, [postList])
 
   const icons: Record<string, any | string>[] = [
     {type: EyeOutlined, text: 'read'},

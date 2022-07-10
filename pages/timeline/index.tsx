@@ -2,7 +2,7 @@ import {NextPage} from 'next'
 
 import Head from 'next/head'
 
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import {RocketOutlined} from '@ant-design/icons'
 
@@ -12,7 +12,7 @@ import {formatDate} from '@/utils/utils'
 
 import {HttpResponse, LogInfo} from '@/common/interface'
 
-import {getLogs, getMsgs} from '@/api/common'
+import {getLogs} from '@/api/common'
 
 import style from './timeline.module.scss'
 
@@ -59,7 +59,7 @@ const TL: NextPage<{ data: any }> = ({data}) => {
                 color={index % 2 === 0 ? 'green' : 'blue'}
               >
                 <h3>{item.log}</h3>
-                <p>{formatDate(item.created || '')}</p>
+                <p>{item.created || ''}</p>
               </Timeline.Item>
             )
           })}
@@ -75,7 +75,9 @@ export async function getStaticProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
-  const {msg, data, code} = (await getLogs()) as HttpResponse
+  const {msg, data: res, code} = (await getLogs()) as HttpResponse
+
+  const data = res.map((item: LogInfo) => ({...item, created: formatDate(item.created as string)}))
 
   if (!data) {
     return {

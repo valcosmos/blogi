@@ -10,7 +10,8 @@ import {useEffect, useState} from "react";
 
 import {getHotPosts, getPosts, getTags} from "@/api/post";
 
-import {HttpResponse} from "@/common/interface";
+import {HttpResponse, PostInfo} from "@/common/interface";
+import {formatDate} from '@/utils/utils';
 
 // const DynamicComponent = dynamic(() =>
 //   import('../components/hello').then((mod) => mod.Hello)
@@ -90,12 +91,13 @@ export default Home
 export async function getStaticProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  const {total: postListTotal, data: postList} = (await getPosts({
+  const {total: postListTotal, data: posts} = (await getPosts({
     sort: -1,
     current: 1,
     pageSize: 10, tag: ''
   })) as HttpResponse
 
+  const postList = posts.map((item: PostInfo) => ({...item, created: formatDate(item.created as string)}))
 
   const {data: hotList} = (await getHotPosts()) as HttpResponse
 
@@ -116,6 +118,6 @@ export async function getStaticProps(context: any) {
         tagList
       }
     }, // will be passed to the page component as props
-    revalidate: 10 // In seconds
+    // revalidate: 10 // In seconds
   }
 }

@@ -21,8 +21,9 @@ import {toTree} from '@valcosmos/to-tree'
 import {FormType} from '@/components/comment-form'
 
 import style from './msg.module.scss'
+import {formatDate} from '@/utils/utils'
 
-const Messages: NextPage<{data:any}> = ({data}) => {
+const Messages: NextPage<{ data: any }> = ({data}) => {
 
   const [messageList, setMessageList] = useState<MsgInfo[]>(toTree(data.data, '_id', 'pid'))
 
@@ -82,7 +83,9 @@ export async function getStaticProps(context: any) {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
-  const {code, data, total, msg} = (await getMsgs()) as HttpResponse
+  const {code, data: res, total, msg} = (await getMsgs()) as HttpResponse
+
+  const data = res.map((item: MsgInfo) => ({...item, created: formatDate(item.created as string)}))
 
   if (!data) {
     return {
@@ -91,6 +94,6 @@ export async function getStaticProps(context: any) {
   }
 
   return {
-    props: {data:{total, data}} // will be passed to the page component as props
+    props: {data: {total, data}} // will be passed to the page component as props
   }
 }

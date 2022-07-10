@@ -4,8 +4,6 @@ import React, {FC} from 'react'
 
 import {Comment} from 'antd'
 
-import {formatDate} from '@/utils/utils'
-
 import CommentForm, {FormType} from '@/components/comment-form'
 
 interface CustomCommentProps {
@@ -56,7 +54,7 @@ const CustomComment: FC<CustomCommentProps> = ({item, id, active, setActive, set
         ></div>
       ]}
       content={item.content}
-      datetime={formatDate(item.created as string)}
+      datetime={item.created as string}
     >
       {item.children?.length > 0 &&
         item.children.map((item: MsgInfo) =>
