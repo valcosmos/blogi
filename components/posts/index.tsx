@@ -22,7 +22,7 @@ import {HttpResponse, PostInfo} from '@/common/interface'
 
 import {postIcon, postIconProps} from '@/utils/post-icon'
 
-import {scrollToElement} from '@/utils/utils'
+import {formatDate, scrollToElement} from '@/utils/utils'
 
 import {useRouter} from 'next/router'
 
@@ -84,7 +84,7 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
     const {code, msg, total, data} = (await getPosts({...pageInfo, tag})) as HttpResponse
     if (code !== 200) return message.error(msg || 'unknown error')
     setLoading(false)
-    setList(data)
+    setList(data.map((item: PostInfo) => ({...item, created: formatDate(item.created as string)})))
     setTotal(total || 0)
   }
 
