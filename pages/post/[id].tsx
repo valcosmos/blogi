@@ -50,7 +50,7 @@ const Post: NextPage = () => {
     if (code !== 200) return message.error('unknown error')
     // detail.value = data
     // _isLiked.value = isLiked as boolean
-    setPost(data)
+    setPost({...data, created: formatDate(data.created)})
     setLiked(isLiked as boolean)
   }
 
@@ -134,7 +134,7 @@ const Post: NextPage = () => {
           <div>
             <h1>{post.title}</h1>
             <div className="count-data">
-              <span className="me-3">{formatDate(post.created || '')}</span>
+              <span className="me-3">{post.created || ''}</span>
               <span>阅读{post?.read}</span>
             </div>
 
