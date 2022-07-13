@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 import Head from 'next/head'
 
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import {message} from 'antd'
 
@@ -12,7 +12,7 @@ const CommentList = dynamic(() => import('@/components/comment-list'))
 
 import {HttpResponse, MsgInfo} from '@/common/interface'
 
-import {getAbout, getMsgs, setMsgs} from '@/api/common'
+import {getMsgs, setMsgs} from '@/api/common'
 
 // import {toTree} from '@/utils/utils'
 
@@ -79,11 +79,11 @@ const Messages: NextPage<{ data: any }> = ({data}) => {
 
 export default Messages
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
-  const {code, data: res, total, msg} = (await getMsgs()) as HttpResponse
+  const {data: res, total} = (await getMsgs()) as HttpResponse
 
   const data = res.map((item: MsgInfo) => ({...item, created: formatDate(item.created as string)}))
 

@@ -4,7 +4,7 @@ import Head from "next/head"
 
 import {useRouter} from "next/router";
 
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 import NProgress from 'nprogress'
 

@@ -6,8 +6,6 @@ import dynamic from "next/dynamic";
 
 import {loadFull} from 'tsparticles'
 
-import style from '@/components/banner/banner.module.scss'
-
 const Particles = dynamic(() => import('react-tsparticles'))
 
 
@@ -18,7 +16,7 @@ const Banner = () => {
     // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(main)
   }
-  const particlesLoaded = (container: any): Promise<void> => {
+  const particlesLoaded = (): Promise<void> => {
     return new Promise(resolve => resolve())
   }
 

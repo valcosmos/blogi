@@ -10,7 +10,6 @@ import Image from 'next/image'
 
 import {
   MessageOutlined,
-  LikeOutlined,
   EyeOutlined,
   ClockCircleOutlined,
   LinkOutlined
@@ -27,7 +26,7 @@ import {formatDate, scrollToElement} from '@/utils/utils'
 import {useRouter} from 'next/router'
 
 import style from './posts.module.scss'
-import {getLinks} from "@/api/common";
+
 import {useUpdateEffect} from "react-use";
 
 
@@ -97,12 +96,12 @@ export default function PostList({tag, postList, postTotal}: { tag: string, post
     getPostList()
   }, [pageInfo.current, tag])
 
-  const icons: Record<string, any | string>[] = [
-    {type: EyeOutlined, text: 'read'},
-    {type: LikeOutlined, text: 'like'},
-    {type: MessageOutlined, text: 'comment'},
-    {type: ClockCircleOutlined, text: 'time'}
-  ]
+  // const icons: Record<string, any | string>[] = [
+  //   {type: EyeOutlined, text: 'read'},
+  //   {type: LikeOutlined, text: 'like'},
+  //   {type: MessageOutlined, text: 'comment'},
+  //   {type: ClockCircleOutlined, text: 'time'}
+  // ]
 
   const IconText = ({icon, text}: { icon: any; text?: number | string }) => (
     <Space>

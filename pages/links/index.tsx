@@ -2,13 +2,13 @@ import {NextPage} from 'next'
 
 import Head from 'next/head'
 
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 
-import {Card, Row, Col, Button, message} from 'antd'
+import {Card, Row, Col, Button} from 'antd'
 
 import {LinkOutlined} from '@ant-design/icons'
 
-import {getLinks, getProjects} from '@/api/common'
+import {getLinks} from '@/api/common'
 
 import {HttpResponse, LinkInfo} from '@/common/interface'
 
@@ -17,7 +17,7 @@ import Image from 'next/image'
 import style from './links.module.scss'
 
 const Links: NextPage<{ data: any }> = ({data}) => {
-  const [links, setLinks] = useState<LinkInfo[]>(data)
+  const [links] = useState<LinkInfo[]>(data)
   // const getLinkLists = async () => {
   //   const {code, msg, data} = (await getLinks()) as HttpResponse
   //   if (code !== 200) return message.error(msg || 'unknown error')
@@ -86,10 +86,10 @@ const Links: NextPage<{ data: any }> = ({data}) => {
 export default Links
 
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
-  const {code, msg, data} = (await getLinks()) as HttpResponse
+  const {data} = (await getLinks()) as HttpResponse
   if (!data) {
     return {
       notFound: true

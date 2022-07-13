@@ -2,21 +2,21 @@ import {NextPage} from 'next'
 
 import Head from 'next/head'
 
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
-import {Row, Col, Card, message, Button} from 'antd'
+import {Row, Col, Card, Button} from 'antd'
 
 import Image from "next/image";
 
 import {HttpResponse, ProjectInfo} from '@/common/interface'
 
-import {getMsgs, getProjects} from '@/api/common'
+import {getProjects} from '@/api/common'
 
 import style from './open.module.scss'
 
 
 const OpenSource: NextPage<{ data: any }> = ({data}) => {
-  const [project, setProject] = useState<ProjectInfo[]>(data)
+  const [project] = useState<ProjectInfo[]>(data)
 
   // const _getProject = async () => {
   //   const {code, data, msg} = await getProjects() as HttpResponse
@@ -82,11 +82,11 @@ const OpenSource: NextPage<{ data: any }> = ({data}) => {
 
 export default OpenSource
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
-  const {code, data, msg} = await getProjects() as HttpResponse
+  const {data} = await getProjects() as HttpResponse
   if (!data) {
     return {
       notFound: true

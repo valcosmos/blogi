@@ -1,12 +1,10 @@
 import {NextPage} from 'next'
 
-import dynamic from "next/dynamic";
-
 import Head from 'next/head'
 
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
-import {Avatar, message} from 'antd'
+import {Avatar} from 'antd'
 
 import Editor from 'md-editor-rt'
 
@@ -18,9 +16,9 @@ import style from './about.module.scss'
 
 const About: NextPage<{ data: any }> = ({data}) => {
 
-  const [text, setText] = useState<string>(data.info)
+  const [text] = useState<string>(data.info)
 
-  const [avatar, setAvatar] = useState<string>(data.avatar)
+  const [avatar] = useState<string>(data.avatar)
 
   /*
   const getInfo = async () => {
@@ -67,11 +65,11 @@ const About: NextPage<{ data: any }> = ({data}) => {
 
 export default About
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
-  const {code, msg, data} = (await getAbout()) as HttpResponse
+  const {data} = (await getAbout()) as HttpResponse
 
   if (!data) {
     return {

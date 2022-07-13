@@ -12,16 +12,9 @@ import {
   MessageOutlined, ProjectOutlined
 } from '@ant-design/icons'
 
-import Image from 'next/image'
-
-import logo from '@/assets/img/logoh64.png'
-
-import {useRouter} from 'next/router'
-
 import style from './menu.module.scss'
 
 const CustomMenu = () => {
-  const router = useRouter()
   const [current, setCurrent] = useState('mail')
 
   const handleClick = (e: any) => {

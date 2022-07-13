@@ -1,4 +1,4 @@
-import React, {createRef, FC, useRef} from 'react'
+import React, {createRef, FC} from 'react'
 
 import { Button, Col, Form, Input, Row } from 'antd'
 
@@ -7,7 +7,6 @@ import { MailOutlined, UserOutlined } from '@ant-design/icons'
 import type { FormInstance } from 'antd/es/form';
 
 import style from './input.module.scss'
-
 
 interface CommentFormProps {
   info?: string
@@ -32,13 +31,12 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
     getFormData(v)
     formRef.current?.resetFields()
   }
-  const onFinishFailed = () => {}
+
   return (
     <div className={style.commentForm}>
       <Form
         ref={formRef}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         validateTrigger={['onBlur', 'onChange']}
       >

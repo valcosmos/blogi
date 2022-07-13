@@ -1,38 +1,36 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import {useRouter} from 'next/router'
 
-import {Card, List, message, Badge} from 'antd'
+import {Card, List, Badge} from 'antd'
 
 import {FireOutlined} from '@ant-design/icons'
 
-import {getHotPosts} from '@/api/post'
-
-import {HttpResponse, PostInfo} from '@/common/interface'
+import {PostInfo} from '@/common/interface'
 
 import style from './hots.module.scss'
 
 
-export default function Hots({list}: {list?: any}) {
+export default function Hots({list}: { list?: any }) {
   const router = useRouter()
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading] = useState<boolean>(false)
 
-  const [hots, setHots] = useState<Array<PostInfo>>(list)
+  const [hots] = useState<Array<PostInfo>>(list)
 
-  const getList = async () => {
-    setLoading(true)
-    const {code, msg, data} = (await getHotPosts()) as HttpResponse
-    if (code !== 200) return message.error(msg || 'unknown error')
-    setHots(data)
-    setLoading(false)
-  }
+  // const getList = async () => {
+  //   setLoading(true)
+  //   const {code, msg, data} = (await getHotPosts()) as HttpResponse
+  //   if (code !== 200) return message.error(msg || 'unknown error')
+  //   setHots(data)
+  //   setLoading(false)
+  // }
 
   // useEffect(() => {
   //   getList()
   // }, [])
 
-  const toPostDetial = (id: string) => {
+  const toPostDetail = (id: string) => {
     router.push(`/post/${id}`)
   }
 
@@ -52,7 +50,7 @@ export default function Hots({list}: {list?: any}) {
           className={'hot-list'}
           renderItem={(item, index) => (
             <List.Item>
-              <div onClick={() => toPostDetial(item._id)} className="title">
+              <div onClick={() => toPostDetail(item._id)} className="title">
                 <Badge
                   count={index + 1}
                   style={{backgroundColor: index < 3 ? '#52c41a' : '#d3d3d3'}}

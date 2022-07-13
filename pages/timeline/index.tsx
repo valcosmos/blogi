@@ -18,7 +18,7 @@ import style from './timeline.module.scss'
 
 
 const TL: NextPage<{ data: any }> = ({data}) => {
-  const [logs, setLogs] = useState<LogInfo[]>(data)
+  const [logs] = useState<LogInfo[]>(data)
   // const getLogLists = async () => {
   //   const {msg, data, code} = (await getLogs()) as HttpResponse
   //   if (code === 200) {
@@ -71,11 +71,11 @@ const TL: NextPage<{ data: any }> = ({data}) => {
 
 export default TL
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
-  const {msg, data: res, code} = (await getLogs()) as HttpResponse
+  const {data: res} = (await getLogs()) as HttpResponse
 
   const data = res.map((item: LogInfo) => ({...item, created: formatDate(item.created as string)}))
 

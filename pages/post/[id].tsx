@@ -47,7 +47,7 @@ const Post: NextPage = () => {
     const {msg, data, code, isLiked} = (await getPostDetail({
       id: id as string
     })) as HttpResponse
-    if (code !== 200) return message.error('unknown error')
+    if (code !== 200) return message.error(msg||'unknown error')
     // detail.value = data
     // _isLiked.value = isLiked as boolean
     setPost({...data, created: formatDate(data.created)})
@@ -66,7 +66,7 @@ const Post: NextPage = () => {
   }
 
   const setPostComment = async (props: FormType) => {
-    const {code, msg, data} = (await setComment({
+    const {code, msg} = (await setComment({
       postId: post._id,
       ...props
     })) as HttpResponse

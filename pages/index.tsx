@@ -4,9 +4,9 @@ import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
 
-import {Col, Row, Badge} from 'antd'
+import {Col, Row} from 'antd'
 
-import {useEffect, useState} from "react";
+import { useState} from "react";
 
 import {getHotPosts, getPosts, getTags} from "@/api/post";
 
@@ -46,10 +46,10 @@ const Home: NextPage<{ data: any }> = ({data}) => {
     tagList
   } = data
 
-  const [posts, setPosts] = useState(postList)
-  const [total, setTotal] = useState(postListTotal)
-  const [hots, setHots] = useState(hotList)
-  const [tags, setTags] = useState(tagList)
+  const [posts] = useState(postList)
+  const [total] = useState(postListTotal)
+  const [hots] = useState(hotList)
+  const [tags] = useState(tagList)
 
   return (
     <>
@@ -88,7 +88,7 @@ const Home: NextPage<{ data: any }> = ({data}) => {
 export default Home
 
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
   const {total: postListTotal, data: posts} = (await getPosts({
