@@ -109,8 +109,6 @@ export async function getStaticProps() {
     }
   }
 
-  console.log("re generate")
-
   return {
     props: {
       data: {
