@@ -109,6 +109,8 @@ export async function getStaticProps() {
     }
   }
 
+  console.log("re generate")
+
   return {
     props: {
       data: {
@@ -118,6 +120,7 @@ export async function getStaticProps() {
         tagList
       }
     }, // will be passed to the page component as props
-    // revalidate: 10 // In seconds
+    // 60s后刷新页面，会重新请求数据
+    revalidate: 60 // In seconds
   }
 }
