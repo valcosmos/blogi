@@ -39,6 +39,8 @@ export default function Post(props: { data: PostInfo, isLiked: boolean, comments
 
   const [liked, setLiked] = useState<boolean>(props.isLiked)
 
+  console.log(props.isLiked)
+
   const router = useRouter()
 
   const {id} = router.query
