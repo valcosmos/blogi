@@ -7,7 +7,7 @@ import Head from 'next/head'
 import {NextPage} from 'next'
 
 // import Link from 'next/link'
-import {getComments, getPostDetail, setComment, setLike} from '@/api/post'
+import {getComments, getPostDetail, getPosts, setComment, setLike} from '@/api/post'
 
 import {HttpResponse, MsgInfo, PostInfo} from '@/common/interface'
 
@@ -29,31 +29,30 @@ const CommentList = dynamic(() => import('@/components/comment-list'))
 
 import style from './post.module.scss'
 
-const Post: NextPage = () => {
+export default function Post(props: { data: PostInfo, isLiked: boolean, comments: MsgInfo[], commentsTotal: number }) {
 
-  const [post, setPost] = useState<PostInfo>({_id: '', content: '', tags: []})
+  const [post, setPost] = useState<PostInfo>(props.data)
 
-  const [comments, setComments] = useState<MsgInfo[]>([])
+  const [comments, setComments] = useState<MsgInfo[]>(props.comments)
 
-  const [commentTotal, setCommentTotal] = useState<number>(0)
+  const [commentTotal, setCommentTotal] = useState<number>(props.commentsTotal)
 
-  const [liked, setLiked] = useState<boolean>(false)
+  const [liked, setLiked] = useState<boolean>(props.isLiked)
 
   const router = useRouter()
 
   const {id} = router.query
 
-  const getDetail = async () => {
-    const {msg, data, code, isLiked} = (await getPostDetail({
-      id: id as string
-    })) as HttpResponse
-    if (code !== 200) return message.error(msg||'unknown error')
-    // detail.value = data
-    // _isLiked.value = isLiked as boolean
-    setPost({...data, created: formatDate(data.created)})
-    setLiked(isLiked as boolean)
-  }
-
+  // const getDetail = async () => {
+  //   const {msg, data, code, isLiked} = (await getPostDetail({
+  //     id: id as string
+  //   })) as HttpResponse
+  //   if (code !== 200) return message.error(msg || 'unknown error')
+  //   // detail.value = data
+  //   // _isLiked.value = isLiked as boolean
+  //   setPost({...data, created: formatDate(data.created)})
+  //   setLiked(isLiked as boolean)
+  // }
 
   const getPostComments = async () => {
     const {code, data, total, msg} = (await getComments({
@@ -104,8 +103,8 @@ const Post: NextPage = () => {
 
   useEffect(() => {
     if (!id) return
-    getDetail()
-    getPostComments()
+    // getDetail()
+    // getPostComments()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
@@ -198,4 +197,50 @@ const Post: NextPage = () => {
   )
 }
 
-export default Post
+
+export async function getStaticProps(context: any) {
+  const {params} = context
+
+  const id = params.id
+
+  const {data, isLiked} = (await getPostDetail({
+    id: id as string
+  })) as HttpResponse
+
+
+  const {data: comments, total: commentsTotal} = (await getComments({
+    postId: id as string
+  })) as HttpResponse
+
+  if (!data) {
+    return {notFound: true}
+  }
+
+  return {
+    props: {
+      data,
+      isLiked,
+      comments,
+      commentsTotal
+    }
+  }
+}
+
+export async function getStaticPaths() {
+  const {total: postListTotal, data: posts} = (await getPosts({
+    sort: -1,
+    current: 1,
+    pageSize: 10,
+    tag: ''
+  })) as HttpResponse
+
+
+  const ids = posts.map((post: PostInfo) => post._id)
+
+  const pathsWithParams = ids.map((id: string) => ({params: {id}}))
+
+  return {
+    paths: pathsWithParams,
+    fallback: false
+  }
+}
