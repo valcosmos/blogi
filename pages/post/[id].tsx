@@ -222,7 +222,8 @@ export async function getStaticProps(context: any) {
       isLiked,
       comments,
       commentsTotal
-    }
+    },
+    revalidate: 10
   }
 }
 
