@@ -1,15 +1,12 @@
 import React from 'react'
 
-// import Particles from 'react-tsparticles'
-
 import dynamic from "next/dynamic";
 
 import {loadFull} from 'tsparticles'
 
 const Particles = dynamic(() => import('react-tsparticles'))
 
-
-const Banner = () => {
+export default function Banner() {
   const particlesInit = async (main: any) => {
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -110,5 +107,3 @@ const Banner = () => {
     />
   )
 }
-
-export default Banner
