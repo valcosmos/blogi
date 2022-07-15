@@ -1,4 +1,4 @@
-import {NextPage} from 'next'
+import {GetStaticProps, NextPage} from 'next'
 
 import Head from 'next/head'
 
@@ -15,7 +15,9 @@ import {getProjects} from '@/api/common'
 import style from './open.module.scss'
 
 
-const OpenSource: NextPage<{ data: any }> = ({data}) => {
+// const OpenSource: NextPage<{ data: any }> = ({data}) => {
+export default function OpenSource({data}: any) {
+
   const [project] = useState<ProjectInfo[]>(data)
 
   // const _getProject = async () => {
@@ -80,9 +82,8 @@ const OpenSource: NextPage<{ data: any }> = ({data}) => {
   )
 }
 
-export default OpenSource
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 

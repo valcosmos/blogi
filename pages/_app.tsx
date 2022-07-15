@@ -18,7 +18,7 @@ import 'md-editor-rt/lib/style.css'
 
 import '../styles/globals.scss'
 
-function MyApp({Component, pageProps}: AppProps) {
+export default function MyApp({Component, pageProps}: AppProps) {
 
   const router = useRouter()
 
@@ -51,4 +51,4 @@ function MyApp({Component, pageProps}: AppProps) {
   )
 }
 
-export default MyApp
+

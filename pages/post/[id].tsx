@@ -4,9 +4,8 @@ import dynamic from "next/dynamic";
 
 import Head from 'next/head'
 
-import {NextPage} from 'next'
+import {GetStaticProps, GetStaticPaths} from 'next'
 
-// import Link from 'next/link'
 import {getComments, getPostDetail, getPosts, setComment, setLike} from '@/api/post'
 
 import {HttpResponse, MsgInfo, PostInfo} from '@/common/interface'
@@ -15,9 +14,9 @@ import {message, Button, Badge} from 'antd'
 
 import {StarOutlined, CommentOutlined} from '@ant-design/icons'
 
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 
-import {formatDate, scrollToElement} from '@/utils/utils'
+import {scrollToElement} from '@/utils/utils'
 
 import {toTree} from '@valcosmos/to-tree'
 
@@ -103,12 +102,12 @@ export default function Post(props: { data: PostInfo, isLiked: boolean, comments
     scrollToElement('.comment', 800, 0)
   }
 
-  useEffect(() => {
-    if (!id) return
-    // getDetail()
-    // getPostComments()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  // useEffect(() => {
+  // if (!id) return
+  // getDetail()
+  // getPostComments()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [id])
 
   return (
     <>
@@ -200,10 +199,10 @@ export default function Post(props: { data: PostInfo, isLiked: boolean, comments
 }
 
 
-export async function getStaticProps(context: any) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const {params} = context
 
-  const id = params.id
+  const id = params?.id
 
   const {data, isLiked} = (await getPostDetail({
     id: id as string
@@ -229,7 +228,9 @@ export async function getStaticProps(context: any) {
   }
 }
 
-export async function getStaticPaths() {
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
   const {total: postListTotal, data: posts} = (await getPosts({
     sort: -1,
     current: 1,

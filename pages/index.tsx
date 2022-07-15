@@ -1,17 +1,20 @@
 import type {NextPage} from 'next'
 
+import {GetStaticProps} from 'next'
+
 import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
 
 import {Col, Row} from 'antd'
 
-import { useState} from "react";
+import {useState} from "react";
 
 import {getHotPosts, getPosts, getTags} from "@/api/post";
 
 import {HttpResponse, PostInfo} from "@/common/interface";
 import {formatDate} from '@/utils/utils';
+import exp from "constants";
 
 // const DynamicComponent = dynamic(() =>
 //   import('../components/hello').then((mod) => mod.Hello)
@@ -29,9 +32,7 @@ const Hots = dynamic(() => import('@/components/hots'))
 
 const Tags = dynamic(() => import('@/components/tags'))
 
-
-const Home: NextPage<{ data: any }> = ({data}) => {
-
+export default function Home({data}: any) {
 
   const [tag, setTag] = useState<string>('')
 
@@ -85,10 +86,8 @@ const Home: NextPage<{ data: any }> = ({data}) => {
   )
 }
 
-export default Home
 
-
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
   const {total: postListTotal, data: posts} = (await getPosts({

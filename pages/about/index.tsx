@@ -1,4 +1,4 @@
-import {NextPage} from 'next'
+import {NextPage, GetStaticProps} from 'next'
 
 import Head from 'next/head'
 
@@ -14,8 +14,7 @@ import {HttpResponse} from '@/common/interface'
 
 import style from './about.module.scss'
 
-const About: NextPage<{ data: any }> = ({data}) => {
-
+export default function About({data}: any) {
   const [text] = useState<string>(data.info)
 
   const [avatar] = useState<string>(data.avatar)
@@ -63,9 +62,7 @@ const About: NextPage<{ data: any }> = ({data}) => {
   )
 }
 
-export default About
-
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 

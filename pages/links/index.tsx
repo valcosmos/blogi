@@ -1,8 +1,8 @@
-import {NextPage} from 'next'
+import {NextPage, GetStaticProps} from 'next'
 
 import Head from 'next/head'
 
-import React, { useState} from 'react'
+import React, {useState} from 'react'
 
 import {Card, Row, Col, Button} from 'antd'
 
@@ -16,7 +16,7 @@ import Image from 'next/image'
 
 import style from './links.module.scss'
 
-const Links: NextPage<{ data: any }> = ({data}) => {
+export default function Links({data}: any) {
   const [links] = useState<LinkInfo[]>(data)
   // const getLinkLists = async () => {
   //   const {code, msg, data} = (await getLinks()) as HttpResponse
@@ -83,10 +83,8 @@ const Links: NextPage<{ data: any }> = ({data}) => {
   )
 }
 
-export default Links
 
-
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
   const {data} = (await getLinks()) as HttpResponse

@@ -1,4 +1,4 @@
-import {NextPage} from 'next'
+import {GetStaticProps} from 'next'
 
 import Head from 'next/head'
 
@@ -16,8 +16,9 @@ import {getLogs} from '@/api/common'
 
 import style from './timeline.module.scss'
 
+// const TL: NextPage<{ data: any }> = ({data}) => {
 
-const TL: NextPage<{ data: any }> = ({data}) => {
+export default function TL({data}: any) {
   const [logs] = useState<LogInfo[]>(data)
   // const getLogLists = async () => {
   //   const {msg, data, code} = (await getLogs()) as HttpResponse
@@ -69,9 +70,9 @@ const TL: NextPage<{ data: any }> = ({data}) => {
   )
 }
 
-export default TL
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 

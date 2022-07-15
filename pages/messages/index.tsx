@@ -1,4 +1,4 @@
-import {NextPage} from 'next'
+import { GetStaticProps} from 'next'
 
 import dynamic from 'next/dynamic'
 
@@ -14,17 +14,16 @@ import {HttpResponse, MsgInfo} from '@/common/interface'
 
 import {getMsgs, setMsgs} from '@/api/common'
 
-// import {toTree} from '@/utils/utils'
 
 import {toTree} from '@valcosmos/to-tree'
 
 import {FormType} from '@/components/comment-form'
 
 import style from './msg.module.scss'
+
 import {formatDate} from '@/utils/utils'
 
-const Messages: NextPage<{ data: any }> = ({data}) => {
-
+export default function Messages({data}: any) {
   const [messageList, setMessageList] = useState<MsgInfo[]>(toTree(data.data, '_id', 'pid'))
 
   const [total, setTotal] = useState<number>(data.total)
@@ -77,9 +76,8 @@ const Messages: NextPage<{ data: any }> = ({data}) => {
   )
 }
 
-export default Messages
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch(`https://.../data`)
   // const data = await res.json()
 
