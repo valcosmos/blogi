@@ -1,10 +1,10 @@
-import React, {createRef, FC} from 'react'
+import React, {createRef} from 'react'
 
-import { Button, Col, Form, Input, Row } from 'antd'
+import {Button, Col, Form, Input, Row} from 'antd'
 
-import { MailOutlined, UserOutlined } from '@ant-design/icons'
+import {MailOutlined, UserOutlined} from '@ant-design/icons'
 
-import type { FormInstance } from 'antd/es/form';
+import type {FormInstance} from 'antd/es/form';
 
 import style from './input.module.scss'
 
@@ -20,7 +20,7 @@ export interface FormType {
   email?: string
 }
 
-const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
+export default function CommentForm({info, pid, getFormData}: CommentFormProps) {
   const formRef = createRef<FormInstance>()
   const onFinish = (value: FormType) => {
     const v = {
@@ -57,7 +57,7 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
         >
           <Input.TextArea
             placeholder={info ? `@${info}` : '内容'}
-            autoSize={{ minRows: 3, maxRows: 5 }}
+            autoSize={{minRows: 3, maxRows: 5}}
           />
         </Form.Item>
 
@@ -79,7 +79,7 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
                   }
                 ]}
               >
-                <Input placeholder="邮箱" prefix={<MailOutlined />} />
+                <Input placeholder="邮箱" prefix={<MailOutlined/>}/>
               </Form.Item>
             </Col>
             <Col xs={24} sm={12}>
@@ -98,7 +98,7 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
                   }
                 ]}
               >
-                <Input placeholder="昵称" prefix={<UserOutlined />} />
+                <Input placeholder="昵称" prefix={<UserOutlined/>}/>
               </Form.Item>
             </Col>
           </Row>
@@ -116,5 +116,3 @@ const CommentForm: FC<CommentFormProps> = ({ info, pid, getFormData }) => {
     </div>
   )
 }
-
-export default CommentForm
