@@ -20,7 +20,8 @@ interface CommentProps {
   setFormData: (props: FormType) => void
 }
 
-const CommentList: FC<CommentProps> = ({list, total, setFormData}) => {
+export default function CommentList({list, total, setFormData}: CommentProps) {
+
   const [active, setActive] = useState('')
   const getFormData = (value: FormType) => {
     setFormData(value)
@@ -48,5 +49,3 @@ const CommentList: FC<CommentProps> = ({list, total, setFormData}) => {
     </div>
   )
 }
-
-export default CommentList

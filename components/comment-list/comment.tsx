@@ -14,7 +14,8 @@ interface CustomCommentProps {
   setFormData: (form: FormType) => void
 }
 
-const CustomComment: FC<CustomCommentProps> = ({item, id, active, setActive, setFormData}, key) => {
+// const CustomComment: FC<CustomCommentProps> = ({item, id, active, setActive, setFormData}, key) => {
+export default function CustomComment({item, id, active, setActive, setFormData}: CustomCommentProps, key?: string) {
   // const [itemID, setItemID] = useState<string>('')
 
   const createMarkup = (avatar: string) => {
@@ -63,5 +64,3 @@ const CustomComment: FC<CustomCommentProps> = ({item, id, active, setActive, set
     </Comment>
   )
 }
-
-export default CustomComment
