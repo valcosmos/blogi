@@ -38,8 +38,8 @@ const topStyle: CSSProperties = {
   fontSize: 14,
 };
 
-const LayoutCom: FC<LayoutProps> = ({children}) => {
-
+// const LayoutCom: FC<LayoutProps> = ({children}) => {
+export default function LayoutCom({children}: LayoutProps) {
   const router = useRouter()
 
   return (
@@ -72,4 +72,3 @@ const LayoutCom: FC<LayoutProps> = ({children}) => {
   )
 }
 
-export default LayoutCom

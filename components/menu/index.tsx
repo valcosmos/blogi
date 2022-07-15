@@ -14,7 +14,7 @@ import {
 
 import style from './menu.module.scss'
 
-const CustomMenu = () => {
+export default function CustomMenu() {
   const [current, setCurrent] = useState('mail')
 
   const handleClick = (e: any) => {
@@ -57,5 +57,3 @@ const CustomMenu = () => {
     />
   )
 }
-
-export default CustomMenu
