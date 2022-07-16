@@ -42,6 +42,19 @@ export default function MyApp({Component, pageProps}: AppProps) {
       <Head>
         <title>valcosmos</title>
         <link rel="shortcut icon" href="webicon.ico"/>
+        <meta
+          name="description"
+          content="valcosmos-李青丘的个人博客-Web前端开发-分享前端技术"
+        />
+
+        <meta
+          name="keywords"
+          content="HTML5, CSS3, JavaScript, TypeScript, Vue, React, 前端, 个人博客"
+        />
+
+        <meta name="author" content="Cupid Valentine | 李青丘"/>
+
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
 
       <Layout>
