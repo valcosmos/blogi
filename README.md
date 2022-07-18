@@ -28,9 +28,9 @@
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://valcosmos-valnext-ybzdox95h1z.ws-us47.gitpod.io//) -->
 
-使用 `StackBlitz`
+<!-- 使用 `StackBlitz`
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/valcosmos/valnext)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/valcosmos/valnext) -->
 
 使用git克隆到本地:
 
