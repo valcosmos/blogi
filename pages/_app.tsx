@@ -55,14 +55,11 @@ export default function MyApp({Component, pageProps}: AppProps) {
 
         <meta name="author" content="Cupid Valentine | 李青丘"/>
 
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width" />
 
-        <meta name="theme-color" content="#6768ab" />
+        <meta name="theme-color" content="#6768ab"/>
 
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.json"/>
 
         <link
           href="/icons/icon-16x16.png"
