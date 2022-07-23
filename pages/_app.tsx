@@ -52,9 +52,33 @@ export default function MyApp({Component, pageProps}: AppProps) {
           content="HTML5, CSS3, JavaScript, TypeScript, Vue, React, 前端, 个人博客"
         />
 
+
         <meta name="author" content="Cupid Valentine | 李青丘"/>
 
-        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+
+        <meta name="theme-color" content="#317EFB" />
+
+        <link rel="manifest" href="/manifest.json" />
+
+        <link
+          href="/icons/icon-16x16.png"
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+        />
+        <link
+          href="/icons/icon-32x32.png"
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+        />
+
+        <link rel="apple-touch-icon" href="/webicon.ico"></link>
+
       </Head>
 
       <Layout>

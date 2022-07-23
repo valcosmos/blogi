@@ -5,6 +5,10 @@ const nextWithLess = require('next-with-less')
 // 转换 antd ,用来支持 按需引入组件css
 const withTM = require('next-transpile-modules')(['antd'])
 
+const withPWA = require('next-pwa')
+
+const runtimeCaching = require('next-pwa/cache')
+
 const path = require('path')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -12,8 +16,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withPWA({
   // productionBrowserSourceMaps: true,
+
   images: {
     domains: [
       'valzt.cn',
@@ -36,7 +41,7 @@ const nextConfig = {
     }
     return config
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   // compiler: {
   //   //只要有.babelrc文件，就会切回babel编译，这里swc就无效了。
   //   styledComponents: true
@@ -44,8 +49,13 @@ const nextConfig = {
   swcMinify: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
-  }
-}
+  },
+  pwa: {
+    dest: 'public',
+    runtimeCaching,
+    disable: process.env.NODE_ENV === 'development'
+  },
+})
 
 const plugins = [
   [
