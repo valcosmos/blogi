@@ -2,7 +2,7 @@
   "name": "valnext",
   "short_name": "valnext",
   "theme_color": "#ffffff",
-  "background_color": "#004740",
+  "background_color": "#6768ab",
   "display": "fullscreen",
   "orientation": "portrait",
   "scope": "/",
