@@ -54,7 +54,7 @@ const nextConfig = withPWA({
     dest: 'public',
     runtimeCaching,
     disable: process.env.NODE_ENV === 'development'
-  },
+  }
 })
 
 const plugins = [

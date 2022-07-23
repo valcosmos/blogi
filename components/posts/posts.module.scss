@@ -3,13 +3,14 @@
     .post-list {
       background-color: #fff;
     }
+
     .img {
       position: relative;
       width: 60px;
       height: 100%;
     }
 
-    .custom-pagination{
+    .custom-pagination {
       border: none;
       background-color: transparent;
       width: 100%;
@@ -21,19 +22,20 @@
       justify-content: flex-end;
       padding: 0 20px;
     }
-          .ant-list-pagination{
-            margin: 0;
-        padding: 20px;
-      }
 
-    ::v-deep(.ant-list-item-action) {
+    .ant-list-pagination {
+      margin: 0;
+      padding: 20px;
+    }
+
+    .ant-list-item-action {
       li {
         // max-width: 200px;
         text-align: left;
       }
     }
 
-    @media screen and(min-width: 768px) {
+    @media screen and (min-width: 768px) {
       .timebox {
         width: 300px;
         display: inline-block;
