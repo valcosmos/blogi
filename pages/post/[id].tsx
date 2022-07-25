@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import Head from 'next/head'
 
-import {GetStaticProps, GetStaticPaths} from 'next'
+import {GetStaticProps, GetStaticPaths, GetServerSideProps} from 'next'
 
 import {getComments, getPostDetail, getPosts, setComment, setLike} from '@/api/post'
 
@@ -199,7 +199,7 @@ export default function Post(props: { data: PostInfo, isLiked: boolean, comments
 }
 
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const {params} = context
 
   const id = params?.id
@@ -224,27 +224,27 @@ export const getStaticProps: GetStaticProps = async (context) => {
       comments,
       commentsTotal
     },
-    revalidate: 10
+    // revalidate: 10
   }
 }
 
 
-export const getStaticPaths: GetStaticPaths = async () => {
-
-  const {total: postListTotal, data: posts} = (await getPosts({
-    sort: -1,
-    current: 1,
-    pageSize: 10,
-    tag: ''
-  })) as HttpResponse
-
-
-  const ids = posts.map((post: PostInfo) => post._id)
-
-  const pathsWithParams = ids.map((id: string) => ({params: {id}}))
-
-  return {
-    paths: pathsWithParams,
-    fallback: false
-  }
-}
+// export const getStaticPaths: GetStaticPaths = async () => {
+//
+//   const {total: postListTotal, data: posts} = (await getPosts({
+//     sort: -1,
+//     current: 1,
+//     pageSize: 10,
+//     tag: ''
+//   })) as HttpResponse
+//
+//
+//   const ids = posts.map((post: PostInfo) => post._id)
+//
+//   const pathsWithParams = ids.map((id: string) => ({params: {id}}))
+//
+//   return {
+//     paths: pathsWithParams,
+//     fallback: false
+//   }
+// }
