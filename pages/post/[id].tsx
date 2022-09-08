@@ -199,7 +199,7 @@ export default function Post(props: { data: PostInfo, isLiked: boolean, comments
 }
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetServerSideProps = async (context) => {
   const {params} = context
 
   const id = params?.id
@@ -224,27 +224,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       comments,
       commentsTotal
     },
-    // revalidate: 10
+    revalidate: 10
   }
 }
 
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//
-//   const {total: postListTotal, data: posts} = (await getPosts({
-//     sort: -1,
-//     current: 1,
-//     pageSize: 10,
-//     tag: ''
-//   })) as HttpResponse
-//
-//
-//   const ids = posts.map((post: PostInfo) => post._id)
-//
-//   const pathsWithParams = ids.map((id: string) => ({params: {id}}))
-//
-//   return {
-//     paths: pathsWithParams,
-//     fallback: false
-//   }
-// }
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const {total: postListTotal, data: posts} = (await getPosts({
+    sort: -1,
+    current: 1,
+    pageSize: 10,
+    tag: ''
+  })) as HttpResponse
+
+
+  const ids = posts.map((post: PostInfo) => post._id)
+
+  const pathsWithParams = ids.map((id: string) => ({params: {id}}))
+
+  return {
+    paths: pathsWithParams,
+    fallback: false
+  }
+}
