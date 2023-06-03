@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://nextjs.org">
     <img src="icon.svg" height="100">
-    <h1 align="center">valnext</h1>
+    <h1 align="center">Blogi</h1>
   </a>
 </p>
 
