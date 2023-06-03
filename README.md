@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://nextjs.org">
-    <img src="https://api.valzt.cn/media/avatar_me.png" height="100">
+    <img src="icon.svg" height="100">
     <h1 align="center">valnext</h1>
   </a>
 </p>
