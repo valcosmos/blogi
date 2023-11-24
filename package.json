@@ -27,7 +27,7 @@
     "react-dom": "v18.2.0",
     "react-tsparticles": "^2.3.3",
     "react-use": "^17.4.0",
-    "sharp": "^0.31.1",
+    "sharp": "^0.32.6",
     "tsparticles": "^2.3.4"
   },
   "devDependencies": {
