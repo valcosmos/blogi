@@ -23,7 +23,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: pnpm
+      - name: Install PNPM 
+        run: npm i -g pnpm
       - id: configurepages
         uses: actions/configure-pages@v5
       - name: Restore cache
