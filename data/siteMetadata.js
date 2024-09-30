@@ -3,8 +3,8 @@ const siteMetadata = {
   title: 'Valcosmos',
   author: 'Cupid Valentine',
   headerTitle: 'Valcosmos Blog',
-  description: 'Share some tech...',
-  language: 'en-us',
+  description: '一名小前端的日常记录...',
+  language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.valzt.cn/',
   siteRepo: 'https://github.com/valcosmos/blogi',
@@ -20,7 +20,7 @@ const siteMetadata = {
   // linkedin: 'https://www.linkedin.com',
   // threads: 'https://www.threads.net',
   // instagram: 'https://www.instagram.com',
-  locale: 'en-US',
+  locale: 'zh-CN',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {

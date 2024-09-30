@@ -10,14 +10,14 @@ export default function NotFound() {
       </div>
       <div className="max-w-md">
         <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-          Sorry we couldn't find this page.
+          页面飞走啦～
         </p>
-        <p className="mb-8">But dont worry, you can find plenty of other things on our homepage.</p>
+        <p className="mb-8">不过不用担心，您可以点击下面按钮回到首页.</p>
         <Link
           href="/"
           className="inline rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-blue-700 focus:shadow-blue-500 focus:outline-none dark:hover:bg-blue-500"
         >
-          Back to homepage
+          回到首页
         </Link>
       </div>
     </div>
