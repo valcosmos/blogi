@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install PNPM 
+      - name: Install PNPM
         run: npm i -g pnpm
       - id: configurepages
         uses: actions/configure-pages@v5

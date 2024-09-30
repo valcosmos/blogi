@@ -1,23 +1,23 @@
-import { ReactNode } from 'react'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
+import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ReactNode } from 'react'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { formatDate } from 'pliny/utils/formatDate'
 
 interface LayoutProps {
   content: CoreContent<Blog>
   children: ReactNode
-  next?: { path: string; title: string }
-  prev?: { path: string; title: string }
+  next?: { path: string, title: string }
+  prev?: { path: string, title: string }
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title } = content
+  const { slug, date, title } = content
 
   return (
     <SectionContainer>
@@ -44,7 +44,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
             </div>
             {siteMetadata.comments && (
-              <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+              <div className="py-6 text-center text-gray-700 dark:text-gray-300" id="comment">
                 <Comments slug={slug} />
               </div>
             )}
@@ -57,7 +57,9 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Previous post: ${prev.title}`}
                     >
-                      &larr; {prev.title}
+                      &larr;
+                      {' '}
+                      {prev.title}
                     </Link>
                   </div>
                 )}
@@ -68,7 +70,9 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Next post: ${next.title}`}
                     >
-                      {next.title} &rarr;
+                      {next.title}
+                      {' '}
+                      &rarr;
                     </Link>
                   </div>
                 )}

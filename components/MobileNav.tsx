@@ -1,12 +1,12 @@
 'use client'
 
-import { Dialog, Transition } from '@headlessui/react'
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
-import { Fragment, useState, useEffect, useRef } from 'react'
-import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
+import { Dialog, Transition } from '@headlessui/react'
+import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import Link from './Link'
 
-const MobileNav = () => {
+function MobileNav() {
   const [navShow, setNavShow] = useState(false)
   const navRef = useRef(null)
 
@@ -14,7 +14,8 @@ const MobileNav = () => {
     setNavShow((status) => {
       if (status) {
         enableBodyScroll(navRef.current)
-      } else {
+      }
+      else {
         // Prevent scrolling
         disableBodyScroll(navRef.current)
       }
@@ -28,12 +29,12 @@ const MobileNav = () => {
 
   return (
     <>
-      <button aria-label="Toggle Menu" onClick={onToggleNav} className="sm:hidden">
+      <button type="button" aria-label="Toggle Menu" onClick={onToggleNav} className="sm:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-8 w-8 text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+          className="size-8 text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
         >
           <path
             fillRule="evenodd"
@@ -67,12 +68,12 @@ const MobileNav = () => {
             leaveTo="translate-x-full opacity-0"
             unmount={false}
           >
-            <Dialog.Panel className="fixed left-0 top-0 z-70 h-full w-full bg-white opacity-95 duration-300 dark:bg-gray-950 dark:opacity-[0.98]">
+            <Dialog.Panel className="fixed left-0 top-0 z-70 size-full bg-white opacity-95 duration-300 dark:bg-gray-950 dark:opacity-[0.98]">
               <nav
                 ref={navRef}
                 className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pl-12 pt-2 text-left"
               >
-                {headerNavLinks.map((link) => (
+                {headerNavLinks.map(link => (
                   <Link
                     key={link.title}
                     href={link.href}
@@ -85,7 +86,8 @@ const MobileNav = () => {
               </nav>
 
               <button
-                className="fixed right-4 top-7 z-80 h-16 w-16 p-4 text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                type="button"
+                className="fixed right-4 top-7 z-80 size-16 p-4 text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
                 aria-label="Toggle Menu"
                 onClick={onToggleNav}
               >

@@ -1,14 +1,14 @@
+import siteMetadata from '@/data/siteMetadata'
 import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
 import { KBarButton } from 'pliny/search/KBarButton'
-import siteMetadata from '@/data/siteMetadata'
 
-const SearchButton = () => {
+function SearchButton() {
   if (
-    siteMetadata.search &&
-    (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')
+    siteMetadata.search
+    && (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')
   ) {
-    const SearchButtonWrapper =
-      siteMetadata.search.provider === 'algolia' ? AlgoliaButton : KBarButton
+    const SearchButtonWrapper
+      = siteMetadata.search.provider === 'algolia' ? AlgoliaButton : KBarButton
 
     return (
       <SearchButtonWrapper aria-label="Search">
@@ -18,8 +18,7 @@ const SearchButton = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-6 w-6 text-gray-900 hover:text-primary-500 dark:text-gray-100
-          dark:hover:text-primary-400"
+          className="size-6 text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
         >
           <path
             strokeLinecap="round"

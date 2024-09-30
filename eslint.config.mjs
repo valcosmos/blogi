@@ -11,10 +11,12 @@ export default antfu(
     rules: {
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
+      'node/prefer-global/process': 'off',
       '@next/next/no-duplicate-head': 'off',
       'react-hooks/exhaustive-deps': 'off',
-      '@next/next/no-page-custom-font': 'off'
-    }
+      'react-dom/no-dangerously-set-innerhtml': 'off',
+      '@next/next/no-page-custom-font': 'off',
+    },
   },
-  ...tailwind.configs['flat/recommended']
+  ...tailwind.configs['flat/recommended'],
 )

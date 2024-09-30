@@ -1,28 +1,30 @@
-import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer2/source-files'
-import { writeFileSync } from 'fs'
-import readingTime from 'reading-time'
+import type { ComputedFields } from 'contentlayer2/source-files'
+import { writeFileSync } from 'node:fs'
+import path from 'node:path'
+
+import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
 import { slug } from 'github-slugger'
-import path from 'path'
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
-// Remark packages
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import { remarkAlert } from 'remark-github-blockquote-alert'
 import {
-  remarkExtractFrontmatter,
-  remarkCodeTitles,
-  remarkImgToJsx,
   extractTocHeadings,
+  remarkCodeTitles,
+  remarkExtractFrontmatter,
+  remarkImgToJsx,
 } from 'pliny/mdx-plugins/index.js'
-// Rehype packages
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeKatex from 'rehype-katex'
-import rehypeCitation from 'rehype-citation'
-import rehypePrismPlus from 'rehype-prism-plus'
-import rehypePresetMinify from 'rehype-preset-minify'
-import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import readingTime from 'reading-time'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeCitation from 'rehype-citation'
+import rehypeKatex from 'rehype-katex'
+import rehypePresetMinify from 'rehype-preset-minify'
+import rehypePrismPlus from 'rehype-prism-plus'
+import rehypeSlug from 'rehype-slug'
+
+import remarkGfm from 'remark-gfm'
+import { remarkAlert } from 'remark-github-blockquote-alert'
+import remarkMath from 'remark-math'
+
+import siteMetadata from './data/siteMetadata'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -37,24 +39,24 @@ const icon = fromHtmlIsomorphic(
   </svg>
   </span>
 `,
-  { fragment: true }
+  { fragment: true },
 )
 
 const computedFields: ComputedFields = {
-  readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
+  readingTime: { type: 'json', resolve: doc => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+    resolve: doc => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
   },
   path: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath,
+    resolve: doc => doc._raw.flattenedPath,
   },
   filePath: {
     type: 'string',
-    resolve: (doc) => doc._raw.sourceFilePath,
+    resolve: doc => doc._raw.sourceFilePath,
   },
-  toc: { type: 'json', resolve: (doc) => extractTocHeadings(doc.body.raw) },
+  toc: { type: 'json', resolve: doc => extractTocHeadings(doc.body.raw) },
 }
 
 /**
@@ -68,7 +70,8 @@ function createTagCount(allBlogs) {
         const formattedTag = slug(tag)
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1
-        } else {
+        }
+        else {
           tagCount[formattedTag] = 1
         }
       })
@@ -79,12 +82,12 @@ function createTagCount(allBlogs) {
 
 function createSearchIndex(allBlogs) {
   if (
-    siteMetadata?.search?.provider === 'kbar' &&
-    siteMetadata.search.kbarConfig.searchDocumentsPath
+    siteMetadata?.search?.provider === 'kbar'
+    && siteMetadata.search.kbarConfig.searchDocumentsPath
   ) {
     writeFileSync(
       `public/${path.basename(siteMetadata.search.kbarConfig.searchDocumentsPath)}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+      JSON.stringify(allCoreContent(sortPosts(allBlogs))),
     )
     console.log('Local search index generated...')
   }
@@ -111,15 +114,15 @@ export const Blog = defineDocumentType(() => ({
     ...computedFields,
     structuredData: {
       type: 'json',
-      resolve: (doc) => ({
+      resolve: doc => ({
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
-        headline: doc.title,
-        datePublished: doc.date,
-        dateModified: doc.lastmod || doc.date,
-        description: doc.summary,
-        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        'headline': doc.title,
+        'datePublished': doc.date,
+        'dateModified': doc.lastmod || doc.date,
+        'description': doc.summary,
+        'image': doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        'url': `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
       }),
     },
   },

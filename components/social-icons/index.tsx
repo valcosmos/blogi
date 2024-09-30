@@ -1,14 +1,14 @@
 import {
-  Mail,
-  Github,
   Facebook,
-  Youtube,
+  Github,
+  Instagram,
   Linkedin,
-  Twitter,
-  X,
+  Mail,
   Mastodon,
   Threads,
-  Instagram,
+  Twitter,
+  X,
+  Youtube,
 } from './icons'
 
 const components = {
@@ -24,21 +24,23 @@ const components = {
   instagram: Instagram,
 }
 
-type SocialIconProps = {
+interface SocialIconProps {
   kind: keyof typeof components
   href: string | undefined
   size?: number
 }
 
-const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
+function SocialIcon({ kind, href, size = 8 }: SocialIconProps) {
   if (
-    !href ||
-    (kind === 'mail' && !/^mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(href))
-  )
+    !href
+    || (kind === 'mail' && !/^mailto:[\w.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(href))
+  ) {
     return null
+  }
 
   const SocialSvg = components[kind]
 
+  const classSize = `w-${size} w-${size}`
   return (
     <a
       className="text-sm text-gray-500 transition hover:text-gray-600"
@@ -48,7 +50,7 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
     >
       <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+        className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 ${classSize}`}
       />
     </a>
   )

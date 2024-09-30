@@ -1,18 +1,19 @@
-import { ReactNode } from 'react'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog, Authors } from 'contentlayer/generated'
+import type { Authors, Blog } from 'contentlayer/generated'
+import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ReactNode } from 'react'
 import Comments from '@/components/Comments'
+import Image from '@/components/Image'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SectionContainer from '@/components/SectionContainer'
-import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
-const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
-const discussUrl = (path) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
+const editUrl = path => `${siteMetadata.siteRepo}/blob/main/data/${path}`
+function discussUrl(path) {
+  return `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
+}
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -24,8 +25,8 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 interface LayoutProps {
   content: CoreContent<Blog>
   authorDetails: CoreContent<Authors>[]
-  next?: { path: string; title: string }
-  prev?: { path: string; title: string }
+  next?: { path: string, title: string }
+  prev?: { path: string, title: string }
   children: ReactNode
 }
 
@@ -60,7 +61,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <dt className="sr-only">Authors</dt>
               <dd>
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                  {authorDetails.map((author) => (
+                  {authorDetails.map(author => (
                     <li className="flex items-center space-x-2" key={author.name}>
                       {author.avatar && (
                         <Image
@@ -68,7 +69,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           width={38}
                           height={38}
                           alt="avatar"
-                          className="h-10 w-10 rounded-full"
+                          className="size-10 rounded-full"
                         />
                       )}
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
@@ -95,7 +96,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+              <div className="py-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
                   Discuss on Twitter
                 </Link>
@@ -104,7 +105,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </div>
               {siteMetadata.comments && (
                 <div
-                  className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
+                  className="py-6 text-center text-gray-700 dark:text-gray-300"
                   id="comment"
                 >
                   <Comments slug={slug} />
@@ -119,7 +120,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                       Tags
                     </h2>
                     <div className="flex flex-wrap">
-                      {tags.map((tag) => (
+                      {tags.map(tag => (
                         <Tag key={tag} text={tag} />
                       ))}
                     </div>

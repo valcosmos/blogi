@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { usePathname } from 'next/navigation'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
+import type { CoreContent } from 'pliny/utils/contentlayer'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
+import { usePathname } from 'next/navigation'
+import { formatDate } from 'pliny/utils/formatDate'
+import { useState } from 'react'
 
 interface PaginationProps {
   totalPages: number
@@ -30,7 +30,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
       <nav className="flex justify-between">
         {!prevPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
+          <button type="button" className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
             Previous
           </button>
         )}
@@ -43,10 +43,13 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </Link>
         )}
         <span>
-          {currentPage} of {totalPages}
+          {currentPage}
+          {' '}
+          of
+          {totalPages}
         </span>
         {!nextPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
+          <button type="button" className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
             Next
           </button>
         )}
@@ -60,10 +63,12 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   )
 }
 
+const emptyInitialDisplayPosts: ListLayoutProps['posts'] = []
+
 export default function ListLayout({
   posts,
   title,
-  initialDisplayPosts = [],
+  initialDisplayPosts = emptyInitialDisplayPosts,
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
@@ -73,8 +78,8 @@ export default function ListLayout({
   })
 
   // If initialDisplayPosts exist, display it if no searchValue is specified
-  const displayPosts =
-    initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts
+  const displayPosts
+    = initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts
 
   return (
     <>
@@ -89,13 +94,13 @@ export default function ListLayout({
               <input
                 aria-label="Search articles"
                 type="text"
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={e => setSearchValue(e.target.value)}
                 placeholder="Search articles"
                 className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
               />
             </label>
             <svg
-              className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
+              className="absolute right-3 top-3 size-5 text-gray-400 dark:text-gray-300"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -131,7 +136,7 @@ export default function ListLayout({
                         </Link>
                       </h3>
                       <div className="flex flex-wrap">
-                        {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                        {tags?.map(tag => <Tag key={tag} text={tag} />)}
                       </div>
                     </div>
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">
