@@ -11,7 +11,7 @@
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
     "@headlessui/react": "2.1.8",
@@ -62,9 +62,12 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.12",
     "eslint-plugin-tailwindcss": "^3.17.4",
-    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
+    "simple-git-hooks": "^2.11.1",
     "typescript": "^5.6.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"
