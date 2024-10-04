@@ -19,8 +19,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Create .env file
-        run: echo ${{ secrets.ENV_VARS }} > .env
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -37,6 +35,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
       - run: pnpm i
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_VARS }}" > .env
+      - run: cat .env
       - run: pnpm build
         env:
           EXPORT: 1
