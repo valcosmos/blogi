@@ -19,6 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_VARS }}" > .env
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
