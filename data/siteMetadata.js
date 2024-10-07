@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Valcosmos',
   author: 'Cupid Valentine',
   headerTitle: 'Valcosmos Blog',
-  description: '一名小前端的日常记录...',
+  description: '一名coder的日常记录...',
   language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.valzt.cn/',
@@ -50,7 +50,7 @@ const siteMetadata = {
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus, beehive
     // Please add your .env file and modify it according to your selection
-    provider: 'buttondown',
+    // provider: 'buttondown',
   },
   comments: {
     // If you want to use an analytics provider you have to add it to the

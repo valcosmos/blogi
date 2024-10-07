@@ -1,0 +1,150 @@
+---
+title: Solid Start
+date: 2024-06-12
+tags: ['frontend']
+draft: false
+summary: 'SolidStart 是 SolidJS 的 SSR 框架，它基于 SolidJS 和 Vite 构建，提供了与 SolidJS 的紧密集成。'
+---
+
+本文主要尝试一下`SolidStart` ，文档地址：https://docs.solidjs.com/solid-start/getting-started
+
+## 创建项目
+
+```bash
+pnpm create solid
+```
+
+选择如下配置：
+
+![solid-start-1](/static/images/solid-start/1.png)
+
+目录结构如下：
+
+```tree
+.
+├── README.md
+├── app.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.cjs
+├── public
+│   └── favicon.ico
+├── src
+│   ├── app.css
+│   ├── app.tsx
+│   ├── components
+│   │   ├── Counter.tsx
+│   │   └── Nav.tsx
+│   ├── entry-client.tsx
+│   ├── entry-server.tsx
+│   ├── global.d.ts
+│   └── routes
+│       ├── [...404].tsx
+│       ├── about.tsx
+│       └── index.tsx
+├── tailwind.config.cjs
+└── tsconfig.json
+
+```
+
+## 关键文件介绍
+
+- `package.json`中项目运行脚本如下：
+
+```json
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+```
+它里面使用了`Vinxi`进行构建，该项目的repo地址为https://github.com/nksaraf/vinxi
+根据它的官方文档内容，它似乎是一个全栈 JavaScript SDK,可用于根据您自己的观点构建各种应用程序和框架，基于`Vite` & `Nitro`。
+
+- `app.config.ts`
+
+```ts
+import { defineConfig } from "@solidjs/start/config";
+
+export default defineConfig({});
+
+```
+
+这是配置文件，里面只有一个`defineConfig`，和vite项目类似，点进去看了下，这似乎是暴露给`Vinxi`用的。
+
+![solid-start-2](/static/images/solid-start/2.png)
+
+- `app.tsx`
+```tsx
+import { Router } from "@solidjs/router";
+import { FileRoutes } from "@solidjs/start/router";
+import { Suspense } from "solid-js";
+import Nav from "~/components/Nav";
+import "./app.css";
+
+export default function App() {
+  return (
+    <Router
+      root={props => (
+        <>
+          <Nav />
+          <Suspense>{props.children}</Suspense>
+        </>
+      )}
+    >
+      <FileRoutes />
+    </Router>
+  );
+}
+
+```
+
+这目测是入口文件，里面定义了路由的基本配置，并且和`Nuxt`和`Next.js`类似，用的是文件系统路由。
+- `src/entry-client.tsx`
+
+```tsx
+// @refresh reload
+import { mount, StartClient } from "@solidjs/start/client";
+
+mount(() => <StartClient />, document.getElementById("app")!);
+
+```
+客户端入口，用于客户端挂载和渲染
+
+里面的`// @refresh reload` 这似乎是一个特殊的注释，应该可能是给vite用的,问了下AI,给出的解释是”用于启用热模块替换(HMR)功能。当代码发生更改时,浏览器会自动重新加载页面,以反映最新的修改“。
+- `entry-server.tsx`
+
+```tsx
+// @refresh reload
+import { createHandler, StartServer } from '@solidjs/start/server'
+
+export default createHandler(() => (
+  <StartServer
+    document={({ assets, children, scripts }) => (
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+          {assets}
+        </head>
+        <body>
+          <div id="app">{children}</div>
+          {scripts}
+        </body>
+      </html>
+    )}
+  />
+))
+```
+服务端入口，处理SSR相关内容，总的来说,这段代码的作用是:
+
+1.  启用热模块替换功能,以便在代码更改时自动重新加载服务器。
+1.  导入 `createHandler` 和 `StartServer` 函数。
+1.  创建一个请求处理函数,并在其中使用 `StartServer` 组件配置服务器端渲染。
+1.  定义服务器端渲染的 HTML 文档结构,包括静态资源、主要内容和 JavaScript 脚本。
+
+## 总结
+本文主要介绍了如何使用 `pnpm create solid` 命令创建一个新的 SolidJS 项目,并熟悉了项目的目录结构和关键文件的作用。
+
+Happy Coding!

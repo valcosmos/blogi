@@ -1,0 +1,279 @@
+---
+title: 使用Axum实现一个简易的File Server
+date: 2024-06-11
+tags: ['rust']
+draft: false
+summary: '本文介绍了如何使用Axum实现一个简易的File Server。'
+---
+
+
+## 创建项目
+
+```sh
+cargo new rust-file-serve
+```
+
+## 安装相关依赖
+
+```sh
+# 命令行参数解析库
+cargo add clap --features derive
+
+# 异步运行时和编程框架
+cargo add tokio --features rt --features rt-multi-thread --features macros --features net --features fs
+
+# 个灵活的日志记录和追踪库,用于记录应用程序的事件和状态
+cargo add tracing
+
+# `tracing-subscriber`是 `tracing` 的订阅者实现,用于将事件记录到不同的输出,如控制台、文件等
+cargo add tracing-subscriber --features env-filter
+
+# 一个基于 `tokio` 和 `hyper` 的 Web 应用程序框架,用于构建高性能的异步 Web 服务器
+cargo add axum --features http2 --features query --features tracing
+
+# 一个错误处理库,提供了一种简单而灵活的方式来处理和传播错误
+cargo add anyhow 
+```
+
+
+
+
+## 创建命令行参数解析模块
+创建`src/cli/http.rs`, `src/cli/mod.rs`
+
+`http.rs`这个文件作为`http`子模块,定义了`http serve`子命令的选项：
+
+-   `dir`字段表示要服务的目录路径,使用`verify_path`函数进行验证,默认值为当前目录("."),可以通过`--dir`或`-d`参数指定。
+
+-   `port`字段表示服务器监听的端口号,默认值为8080,可以通过`--port`或`-p`参数指定。
+
+```rs
+use std::{fmt, path::PathBuf, str::FromStr};
+
+use clap::Parser;
+
+use super::verify_path;
+
+
+
+#[derive(Debug, Parser)]
+pub enum HttpSubCommand {
+    #[command(about = "Serve a directory over HTTP")]
+    Serve(HttpServeOpts),
+}
+
+#[derive(Debug, Parser)]
+pub struct HttpServeOpts {
+    #[arg(short, long, value_parser = verify_path, default_value = ".")]
+    pub dir: PathBuf,
+
+    #[arg(short, long, default_value_t = 8080)]
+    pub port: u16,
+}
+
+
+```
+
+- 声明这个模块：
+
+```rs
+
+mod http;
+
+use std::path::{Path, PathBuf};
+
+use clap::Parser;
+
+pub use self::http::HttpSubCommand;
+
+#[derive(Debug, Parser)]
+#[command(name="rcli", version, author, about, long_about = None)]
+pub struct Opts {
+    #[command(subcommand)]
+    pub cmd: SubCommand,
+}
+
+#[derive(Debug, Parser)]
+pub enum SubCommand {
+    #[command(subcommand)]
+    Http(HttpSubCommand),
+}
+
+fn verify_path(path: &str) -> Result<PathBuf, &'static str> {
+    // if input is "-" or file exists
+    let p = Path::new(path);
+    if p.exists() && p.is_dir() {
+        Ok(path.into())
+    } else {
+        Err("Path does not exist or is not a directory")
+    }
+}
+
+```
+
+## 使用 Axum 创建 HTTP 服务器
+
+这个文件主要做下面三件事
+-   定义 `HttpServeState` 结构体:
+
+    -   该结构体用于存储服务器的状态,包含一个 `path` 字段,表示要服务的目录路径。
+
+-   定义 `process_http_serve` 函数:
+
+    -   该函数接受 `path` 和 `port` 参数,分别表示要服务的目录路径和监听的端口号。
+    -   函数内部创建了一个 `SocketAddr` 类型的地址,将端口号绑定到 `0.0.0.0`。
+    -   创建了一个 `HttpServeState` 结构体实例,将 `path` 传递给它。
+    -   使用 Axum 的 `Router` 创建了一个路由器,定义了一个 `/*path` 的路由,表示匹配任意路径,并将请求处理函数 `file_handler` 与之关联。
+    -   将 `HttpServeState` 实例通过 `with_state` 方法传递给路由器,以便在处理请求时访问服务器状态。
+    -   使用 `tokio::net::TcpListener` 绑定指定的地址和端口,启动 HTTP 服务器。
+
+-   定义 `file_handler` 函数:
+
+    -   该函数是请求处理函数,接受 `State` 和 `Path` 两个提取器参数。
+    -   `State` 提取器用于访问服务器状态,即 `HttpServeState` 实例。
+    -   `Path` 提取器用于获取请求的路径参数。
+    -   函数内部根据请求的路径和服务器状态中的基础路径,构建完整的文件路径。
+    -   如果文件不存在,返回 `404 Not Found` 状态码和相应的错误信息。
+    -   如果文件存在,使用 `tokio::fs::read_to_string` 异步读取文件内容,并返回 `200 OK` 状态码和文件内容。
+    -   如果读取文件时出现错误,返回 `500 Internal Server Error` 状态码和错误信息。
+
+```rs
+use std::{net::SocketAddr, path::PathBuf, sync::Arc};
+
+use axum::{
+    extract::{Path, State},
+    http::StatusCode,
+    routing::get,
+    Router,
+};
+use tracing::{info, warn};
+
+use anyhow::Result;
+
+#[derive(Debug)]
+struct HttpServeState {
+    path: PathBuf,
+}
+
+pub async fn process_http_serve(path: PathBuf, port: u16) -> Result<()> {
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
+    info!("Serving {:?} on port {}", path, port);
+
+    let state = HttpServeState { path };
+    // axum router
+    let router = Router::new()
+        .route("/*path", get(file_handler))
+        .with_state(Arc::new(state));
+
+    let listener = tokio::net::TcpListener::bind(addr).await?;
+    axum::serve(listener, router).await?;
+
+    Ok(())
+}
+
+async fn file_handler(
+    State(state): State<Arc<HttpServeState>>,
+    Path(path): Path<String>,
+) -> (StatusCode, String) {
+    let p = std::path::Path::new(&state.path).join(path);
+    info!("Reading file {:?}", p);
+    if !p.exists() {
+        (
+            StatusCode::NOT_FOUND,
+            format!("File {} not found", p.display()),
+        )
+    } else {
+        match tokio::fs::read_to_string(p).await {
+            Ok(content) => {
+                info!("Read {} bytes", content.len());
+                (StatusCode::OK, content)
+            }
+            Err(e) => {
+                warn!("Error reading file: {:?}", e);
+                (StatusCode::INTERNAL_SERVER_ERROR, e.to_string())
+            }
+        }
+    }
+
+    // format!("{:?}, {}", state, path)
+}
+
+```
+
+声明`http_serve`模块，将 `http_serve` 模块中的 `process_http_serve` 函数引入到当前模块的公共接口中,使其他模块可以通过导入当前模块来直接访问和使用该函数。
+
+```rs
+mod http_serve;
+
+pub use http_serve::process_http_serve;
+```
+
+
+## 声明公共模块
+
+创建`src/lib.rs`，代码如下：
+
+```rs
+mod cli;
+mod process;
+
+pub use cli::{HttpSubCommand, Opts, SubCommand};
+pub use process::*;
+```
+
+## 实现主函数
+
+这里主要是解析命令行参数，调用`process_http_serve`
+
+```rs
+
+use anyhow::Ok;
+use clap::Parser;
+use rust_serve_demo::{process_http_serve, HttpSubCommand, Opts, SubCommand};
+
+#[tokio::main]
+async fn main()->anyhow::Result<()> {
+    tracing_subscriber::fmt::init();
+
+    let opts = Opts::parse();
+
+    match opts.cmd {
+        SubCommand::Http(cmd) => match cmd {
+            HttpSubCommand::Serve(opts) => {
+                // println!("Serving at http://0.0.0.0:{}", opts.port);
+                process_http_serve(opts.dir, opts.port).await?;
+            }
+        },
+    }
+
+    Ok(())
+}
+
+```
+
+
+## 运行
+```sh
+RUST_LOG=debug cargo run --http serve
+```
+这将启动 HTTP 文件服务器,你可以使用浏览器或其他工具访问服务器提供的文件。
+
+## 测试
+创建一个`test.http`
+内容如下：
+
+```rs
+### test api
+
+http://localhost:8080/Cargo.toml
+```
+
+如下图，点击**Send Request**，即会发送请求，显示请求结果。
+
+![image.png](/static/images/axum-file-server/1.png)
+
+
+## 总结
+本文主要使用 Rust 和 Axum 框架构建一个简单的 HTTP 文件服务器。我们创建了命令行参数解析模块、HTTP 服务器模块,并在主函数中解析命令行参数并启动服务器。
+
+Happy coding!

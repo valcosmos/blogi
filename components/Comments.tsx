@@ -2,7 +2,7 @@
 
 import siteMetadata from '@/data/siteMetadata'
 import { Comments as CommentsComponent } from 'pliny/comments'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Comments({ slug }: { slug: string }) {
   const [loadComments, setLoadComments] = useState(false)
@@ -10,6 +10,11 @@ export default function Comments({ slug }: { slug: string }) {
   if (!siteMetadata.comments?.provider) {
     return null
   }
+
+  useEffect(() => {
+    setLoadComments(true)
+  }, [])
+
   return (
     <>
       {loadComments

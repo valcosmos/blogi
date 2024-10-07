@@ -1,0 +1,94 @@
+---
+title: tower-http 和 axum 构建file server
+date: 2024-06-13
+tags: ['rust']
+draft: false
+summary: '本文介绍了如何使用tower-http和axum库在Rust中构建一个简单的文件服务器。'
+---
+
+## 安装tower-http
+```bash
+cargo add tower-http --features compression-full --features cors --features trace --features fs
+```
+
+## 在`http_serve.rs`中使用
+
+我们主要使用`tower_http`的 `nest_service` 方法定义一个嵌套的服务，路径为 "/tower"，服务类型为 `ServeDir::new(path)`，这样就可以了。
+
+代码具体修改如下：
+
+```rust
+pub async fn process_http_serve(path: PathBuf, port: u16) -> Result<()> {
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
+    info!("Serving {:?} on port {}", path, port);
+
+    let state = HttpServeState { path:path.clone() };
+    // axum router
+    let router = Router::new()
+        .nest_service("/tower", ServeDir::new(path))
+        .route("/*path", get(file_handler))
+        .with_state(Arc::new(state));
+
+    let listener = tokio::net::TcpListener::bind(addr).await?;
+    axum::serve(listener, router).await?;
+
+    Ok(())
+}
+```
+
+
+![image.png](/static/images/tower-http-axum-file-server/1.png)
+
+
+## 在test.http中进行测试
+
+```http
+### test static file with tower-http
+GET http://localhost:8080/tower/Cargo.toml
+```
+如图：
+
+![image.png](/static/images/tower-http-axum-file-server/2.png)
+
+
+## 单元测试
+在`http_serve.rs`中添加如下代码：
+
+```rust
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn test_file_handler() {
+        let state = Arc::new(HttpServeState {
+            path: PathBuf::from("."),
+        });
+        let (status, content) = file_handler(
+            State(state),
+            axum::extract::Path(Path("Cargo.toml").to_string()),
+        )
+        .await;
+        assert_eq!(status, StatusCode::OK);
+        assert!(content.trim().starts_with("[package]"));
+    }
+}
+
+```
+
+这个测试用例的目的是验证 `file_handler` 函数能够正确处理指定的文件路径，并返回预期的状态码和文件内容。通过创建一个共享状态 `HttpServeState`，并将其与文件路径一起传递给 `file_handler` 函数，测试用例模拟了实际的请求处理过程。
+
+运行这个测试用例：
+```bash
+cargo nextest run -- test_file_handler
+```
+
+运行结果如下：
+
+![image.png](/static/images/tower-http-axum-file-server/3.png)
+
+## 总结
+本文主要通过Cargo添加了tower-http库的依赖,并启用了一些有用的特性。然后,在`http_serve.rs`文件中,我们使用了`nest_service`方法将一个`ServeDir`服务嵌套到"/tower"路径下,实现了静态文件服务的功能。接着,我们在`test.http`文件中编写了一个测试请求,验证了静态文件服务是否正常工作。最后,为了确保`file_handler`函数的正确性,编写了一个单元测试用例,模拟了实际的请求处理过程,并断言了返回的状态码和文件内容。
+
+Happy Coding!
