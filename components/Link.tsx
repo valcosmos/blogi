@@ -1,6 +1,7 @@
 import type { LinkProps } from 'next/link'
 import type { AnchorHTMLAttributes } from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 
 function CustomLink({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) {
   const isInternalLink = href && href.startsWith('/')
