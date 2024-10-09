@@ -47,7 +47,7 @@ cargo add anyhow
 
 -   `port`字段表示服务器监听的端口号,默认值为8080,可以通过`--port`或`-p`参数指定。
 
-```rs
+```rust
 use std::{fmt, path::PathBuf, str::FromStr};
 
 use clap::Parser;
@@ -76,7 +76,7 @@ pub struct HttpServeOpts {
 
 - 声明这个模块：
 
-```rs
+```rust
 
 mod http;
 
@@ -137,7 +137,7 @@ fn verify_path(path: &str) -> Result<PathBuf, &'static str> {
     -   如果文件存在,使用 `tokio::fs::read_to_string` 异步读取文件内容,并返回 `200 OK` 状态码和文件内容。
     -   如果读取文件时出现错误,返回 `500 Internal Server Error` 状态码和错误信息。
 
-```rs
+```rust
 use std::{net::SocketAddr, path::PathBuf, sync::Arc};
 
 use axum::{
@@ -213,7 +213,7 @@ pub use http_serve::process_http_serve;
 
 创建`src/lib.rs`，代码如下：
 
-```rs
+```rust
 mod cli;
 mod process;
 
@@ -225,7 +225,7 @@ pub use process::*;
 
 这里主要是解析命令行参数，调用`process_http_serve`
 
-```rs
+```rust
 
 use anyhow::Ok;
 use clap::Parser;
