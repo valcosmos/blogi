@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import type { AnalyticsConfig } from 'pliny/analytics'
 import type { SearchConfig } from 'pliny/search'
-import { ViewTransitions } from 'next-view-transitions'
+import Bg from '@/components/Bg'
 
+import { ViewTransitions } from 'next-view-transitions'
 // import process from 'node:process'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -13,8 +14,8 @@ import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import { ThemeProviders } from './theme-providers'
 import 'css/tailwind.css'
-import 'pliny/search/algolia.css'
 
+import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
 
 const space_grotesk = Space_Grotesk({
@@ -101,17 +102,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-        <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-          <ThemeProviders>
-            <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-            <SectionContainer>
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                <Header />
-                <main className="mb-auto">{children}</main>
-              </SearchProvider>
-              <Footer />
-            </SectionContainer>
-          </ThemeProviders>
+        <body>
+          <Bg>
+            <section className="relative z-10 pl-[calc(100vw-100%)] text-black antialiased dark:text-white">
+              <ThemeProviders>
+                <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+                <SectionContainer>
+                  <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                    <Header />
+                    <main className="mb-auto">{children}</main>
+                  </SearchProvider>
+                  <Footer />
+                </SectionContainer>
+              </ThemeProviders>
+            </section>
+          </Bg>
         </body>
       </html>
     </ViewTransitions>
