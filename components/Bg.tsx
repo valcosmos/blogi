@@ -1,7 +1,8 @@
 'use client'
 
-import { OrbitControls, Sphere } from '@react-three/drei'
+import { Sphere } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { motion } from 'framer-motion'
 import React, { useRef } from 'react'
 import { pointsInner, pointsOuter } from './utils'
 
@@ -26,6 +27,20 @@ const PointCircle = React.memo(() => {
   )
 })
 
+const Circle = React.memo(() => {
+  return (
+    <Canvas
+      camera={{
+        position: [10, -7.5, -5],
+      }}
+      style={{ height: '100vh' }}
+      className="!absolute inset-0 bg-white dark:bg-slate-900"
+    >
+      <PointCircle />
+    </Canvas>
+  )
+})
+
 function Point({ position, color }) {
   return (
     <Sphere position={position} args={[0.1, 10, 10]}>
@@ -42,18 +57,14 @@ function Point({ position, color }) {
 function ParticleRing({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen w-screen">
-      <Canvas
-        camera={{
-          position: [10, -7.5, -5],
-        }}
-        style={{ height: '100vh' }}
-        className="!absolute inset-0 bg-white dark:bg-slate-900 "
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 3, ease: 'easeInOut' }}
+        className="!absolute inset-0"
       >
-        <OrbitControls maxDistance={20} minDistance={10} />
-        <directionalLight />
-        <pointLight position={[-30, 0, -30]} power={10.0} />
-        <PointCircle />
-      </Canvas>
+        <Circle />
+      </motion.div>
       <main className="h-screen w-screen overflow-auto rounded-lg shadow-lg backdrop-blur-md">
         <div className="p-6">
           {children}

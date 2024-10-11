@@ -5,9 +5,7 @@ function Card({ title, description, imgSrc, href }) {
   return (
     <div className="p-4 md:w-1/2 md:max-w-[544px]">
       <div
-        className={`${
-          imgSrc && 'h-full'
-        }  overflow-hidden rounded-md border-2 border-gray-200/60 dark:border-gray-700`}
+        className={`${imgSrc && 'h-full'} overflow-hidden rounded-md`}
       >
         {imgSrc
         && (href
@@ -31,7 +29,7 @@ function Card({ title, description, imgSrc, href }) {
                 height={306}
               />
             ))}
-        <div className="p-6">
+        <div className="">
           <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
             {href
               ? (
