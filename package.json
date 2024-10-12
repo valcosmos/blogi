@@ -14,7 +14,7 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@headlessui/react": "2.1.9",
+    "@headlessui/react": "2.1.10",
     "@next/bundle-analyzer": "14.2.15",
     "@react-three/drei": "^9.114.3",
     "@react-three/fiber": "^8.17.10",
@@ -24,7 +24,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "contentlayer2": "0.5.1",
     "esbuild": "0.24.0",
-    "framer-motion": "^11.11.1",
+    "framer-motion": "^11.11.8",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-from-html-isomorphic": "^2.0.0",
@@ -39,7 +39,7 @@
     "react-dom": "18.3.1",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "^7.1.0",
-    "rehype-citation": "^2.1.2",
+    "rehype-citation": "^2.2.0",
     "rehype-katex": "^7.0.1",
     "rehype-preset-minify": "7.0.1",
     "rehype-prism-plus": "^2.0.0",
@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
-    "@eslint-react/eslint-plugin": "^1.14.3",
+    "@eslint-react/eslint-plugin": "^1.15.0",
     "@svgr/webpack": "^8.1.0",
     "@types/mdx": "^2.0.13",
     "@types/react": "^18.3.11",
@@ -63,9 +63,9 @@
     "eslint": "^9.12.0",
     "eslint-config-next": "14.2.15",
     "eslint-plugin-format": "^0.1.2",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.12",
-    "eslint-plugin-tailwindcss": "^3.17.4",
+    "eslint-plugin-tailwindcss": "^3.17.5",
     "lint-staged": "^15.2.10",
     "simple-git-hooks": "^2.11.1",
     "typescript": "^5.6.3"

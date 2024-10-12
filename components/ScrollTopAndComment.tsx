@@ -5,29 +5,35 @@ import { useEffect, useState } from 'react'
 
 function ScrollTopAndComment() {
   const [show, setShow] = useState(false)
+  const [container, setContainer] = useState<HTMLElement | null>(null)
+
+  const comment = document.getElementById('comment')
 
   useEffect(() => {
+    const container = document.getElementById('scroll-container') as HTMLElement
+    setContainer(container)
     const handleWindowScroll = () => {
-      if (window.scrollY > 50)
+      if (container.scrollTop > 50)
         setShow(true)
       else setShow(false)
     }
 
-    window.addEventListener('scroll', handleWindowScroll)
-    return () => window.removeEventListener('scroll', handleWindowScroll)
+    container.addEventListener('scroll', handleWindowScroll)
+    return () => container.removeEventListener('scroll', handleWindowScroll)
   }, [])
 
   const handleScrollTop = () => {
-    window.scrollTo({ top: 0 })
+    container && container.scrollTo({ top: 0 })
   }
   const handleScrollToComment = () => {
-    document.getElementById('comment')?.scrollIntoView()
+    comment && comment.scrollIntoView()
   }
   return (
     <div
-      className={`fixed bottom-8 right-8 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
+      id="scroll-top-and-comment"
+      className={`fixed bottom-8 right-8 z-20 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
     >
-      {siteMetadata.comments?.provider && (
+      {comment && siteMetadata.comments?.provider && (
         <button
           type="button"
           aria-label="Scroll To Comment"

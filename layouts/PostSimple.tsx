@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
@@ -21,7 +20,6 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
 
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
       <article>
         <div>
           <header>

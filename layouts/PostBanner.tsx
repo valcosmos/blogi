@@ -5,7 +5,6 @@ import Comments from '@/components/Comments'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import Bleed from 'pliny/ui/Bleed'
@@ -24,7 +23,6 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
 
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
       <article>
         <div>
           <div className="space-y-1 pb-10 text-center dark:border-gray-700">

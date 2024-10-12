@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import type { AnalyticsConfig } from 'pliny/analytics'
 import type { SearchConfig } from 'pliny/search'
-import Bg from '@/components/Bg'
+import BackgroundWrapper from '@/components/BackgroundWrapper'
 
 import { ViewTransitions } from 'next-view-transitions'
 // import process from 'node:process'
@@ -69,7 +69,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <ViewTransitions>
-
       <html
         lang={siteMetadata.language}
         className={`${space_grotesk.variable} scroll-smooth`}
@@ -103,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
         <body>
-          <Bg>
+          <BackgroundWrapper>
             <section className="relative z-10 pl-[calc(100vw-100%)] text-black antialiased dark:text-white">
               <ThemeProviders>
                 <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
@@ -116,7 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </SectionContainer>
               </ThemeProviders>
             </section>
-          </Bg>
+          </BackgroundWrapper>
         </body>
       </html>
     </ViewTransitions>

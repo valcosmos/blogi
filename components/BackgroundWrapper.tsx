@@ -4,6 +4,7 @@ import { Sphere } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { motion } from 'framer-motion'
 import React, { useRef } from 'react'
+import ScrollTopAndComment from './ScrollTopAndComment'
 import { pointsInner, pointsOuter } from './utils'
 
 const PointCircle = React.memo(() => {
@@ -54,7 +55,7 @@ function Point({ position, color }) {
   )
 }
 
-function ParticleRing({ children }: { children: React.ReactNode }) {
+export default function BackgroundWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen w-screen">
       <motion.div
@@ -65,13 +66,10 @@ function ParticleRing({ children }: { children: React.ReactNode }) {
       >
         <Circle />
       </motion.div>
-      <main className="h-screen w-screen overflow-auto rounded-lg shadow-lg backdrop-blur-md">
-        <div className="p-6">
-          {children}
-        </div>
+      <main id="scroll-container" className="h-screen w-screen overflow-auto rounded-lg shadow-lg backdrop-blur-md">
+        {children}
       </main>
+      <ScrollTopAndComment />
     </div>
   )
 }
-
-export default ParticleRing
