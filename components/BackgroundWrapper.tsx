@@ -3,9 +3,11 @@
 import { Sphere } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import React, { useRef } from 'react'
-import ScrollTopAndComment from './ScrollTopAndComment'
 import { pointsInner, pointsOuter } from './utils'
+
+const ScrollTopAndComment = dynamic(() => import('./ScrollTopAndComment'), { ssr: false })
 
 const PointCircle = React.memo(() => {
   const ref = useRef<any>(null)
