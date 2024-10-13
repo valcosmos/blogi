@@ -39,6 +39,7 @@ export default function Home({ posts }) {
                             <Link
                               href={`/blog/${slug}`}
                               className="text-gray-900 dark:text-gray-100"
+                              style={{ viewTransitionName: `post-title-${slug}` }}
                             >
                               {title}
                             </Link>
