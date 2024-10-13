@@ -32,7 +32,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   </dd>
                 </div>
               </dl>
-              <div>
+              <div style={{ viewTransitionName: `post-title-${slug}` }}>
                 <PageTitle>{title}</PageTitle>
               </div>
             </div>

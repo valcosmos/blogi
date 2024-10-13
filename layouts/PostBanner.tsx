@@ -33,7 +33,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 </div>
               </Bleed>
             </div>
-            <div className="relative pt-10">
+            <div className="relative pt-10" style={{ viewTransitionName: `post-title-${slug}` }}>
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
