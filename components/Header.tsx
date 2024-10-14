@@ -1,10 +1,11 @@
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
 import siteMetadata from '@/data/siteMetadata'
+// import Logo from '@/data/logo.svg'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import SearchButton from './SearchButton'
 import ThemeSwitch from './ThemeSwitch'
+import Valcosmos from './Valcosmos'
 
 function Header() {
   let headerClass = 'flex items-center w-full justify-between py-10'
@@ -15,8 +16,10 @@ function Header() {
   return (
     <header className={headerClass}>
       <Link href="/" aria-label={siteMetadata.headerTitle}>
-        <div className="flex items-center justify-between">
-          <div className="mr-3">
+        <div className="flex items-center justify-between" id="valcosmos-logo">
+          <Valcosmos />
+
+          {/* <div className="mr-3">
             <Logo />
           </div>
           {typeof siteMetadata.headerTitle === 'string'
@@ -27,7 +30,7 @@ function Header() {
               )
             : (
                 siteMetadata.headerTitle
-              )}
+              )} */}
         </div>
       </Link>
       <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
