@@ -59,12 +59,10 @@ input:-webkit-autofill:focus {
   vertical-align: middle;
 }
 
-/* 使用了带有 nested 支持的 Tailwind CSS，如果你没用的话，需要自己写 */
 #valcosmos-logo {
   --signature-length: 580px;
 }
 
-/* https://antfu.me/posts/animated-svg-logo */
 #valcosmos-logo #valcosmos-stroke {
   @apply stroke-black dark:stroke-white opacity-100;
   stroke-dashoffset: 1px;
