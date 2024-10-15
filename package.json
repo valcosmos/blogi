@@ -24,7 +24,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "contentlayer2": "0.5.1",
     "esbuild": "0.24.0",
-    "framer-motion": "^11.11.8",
+    "framer-motion": "^11.11.9",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-from-html-isomorphic": "^2.0.0",
@@ -48,7 +48,7 @@
     "remark-gfm": "^4.0.0",
     "remark-github-blockquote-alert": "^1.2.1",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^3.4.13",
+    "tailwindcss": "^3.4.14",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
@@ -57,8 +57,8 @@
     "@svgr/webpack": "^8.1.0",
     "@types/mdx": "^2.0.13",
     "@types/react": "^18.3.11",
-    "@typescript-eslint/eslint-plugin": "^8.8.1",
-    "@typescript-eslint/parser": "^8.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.9.0",
+    "@typescript-eslint/parser": "^8.9.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.12.0",
     "eslint-config-next": "14.2.15",
