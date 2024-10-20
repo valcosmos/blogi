@@ -5,6 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import React, { useRef } from 'react'
+import Cursor from './Cursor'
 import { pointsInner, pointsOuter } from './utils'
 
 const ScrollTopAndComment = dynamic(() => import('./ScrollTopAndComment'), { ssr: false })
@@ -60,6 +61,7 @@ function Point({ position, color }) {
 export default function BackgroundWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen w-screen">
+      <Cursor />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
