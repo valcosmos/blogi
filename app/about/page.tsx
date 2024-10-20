@@ -1,4 +1,5 @@
 import type { Authors } from 'contentlayer/generated'
+import Reveal from '@/components/Reveal'
 import AuthorLayout from '@/layouts/AuthorLayout'
 import { genPageMetadata } from 'app/seo'
 import { allAuthors } from 'contentlayer/generated'
@@ -12,8 +13,10 @@ export default function Page() {
   const mainContent = coreContent(author)
 
   return (
-    <AuthorLayout content={mainContent}>
-      <MDXLayoutRenderer code={author.body.code} />
-    </AuthorLayout>
+    <Reveal>
+      <AuthorLayout content={mainContent}>
+        <MDXLayoutRenderer code={author.body.code} />
+      </AuthorLayout>
+    </Reveal>
   )
 }

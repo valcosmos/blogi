@@ -133,6 +133,7 @@ export default function ListLayoutWithTags({
               const { path, date, title, summary, tags } = post
               return (
                 <li key={path} className="py-5">
+
                   <article className="flex flex-col space-y-2 xl:space-y-0">
                     <dl>
                       <dt className="sr-only">Published on</dt>
@@ -158,6 +159,7 @@ export default function ListLayoutWithTags({
                       </div>
                     </div>
                   </article>
+
                 </li>
               )
             })}

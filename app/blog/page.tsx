@@ -1,3 +1,4 @@
+import Reveal from '@/components/Reveal'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { genPageMetadata } from 'app/seo'
 import { allBlogs } from 'contentlayer/generated'
@@ -20,11 +21,13 @@ export default function BlogPage() {
   }
 
   return (
-    <ListLayout
-      posts={posts}
-      initialDisplayPosts={initialDisplayPosts}
-      pagination={pagination}
-      title="所有文章"
-    />
+    <Reveal>
+      <ListLayout
+        posts={posts}
+        initialDisplayPosts={initialDisplayPosts}
+        pagination={pagination}
+        title="所有文章"
+      />
+    </Reveal>
   )
 }
