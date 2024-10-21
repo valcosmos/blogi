@@ -1,6 +1,6 @@
 'use client'
 
-import { Menu, RadioGroup, Transition } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems, Radio, RadioGroup, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import { Fragment, useEffect, useState } from 'react'
 
@@ -63,9 +63,9 @@ function ThemeSwitch() {
     <div className="mr-5 flex items-center">
       <Menu as="div" className="relative inline-block text-left">
         <div className="flex items-center justify-center hover:text-primary-500 dark:hover:text-primary-400">
-          <Menu.Button aria-label="Theme switcher">
+          <MenuButton aria-label="Theme switcher">
             {mounted ? resolvedTheme === 'dark' ? <Moon /> : <Sun /> : <Blank />}
-          </Menu.Button>
+          </MenuButton>
         </div>
         <Transition
           as={Fragment}
@@ -76,16 +76,16 @@ function ThemeSwitch() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-gray-800">
+          <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-gray-800">
             <RadioGroup value={theme} onChange={setTheme}>
               <div className="p-1">
-                <RadioGroup.Option value="light">
-                  <Menu.Item>
-                    {({ active }) => (
+                <Radio value="light">
+                  <MenuItem>
+                    {({ focus }) => (
                       <button
                         type="button"
                         className={`${
-                          active ? 'bg-primary-600 text-white' : ''
+                          focus ? 'bg-primary-600 text-white' : ''
                         } group flex w-full items-center rounded-md p-2 text-sm`}
                       >
                         <div className="mr-2">
@@ -94,15 +94,15 @@ function ThemeSwitch() {
                         Light
                       </button>
                     )}
-                  </Menu.Item>
-                </RadioGroup.Option>
-                <RadioGroup.Option value="dark">
-                  <Menu.Item>
-                    {({ active }) => (
+                  </MenuItem>
+                </Radio>
+                <Radio value="dark">
+                  <MenuItem>
+                    {({ focus }) => (
                       <button
                         type="button"
                         className={`${
-                          active ? 'bg-primary-600 text-white' : ''
+                          focus ? 'bg-primary-600 text-white' : ''
                         } group flex w-full items-center rounded-md p-2 text-sm`}
                       >
                         <div className="mr-2">
@@ -111,15 +111,15 @@ function ThemeSwitch() {
                         Dark
                       </button>
                     )}
-                  </Menu.Item>
-                </RadioGroup.Option>
-                <RadioGroup.Option value="system">
-                  <Menu.Item>
-                    {({ active }) => (
+                  </MenuItem>
+                </Radio>
+                <Radio value="system">
+                  <MenuItem>
+                    {({ focus }) => (
                       <button
                         type="button"
                         className={`${
-                          active ? 'bg-primary-600 text-white' : ''
+                          focus ? 'bg-primary-600 text-white' : ''
                         } group flex w-full items-center rounded-md p-2 text-sm`}
                       >
                         <div className="mr-2">
@@ -128,11 +128,11 @@ function ThemeSwitch() {
                         System
                       </button>
                     )}
-                  </Menu.Item>
-                </RadioGroup.Option>
+                  </MenuItem>
+                </Radio>
               </div>
             </RadioGroup>
-          </Menu.Items>
+          </MenuItems>
         </Transition>
       </Menu>
     </div>

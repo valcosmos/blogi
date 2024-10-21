@@ -1,7 +1,7 @@
 'use client'
 
 import headerNavLinks from '@/data/headerNavLinks'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import Link from './Link'
@@ -45,7 +45,7 @@ function MobileNav() {
       </button>
       <Transition appear show={navShow} as={Fragment} unmount={false}>
         <Dialog as="div" onClose={onToggleNav} unmount={false}>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -56,9 +56,9 @@ function MobileNav() {
             unmount={false}
           >
             <div className="fixed inset-0 z-60 bg-black/25" />
-          </Transition.Child>
+          </TransitionChild>
 
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="transition ease-in-out duration-300 transform"
             enterFrom="translate-x-full opacity-0"
@@ -68,7 +68,7 @@ function MobileNav() {
             leaveTo="translate-x-full opacity-0"
             unmount={false}
           >
-            <Dialog.Panel className="fixed left-0 top-0 z-70 size-full bg-white opacity-95 duration-300 dark:bg-gray-950 dark:opacity-[0.98]">
+            <DialogPanel className="fixed left-0 top-0 z-70 size-full bg-white opacity-95 duration-300 dark:bg-gray-950 dark:opacity-[0.98]">
               <nav
                 ref={navRef}
                 className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pl-12 pt-2 text-left"
@@ -99,8 +99,8 @@ function MobileNav() {
                   />
                 </svg>
               </button>
-            </Dialog.Panel>
-          </Transition.Child>
+            </DialogPanel>
+          </TransitionChild>
         </Dialog>
       </Transition>
     </>
