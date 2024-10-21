@@ -16,7 +16,7 @@
   "dependencies": {
     "@headlessui/react": "2.1.10",
     "@next/bundle-analyzer": "14.2.15",
-    "@react-three/drei": "^9.114.5",
+    "@react-three/drei": "^9.114.6",
     "@react-three/fiber": "^8.17.10",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
@@ -64,7 +64,7 @@
     "eslint-config-next": "14.2.15",
     "eslint-plugin-format": "^0.1.2",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.12",
+    "eslint-plugin-react-refresh": "^0.4.13",
     "eslint-plugin-tailwindcss": "^3.17.5",
     "lint-staged": "^15.2.10",
     "simple-git-hooks": "^2.11.1",

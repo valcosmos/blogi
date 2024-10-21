@@ -2,6 +2,7 @@ import type { Authors, Blog } from 'contentlayer/generated'
 import type { Metadata } from 'next'
 
 import { components } from '@/components/MDXComponents'
+import Reveal from '@/components/Reveal'
 import siteMetadata from '@/data/siteMetadata'
 import PostBanner from '@/layouts/PostBanner'
 import PostLayout from '@/layouts/PostLayout'
@@ -111,9 +112,11 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
-      </Layout>
+      <Reveal>
+        <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
+          <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+        </Layout>
+      </Reveal>
     </>
   )
 }
