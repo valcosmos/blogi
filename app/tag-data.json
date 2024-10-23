@@ -1,1 +1,5 @@
-{ "svg": 1, "rust": 3, "frontend": 1 }
+{
+  "svg": 1,
+  "rust": 3,
+  "frontend": 1
+}

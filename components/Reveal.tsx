@@ -12,6 +12,8 @@ interface RevealProps {
 export default function Reveal({ children, width = '100%' }: RevealProps) {
   const ref = useRef(null)
 
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
   const isInView = useInView(ref, { once: true })
 
   const mainControls = useAnimation()

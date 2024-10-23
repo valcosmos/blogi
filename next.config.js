@@ -68,7 +68,7 @@ module.exports = () => {
     output,
     basePath,
     reactStrictMode: true,
-    swcMinify: true,
+    // swcMinify: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],

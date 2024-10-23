@@ -77,7 +77,7 @@ function createTagCount(allBlogs) {
       })
     }
   })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
+  writeFileSync('./app/tag-data.json', `${JSON.stringify(tagCount, null, 2)}\n`)
 }
 
 function createSearchIndex(allBlogs) {

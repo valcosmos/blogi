@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.12.2",
   "scripts": {
     "start": "next dev",
-    "dev": "cross-env INIT_CWD=$PWD next dev",
+    "dev": "cross-env INIT_CWD=$PWD next dev --turbopack",
     "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@headlessui/react": "2.1.10",
-    "@next/bundle-analyzer": "14.2.15",
+    "@next/bundle-analyzer": "15.0.1",
     "@react-three/drei": "^9.114.6",
-    "@react-three/fiber": "^8.17.10",
+    "@react-three/fiber": "9.0.0-beta.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "autoprefixer": "^10.4.20",
@@ -29,14 +29,15 @@
     "gray-matter": "^4.0.3",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "1.1.1",
-    "next": "14.2.15",
+    "katex": "^0.16.11",
+    "next": "15.0.1",
     "next-contentlayer2": "0.5.1",
     "next-themes": "^0.3.0",
     "next-view-transitions": "^0.3.2",
     "pliny": "0.3.2",
     "postcss": "^8.4.47",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.0.0-rc-cd22717c-20241013",
+    "react-dom": "19.0.0-rc-cd22717c-20241013",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-citation": "^2.2.0",
@@ -56,12 +57,12 @@
     "@eslint-react/eslint-plugin": "^1.15.0",
     "@svgr/webpack": "^8.1.0",
     "@types/mdx": "^2.0.13",
-    "@types/react": "^18.3.11",
-    "@typescript-eslint/eslint-plugin": "^8.10.0",
-    "@typescript-eslint/parser": "^8.10.0",
+    "@types/react": "npm:types-react@19.0.0-alpha.3",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.13.0",
-    "eslint-config-next": "14.2.15",
+    "eslint-config-next": "15.0.1",
     "eslint-plugin-format": "^0.1.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.13",
@@ -69,6 +70,11 @@
     "lint-staged": "^15.2.10",
     "simple-git-hooks": "^2.11.1",
     "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-alpha.3"
+    }
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

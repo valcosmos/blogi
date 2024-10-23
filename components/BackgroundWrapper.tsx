@@ -1,6 +1,8 @@
 'use client'
 
 import { Sphere } from '@react-three/drei'
+// eslint-disable-next-line ts/ban-ts-comment
+// @ts-expect-error
 import { Canvas, useFrame } from '@react-three/fiber'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
@@ -20,6 +22,8 @@ const PointCircle = React.memo(() => {
   })
 
   return (
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
     <group ref={ref}>
       {pointsInner.map(point => (
         <Point key={point.idx} position={point.position} color={point.color} />
@@ -27,6 +31,8 @@ const PointCircle = React.memo(() => {
       {pointsOuter.map(point => (
         <Point key={point.idx} position={point.position} color={point.color} />
       ))}
+      {/* eslint-disable-next-line ts/ban-ts-comment */}
+      {/* @ts-expect-error */}
     </group>
   )
 })
@@ -48,6 +54,8 @@ const Circle = React.memo(() => {
 function Point({ position, color }) {
   return (
     <Sphere position={position} args={[0.1, 10, 10]}>
+      {/* eslint-disable-next-line ts/ban-ts-comment */}
+      {/* @ts-expect-error */}
       <meshStandardMaterial
         emissive={color}
         emissiveIntensity={0.5}
@@ -66,6 +74,8 @@ export default function BackgroundWrapper({ children }: { children: React.ReactN
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 3, ease: 'easeInOut' }}
+        // eslint-disable-next-line ts/ban-ts-comment
+        // @ts-expect-error
         className="!absolute inset-0"
       >
         <Circle />
