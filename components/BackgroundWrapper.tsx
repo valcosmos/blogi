@@ -74,8 +74,6 @@ export default function BackgroundWrapper({ children }: { children: React.ReactN
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 3, ease: 'easeInOut' }}
-        // eslint-disable-next-line ts/ban-ts-comment
-        // @ts-expect-error
         className="!absolute inset-0"
       >
         <Circle />
