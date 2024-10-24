@@ -2,6 +2,7 @@
   "name": "blogi",
   "version": "2.2.0",
   "private": true,
+  "packageManager": "pnpm@9.12.2",
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev --turbopack",
