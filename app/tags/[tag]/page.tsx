@@ -8,8 +8,7 @@ import { slug } from 'github-slugger'
 import { notFound } from 'next/navigation'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 
-export async function generateMetadata(props: { params: Promise<{ tag: string }> }): Promise<Metadata> {
-  const params = await props.params
+export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
   const tag = decodeURI(params.tag)
   return genPageMetadata({
     title: tag,
@@ -32,8 +31,7 @@ export async function generateStaticParams() {
   return paths
 }
 
-export default async function TagPage({ params: promiseParams }: { params: Promise<{ tag: string }> }) {
-  const params = await promiseParams
+export default async function TagPage({ params }: { params: { tag: string } }) {
   const tag = decodeURI(params.tag)
   // Capitalize first letter and convert space to dash
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)

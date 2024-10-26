@@ -11,8 +11,7 @@ export async function generateStaticParams() {
   return paths
 }
 
-export default async function Page({ params: promiseParams }: { params: Promise<{ page: string }> }) {
-  const params = await promiseParams
+export default async function Page({ params }: { params: { page: string } }) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageNumber = Number.parseInt(params.page as string)
   const initialDisplayPosts = posts.slice(
