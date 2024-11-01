@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Reveal from '@/components/Reveal'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { genPageMetadata } from 'app/seo'
@@ -41,5 +42,9 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
   if (filteredPosts.length === 0) {
     return notFound()
   }
-  return <ListLayout posts={filteredPosts} title={title} />
+  return (
+    <Reveal>
+      <ListLayout posts={filteredPosts} title={title} />
+    </Reveal>
+  )
 }
