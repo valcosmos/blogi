@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import type { ReactNode, RefObject } from 'react'
 import { motion, useAnimation, useInView } from 'motion/react'
 import React, { useEffect, useRef } from 'react'
 
@@ -12,7 +12,7 @@ interface RevealProps {
 export default function Reveal({ children, width = '100%' }: RevealProps) {
   const ref = useRef(null)
 
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref as unknown as RefObject<Element>, { once: true })
 
   const mainControls = useAnimation()
 

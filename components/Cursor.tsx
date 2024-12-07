@@ -20,6 +20,8 @@ export default function Cursor() {
 
   return (
     <motion.div
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-expect-error
       className="fixed z-[999] size-12 rounded-full border border-black dark:border-white"
       animate={{ x: position.x + 10, y: position.y + 10 }}
     >

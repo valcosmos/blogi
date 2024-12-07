@@ -77,7 +77,11 @@ function createTagCount(allBlogs) {
       })
     }
   })
-  writeFileSync('./app/tag-data.json', `${JSON.stringify(tagCount, null, 2)}\n`)
+  const tagCountsJS = `/* eslint-disable eslint-comments/no-unlimited-disable */
+/* eslint-disable */
+
+module.exports = ${JSON.stringify(tagCount, null, 2)}\n`.replaceAll('"', '')
+  writeFileSync('./app/tag-data.js', tagCountsJS)
 }
 
 function createSearchIndex(allBlogs) {
