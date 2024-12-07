@@ -4,7 +4,7 @@ import { slug } from 'github-slugger'
 import { sortPosts } from 'pliny/utils/contentlayer.js'
 import { escape } from 'pliny/utils/htmlEscaper.js'
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
-import tagData from '../app/tag-data.js' // assert { type: 'json' }
+import tagData from '../app/tag-data.js'
 import siteMetadata from '../data/siteMetadata.js'
 
 function generateRssItem(config, post) {

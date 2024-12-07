@@ -77,11 +77,13 @@ function createTagCount(allBlogs) {
       })
     }
   })
-  const tagCountsJS = `/* eslint-disable eslint-comments/no-unlimited-disable */
+  const tagCountJS = `/* eslint-disable eslint-comments/no-unlimited-disable */
 /* eslint-disable */
 
-module.exports = ${JSON.stringify(tagCount, null, 2)}\n`.replaceAll('"', '')
-  writeFileSync('./app/tag-data.js', tagCountsJS)
+module.exports =  ${JSON.stringify(tagCount, null, 2)}`
+
+  writeFileSync('./app/tag-data.js', tagCountJS)
+  writeFileSync('./app/tag-data.json', `${JSON.stringify(tagCount, null, 2)}\n`)
 }
 
 function createSearchIndex(allBlogs) {
