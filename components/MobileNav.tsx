@@ -1,9 +1,9 @@
 'use client'
 
-import headerNavLinks from '@/data/headerNavLinks'
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { Fragment, useEffect, useRef, useState } from 'react'
+import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 
 function MobileNav() {

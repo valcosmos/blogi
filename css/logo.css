@@ -1,0 +1,47 @@
+@reference "./tailwind.css";
+
+#valcosmos-logo {
+  --signature-length: 580px;
+}
+
+#valcosmos-logo #valcosmos-stroke {
+  @apply stroke-black dark:stroke-white opacity-100;
+  stroke-dashoffset: 1px;
+  stroke-dasharray: var(--signature-length) 0;
+  animation: grow 7s ease-out forwards infinite;
+  transform-origin: center;
+  animation-delay: 0s;
+}
+
+@media (prefers-reduced-motion) {
+  path {
+    animation: none !important;
+    stroke-dasharray: unset !important;
+  }
+}
+
+@keyframes grow {
+  0% {
+    stroke-dashoffset: 1px;
+    stroke-dasharray: 0 var(--signature-length);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  45% {
+    stroke-dasharray: var(--signature-length) 0;
+  }
+
+  /* Moving back */
+  65% {
+    stroke-dasharray: var(--signature-length) 0;
+  }
+
+  95%,
+  to {
+    stroke-dasharray: 0 var(--signature-length);
+  }
+}

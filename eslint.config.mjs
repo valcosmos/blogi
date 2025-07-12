@@ -1,6 +1,6 @@
 import antfu from '@antfu/eslint-config'
 import nextPlugin from '@next/eslint-plugin-next'
-import tailwind from 'eslint-plugin-tailwindcss'
+// import tailwind from 'eslint-plugin-tailwindcss'
 
 export default antfu(
   {
@@ -19,5 +19,5 @@ export default antfu(
       '@next/next/no-page-custom-font': 'off',
     },
   },
-  ...tailwind.configs['flat/recommended'],
+  // ...tailwind.configs['flat/recommended'],
 )

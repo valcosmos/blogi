@@ -2,12 +2,12 @@
 
 import type { Blog } from 'contentlayer/generated'
 import type { CoreContent } from 'pliny/utils/contentlayer'
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
 import { useState } from 'react'
+import Link from '@/components/Link'
+import Tag from '@/components/Tag'
+import siteMetadata from '@/data/siteMetadata'
 
 interface PaginationProps {
   totalPages: number

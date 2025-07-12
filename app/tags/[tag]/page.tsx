@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import Reveal from '@/components/Reveal'
-import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/ListLayoutWithTags'
 import { genPageMetadata } from 'app/seo'
 import tagData from 'app/tag-data.json'
 import { allBlogs } from 'contentlayer/generated'
 import { slug } from 'github-slugger'
 import { notFound } from 'next/navigation'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import Reveal from '@/components/Reveal'
+import siteMetadata from '@/data/siteMetadata'
+import ListLayout from '@/layouts/ListLayoutWithTags'
 
 export async function generateMetadata(props: { params: Promise<{ tag: string }> }): Promise<Metadata> {
   const params = await props.params

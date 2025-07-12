@@ -1,9 +1,9 @@
+import NewsletterForm from 'pliny/ui/NewsletterForm'
+import { formatDate } from 'pliny/utils/formatDate'
 import Link from '@/components/Link'
 import Reveal from '@/components/Reveal'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import NewsletterForm from 'pliny/ui/NewsletterForm'
-import { formatDate } from 'pliny/utils/formatDate'
 
 const MAX_DISPLAY = 5
 

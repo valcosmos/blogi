@@ -1,7 +1,7 @@
+import { genPageMetadata } from 'app/seo'
 import Card from '@/components/Card'
 import Reveal from '@/components/Reveal'
 import projectsData from '@/data/projectsData'
-import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({ title: 'Projects' })
 
